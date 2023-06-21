@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -1069,9 +1069,15 @@ importers:
       '@latticexyz/schema-type':
         specifier: workspace:*
         version: link:../schema-type
+      '@latticexyz/solecs':
+        specifier: workspace:*
+        version: link:../solecs
       '@latticexyz/store':
         specifier: workspace:*
         version: link:../store
+      '@solidstate/contracts':
+        specifier: ^0.0.52
+        version: 0.0.52
       ethers:
         specifier: ^5.7.2
         version: 5.7.2

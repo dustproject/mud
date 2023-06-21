@@ -798,6 +798,57 @@
   {
     "inputs": [
       {
+        "internalType": "address",
+        "name": "grantor",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "grantee",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes",
+        "name": "funcSelectorAndArgs",
+        "type": "bytes"
+      }
+    ],
+    "name": "reduceApproval",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "grantor",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "grantee",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "systemID",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "funcSelectorAndArgs",
+        "type": "bytes"
+      }
+    ],
+    "name": "reduceApproval",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "bytes16",
         "name": "namespace",
         "type": "bytes16"
@@ -1073,6 +1124,117 @@
       }
     ],
     "name": "revokeAccess",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "grantee",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "systemID",
+        "type": "uint256"
+      }
+    ],
+    "name": "revokeApproval",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "grantee",
+        "type": "address"
+      }
+    ],
+    "name": "revokeApproval",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "grantor",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "grantee",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "systemID",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint128",
+            "name": "expiryTimestamp",
+            "type": "uint128"
+          },
+          {
+            "internalType": "uint128",
+            "name": "numCalls",
+            "type": "uint128"
+          },
+          {
+            "internalType": "bytes",
+            "name": "funcSelectorAndArgs",
+            "type": "bytes"
+          }
+        ],
+        "internalType": "struct ApprovalData",
+        "name": "approval",
+        "type": "tuple"
+      }
+    ],
+    "name": "setApproval",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "grantee",
+        "type": "address"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint128",
+            "name": "expiryTimestamp",
+            "type": "uint128"
+          },
+          {
+            "internalType": "uint128",
+            "name": "numCalls",
+            "type": "uint128"
+          },
+          {
+            "internalType": "bytes",
+            "name": "funcSelectorAndArgs",
+            "type": "bytes"
+          }
+        ],
+        "internalType": "struct ApprovalData",
+        "name": "approval",
+        "type": "tuple"
+      }
+    ],
+    "name": "setApproval",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

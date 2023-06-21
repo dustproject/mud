@@ -9,6 +9,7 @@ import { IWorldEphemeral } from "../interfaces/IWorldEphemeral.sol";
 
 import { ICoreSystem } from "./ICoreSystem.sol";
 import { IAccessManagementSystem } from "./IAccessManagementSystem.sol";
+import { IApprovalSystem } from "./IApprovalSystem.sol";
 import { IModuleInstallationSystem } from "./IModuleInstallationSystem.sol";
 import { IWorldRegistrationSystem } from "./IWorldRegistrationSystem.sol";
 
@@ -22,6 +23,7 @@ interface IBaseWorld is
   IWorldEphemeral,
   ICoreSystem,
   IAccessManagementSystem,
+  IApprovalSystem,
   IModuleInstallationSystem,
   IWorldRegistrationSystem
 {

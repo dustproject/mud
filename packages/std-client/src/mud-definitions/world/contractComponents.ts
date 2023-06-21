@@ -50,6 +50,23 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
+    Approval: (() => {
+      const tableId = new TableId("", "Approval");
+      return defineComponent(
+        world,
+        {
+          expiryTimestamp: RecsType.BigInt,
+          numCalls: RecsType.BigInt,
+          funcSelectorAndArgs: RecsType.String,
+        },
+        {
+          metadata: {
+            contractId: tableId.toHexString(),
+            tableId: tableId.toString(),
+          },
+        }
+      );
+    })(),
     Systems: (() => {
       const tableId = new TableId("", "Systems");
       return defineComponent(

@@ -23,6 +23,8 @@ import { Systems } from "./modules/core/tables/Systems.sol";
 import { SystemHooks } from "./modules/core/tables/SystemHooks.sol";
 import { FunctionSelectors } from "./modules/core/tables/FunctionSelectors.sol";
 
+import { ApprovalSystem } from "./modules/core/implementations/ApprovalSystem.sol";
+
 contract World is StoreRead, IStoreData, IWorldKernel {
   using ResourceSelector for bytes32;
 
@@ -271,6 +273,7 @@ contract World is StoreRead, IStoreData, IWorldKernel {
     address from,
     bytes memory funcSelectorAndArgs
   ) external payable virtual returns (bytes memory) {
+    (new ApprovalSystem()).reduceApproval(from, msg.sender, funcSelectorAndArgs);
     return _call(namespace, name, from, funcSelectorAndArgs, msg.value);
   }
 
@@ -343,7 +346,7 @@ contract World is StoreRead, IStoreData, IWorldKernel {
     bytes memory callData = Bytes.setBytes4(msg.data, 0, systemFunctionSelector);
 
     // Call the function and forward the call value
-    bytes memory returnData = _call(namespace, name, callData, msg.value);
+    bytes memory returnData = _call(namespace, name, msg.sender, callData, msg.value);
     assembly {
       return(add(returnData, 0x20), mload(returnData))
     }

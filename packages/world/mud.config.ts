@@ -42,6 +42,21 @@ export default mudConfig({
       // schema in `getField` too. (See https://github.com/latticexyz/mud/issues/444)
       dataStruct: true,
     },
+    // Allows Alice to grant Bob permission to call a resource (see `callFrom` in World)
+    // The proposal for this table is here: https://github.com/latticexyz/mud/issues/327
+    Approval: {
+      keySchema: {
+        approvalSelector: "bytes32", // keccak(grantor, grantee) (for generic approvals) or keccak(grantor, grantee, systemID) (for approvals restricted to certain systems)
+      },
+      schema: {
+        expiryTimestamp: "uint128",
+        numCalls: "uint128", // the number of times Bob can call the system on behalf of Alice, using these arguments
+        funcSelectorAndArgs: "bytes",
+      },
+
+      // TODO: To save gas when verifying approvals, expiryTimestamp and numCalls could be bitpacked into a single storage slot.
+      // To save even more gas, one bit in this bitpacked slot could be reserved as a flag to represent whether the funcSelectorAndArgs value is empty or non-empty.
+    },
     /************************************************************************
      *
      *    MODULE TABLES

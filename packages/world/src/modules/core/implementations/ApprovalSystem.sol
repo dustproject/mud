@@ -20,15 +20,29 @@ contract ApprovalSystem is System {
   /**
    * Creates a new approval from msg.sender as grantor to grantee. To create a generic approval, systemID can be set to 0.
    */
-  function setApproval(address grantor, address grantee, uint256 systemID, ApprovalData memory approval) public {
+  function setApproval(address grantor, address grantee, uint256 systemID, ApprovalData memory approval) private {
     bytes32 approvalSelector = getApprovalSelector(grantor, grantee, systemID);
     Approval.set(approvalSelector, approval);
   }
 
+  //
+  //  function getFunctionSelector(string memory _func) private pure returns (bytes4) {
+  //    return bytes4(keccak256(bytes(_func)));
+  //  }
+
   /**
    * Creates a new approval from msg.sender as grantor to grantee (for all systems)
    */
-  function setApproval(address grantee, ApprovalData memory approval) public {
+  function setApproval(
+    address grantee,
+    uint128 expiryTimestamp,
+    uint128 numCalls,
+    bytes4 funcSelector,
+    bytes memory args
+  ) public {
+    bytes memory funcSelectorAndArgs = abi.encodeWithSelector(funcSelector, args);
+    ApprovalData memory approval = ApprovalData(expiryTimestamp, numCalls, funcSelectorAndArgs);
+
     // setting systemID to 0 means the grantee has approval for all systems
     setApproval(msg.sender, grantee, 0, approval);
   }

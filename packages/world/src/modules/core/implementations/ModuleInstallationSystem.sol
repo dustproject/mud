@@ -29,9 +29,6 @@ contract ModuleInstallationSystem is System {
     //    InstalledModules.set(module.getName(), keccak256(args), address(module));
     IWorldKernel world = IWorldKernel(_world());
 
-    //    bytes16 namespace,
-    //    bytes16 name,
-    //    address from,
     bytes memory funcSelectorAndArgs = abi.encodeWithSelector(IModule.install.selector, args);
 
     world.callFrom(namespace, module.getName(), _msgSender(), funcSelectorAndArgs);

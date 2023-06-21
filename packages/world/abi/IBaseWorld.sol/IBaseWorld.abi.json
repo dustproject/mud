@@ -1202,75 +1202,28 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "grantor",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
         "name": "grantee",
         "type": "address"
       },
       {
-        "internalType": "uint256",
-        "name": "systemID",
-        "type": "uint256"
+        "internalType": "uint128",
+        "name": "expiryTimestamp",
+        "type": "uint128"
       },
       {
-        "components": [
-          {
-            "internalType": "uint128",
-            "name": "expiryTimestamp",
-            "type": "uint128"
-          },
-          {
-            "internalType": "uint128",
-            "name": "numCalls",
-            "type": "uint128"
-          },
-          {
-            "internalType": "bytes",
-            "name": "funcSelectorAndArgs",
-            "type": "bytes"
-          }
-        ],
-        "internalType": "struct ApprovalData",
-        "name": "approval",
-        "type": "tuple"
-      }
-    ],
-    "name": "setApproval",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "grantee",
-        "type": "address"
+        "internalType": "uint128",
+        "name": "numCalls",
+        "type": "uint128"
       },
       {
-        "components": [
-          {
-            "internalType": "uint128",
-            "name": "expiryTimestamp",
-            "type": "uint128"
-          },
-          {
-            "internalType": "uint128",
-            "name": "numCalls",
-            "type": "uint128"
-          },
-          {
-            "internalType": "bytes",
-            "name": "funcSelectorAndArgs",
-            "type": "bytes"
-          }
-        ],
-        "internalType": "struct ApprovalData",
-        "name": "approval",
-        "type": "tuple"
+        "internalType": "bytes4",
+        "name": "funcSignature",
+        "type": "bytes4"
+      },
+      {
+        "internalType": "bytes",
+        "name": "args",
+        "type": "bytes"
       }
     ],
     "name": "setApproval",

@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from "fs";
 import path from "path";
 import chalk from "chalk";
 import { BigNumber, BigNumberish, BytesLike, ContractInterface, ethers } from "ethers";
-import { defaultAbiCoder as abi, Fragment, ParamType } from "ethers/lib/utils.js";
+import { defaultAbiCoder as abi, Fragment, keccak256, ParamType } from "ethers/lib/utils.js";
 
 import { getOutDirectory, getScriptDirectory, cast, forge } from "@latticexyz/common/foundry";
 import { resolveWithContext } from "@latticexyz/config";
@@ -307,27 +307,29 @@ export async function deploy(
         );
       } else {
         // 1) permit the module to register a hook on the table
+        const expiryTimestamp = "9999999999999999";
+        const numCalls = 10; // TODO: reduce
+        // a function selector is 4 bytes. Each hex char requires 4 bits, so 4 bytes = 8 hex chars
+        // So take the first 10 chars since we need 8 chars + the "0x" prefix
+        const funcSelector = keccak256(
+          IBaseWorldData.methodIdentifiers["installModule(bytes16,address,bytes)"]
+        ).substring(0, 10);
 
-        const approval: ApprovalDataStruct = {
-          expiryTimestamp: "99999999999999999",
-          numCalls: 10,
-          funcSelectorAndArgs: IBaseWorldData.methodIdentifiers["installModule(bytes16,address,bytes)"],
-        };
-
+        const args = abi.encode(types, values);
         await fastTxExecute(
           WorldContract,
           "setApproval",
-          [moduleAddress, approval, namespace + module.name], // this namespace + module.name is 100% wrong
+          [moduleAddress, expiryTimestamp, numCalls, funcSelector, args],
           confirmations
         );
 
         // 2) install the module
-        await fastTxExecute(
-          WorldContract,
-          "installModule",
-          [namespace, moduleAddress, abi.encode(types, values)],
-          confirmations
-        );
+        // await fastTxExecute(
+        //   WorldContract,
+        //   "installModule",
+        //   [namespace, moduleAddress, args],
+        //   confirmations
+        // );
       }
 
       console.log(chalk.green(`Installed${module.root ? " root " : " "}module ${module.name}`));

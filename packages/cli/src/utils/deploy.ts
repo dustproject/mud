@@ -298,12 +298,21 @@ export async function deploy(
       if (!moduleAddress) throw new Error(`Module ${module.name} not found`);
 
       // Send transaction to install module
-      await fastTxExecute(
-        WorldContract,
-        module.root ? "installRootModule" : "installModule",
-        [moduleAddress, abi.encode(types, values)],
-        confirmations
-      );
+      if (module.root) {
+        await fastTxExecute(
+          WorldContract,
+          "installRootModule",
+          [moduleAddress, abi.encode(types, values)],
+          confirmations
+        );
+      } else {
+        await fastTxExecute(
+          WorldContract,
+          "installModule",
+          [namespace, moduleAddress, abi.encode(types, values)],
+          confirmations
+        );
+      }
 
       console.log(chalk.green(`Installed${module.root ? " root " : " "}module ${module.name}`));
     }),

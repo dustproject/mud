@@ -6,5 +6,5 @@ pragma solidity >=0.8.0;
 import { IModule } from "./IModule.sol";
 
 interface IModuleInstallationSystem {
-  function installModule(IModule module, bytes memory args) external;
+  function installModule(bytes16 namespace, IModule module, bytes memory args) external;
 }

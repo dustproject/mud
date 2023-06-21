@@ -300,6 +300,11 @@
   {
     "inputs": [
       {
+        "internalType": "bytes16",
+        "name": "namespace",
+        "type": "bytes16"
+      },
+      {
         "internalType": "contract IModule",
         "name": "module",
         "type": "address"

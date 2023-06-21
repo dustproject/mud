@@ -91,6 +91,13 @@ interface IWorldCall {
     bytes16 name,
     bytes memory funcSelectorAndArgs
   ) external payable returns (bytes memory);
+
+  function callFrom(
+    bytes16 namespace,
+    bytes16 name,
+    address from,
+    bytes memory funcSelectorAndArgs
+  ) external payable virtual returns (bytes memory);
 }
 
 /**

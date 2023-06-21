@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from "fs";
 import path from "path";
 import chalk from "chalk";
-import { BigNumber, ContractInterface, ethers } from "ethers";
+import { BigNumber, BigNumberish, BytesLike, ContractInterface, ethers } from "ethers";
 import { defaultAbiCoder as abi, Fragment, ParamType } from "ethers/lib/utils.js";
 
 import { getOutDirectory, getScriptDirectory, cast, forge } from "@latticexyz/common/foundry";
@@ -11,7 +11,7 @@ import { encodeSchema } from "@latticexyz/schema-type/deprecated";
 import { StoreConfig } from "@latticexyz/store";
 import { resolveAbiOrUserType } from "@latticexyz/store/codegen";
 import { WorldConfig, resolveWorldConfig } from "@latticexyz/world";
-import { IBaseWorld } from "@latticexyz/world/types/ethers-contracts/IBaseWorld";
+import { ApprovalDataStruct, IBaseWorld } from "@latticexyz/world/types/ethers-contracts/IBaseWorld";
 import WorldData from "@latticexyz/world/abi/World.sol/World.json" assert { type: "json" };
 import IBaseWorldData from "@latticexyz/world/abi/IBaseWorld.sol/IBaseWorld.json" assert { type: "json" };
 import CoreModuleData from "@latticexyz/world/abi/CoreModule.sol/CoreModule.json" assert { type: "json" };
@@ -306,6 +306,22 @@ export async function deploy(
           confirmations
         );
       } else {
+        // 1) permit the module to register a hook on the table
+
+        const approval: ApprovalDataStruct = {
+          expiryTimestamp: "99999999999999999",
+          numCalls: 10,
+          funcSelectorAndArgs: IBaseWorldData.methodIdentifiers["installModule(bytes16,address,bytes)"],
+        };
+
+        await fastTxExecute(
+          WorldContract,
+          "setApproval",
+          [moduleAddress, approval, namespace + module.name], // this namespace + module.name is 100% wrong
+          confirmations
+        );
+
+        // 2) install the module
         await fastTxExecute(
           WorldContract,
           "installModule",

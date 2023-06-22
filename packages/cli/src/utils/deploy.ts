@@ -325,12 +325,8 @@ export async function deploy(
         console.log("1111111111111111");
 
         // 2) install the module
-        // await fastTxExecute(
-        //   WorldContract,
-        //   "installModule",
-        //   [namespace, moduleAddress, args],
-        //   confirmations
-        // );
+        await fastTxExecute(WorldContract, "installModule", [toBytes16(namespace), moduleAddress, args], confirmations);
+        console.log("2222222222222222");
       }
 
       console.log(chalk.green(`Installed${module.root ? " root " : " "}module ${module.name}`));

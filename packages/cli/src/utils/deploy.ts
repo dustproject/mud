@@ -297,35 +297,31 @@ export async function deploy(
       const moduleAddress = await contractPromises[module.name];
       if (!moduleAddress) throw new Error(`Module ${module.name} not found`);
 
+      const args = abi.encode(types, values);
+
       // Send transaction to install module
       if (module.root) {
-        await fastTxExecute(
-          WorldContract,
-          "installRootModule",
-          [moduleAddress, abi.encode(types, values)],
-          confirmations
-        );
+        await fastTxExecute(WorldContract, "installRootModule", [moduleAddress, args], confirmations);
       } else {
+        await fastTxExecute(WorldContract, "installModule", [moduleAddress, args], confirmations);
         // 1) permit the module to register a hook on the table
         const expiryTimestamp = "9999999999999999";
         const numCalls = 10; // TODO: reduce
-        // a function selector is 4 bytes. Each hex char requires 4 bits, so 4 bytes = 8 hex chars
-        // So take the first 10 chars since we need 8 chars + the "0x" prefix
+
         console.log("ASDFSAFDASDFASDFSADFDSAFD");
         const funcSelector = sigHash("installModule(bytes16,address,bytes)");
         console.log("----------------------");
 
-        const args = abi.encode(types, values);
-        await fastTxExecute(
-          WorldContract,
-          "setApproval",
-          [moduleAddress, expiryTimestamp, numCalls, funcSelector, args],
-          confirmations
-        );
+        // await fastTxExecute(
+        //   WorldContract,
+        //   "setApproval",
+        //   [moduleAddress, expiryTimestamp, numCalls, funcSelector, args],
+        //   confirmations
+        // );
         console.log("1111111111111111");
 
         // 2) install the module
-        await fastTxExecute(WorldContract, "installModule", [toBytes16(namespace), moduleAddress, args], confirmations);
+        // await fastTxExecute(WorldContract, "installNamespacedModule", [toBytes16(namespace), moduleAddress, args], confirmations);
         console.log("2222222222222222");
       }
 

@@ -16,21 +16,29 @@ contract ModuleInstallationSystem is System {
   /**
    * Install the given module at the given namespace in the World.
    */
-  function installModule(bytes16 namespace, IModule module, bytes memory args) public {
-    //    Call.withSender({
-    //      msgSender: _msgSender(),
-    //      target: address(module),
-    //      funcSelectorAndArgs: abi.encodeWithSelector(IModule.install.selector, args),
-    //      delegate: false,
-    //      value: 0
-    //    });
-    //
-    //    // Register the module in the InstalledModules table
-    //    InstalledModules.set(module.getName(), keccak256(args), address(module));
+  function installNamespacedModule(bytes16 namespace, IModule module, bytes memory args) public {
     IWorldKernel world = IWorldKernel(_world());
 
     bytes memory funcSelectorAndArgs = abi.encodeWithSelector(IModule.install.selector, args);
 
     world.callFrom(namespace, module.getName(), _msgSender(), funcSelectorAndArgs);
+
+    // Register the module in the InstalledModules table
+    InstalledModules.set(module.getName(), keccak256(args), address(module));
+  }
+
+  // This function assumes that you are installing the module in the root namespace
+  // I tried changing this API to use the function above, but I couldn't get it to work
+  function installModule(IModule module, bytes memory args) public {
+    Call.withSender({
+      msgSender: _msgSender(),
+      target: address(module),
+      funcSelectorAndArgs: abi.encodeWithSelector(IModule.install.selector, args),
+      delegate: false,
+      value: 0
+    });
+
+    // Register the module in the InstalledModules table
+    InstalledModules.set(module.getName(), keccak256(args), address(module));
   }
 }

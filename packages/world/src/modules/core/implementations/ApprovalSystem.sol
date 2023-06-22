@@ -62,7 +62,7 @@ contract ApprovalSystem is System {
    * Revoke approvals to the grantee for all systems
    * If the grantee was given approval for an individual system, they will STILL have approval for that system.
    */
-  function revokeApproval(address grantee) public {
+  function revokeApprovalForSystem(address grantee) public {
     // setting systemID to 0 means removing approvals for the grantee for all systems
     revokeApproval(grantee, 0);
   }
@@ -70,7 +70,7 @@ contract ApprovalSystem is System {
   /**
    * Reduces the number of calls left in an approval by 1
    */
-  function reduceApproval(address grantor, address grantee, bytes memory funcSelectorAndArgs) public {
+  function reduceApprovalForSystem(address grantor, address grantee, bytes memory funcSelectorAndArgs) public {
     // setting systemID to 0 means reducing approvals for the grantee for all systems
     reduceApproval(grantor, grantee, 0, funcSelectorAndArgs);
   }

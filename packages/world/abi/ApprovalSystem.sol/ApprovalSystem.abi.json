@@ -81,6 +81,11 @@
         "type": "address"
       },
       {
+        "internalType": "uint256",
+        "name": "systemID",
+        "type": "uint256"
+      },
+      {
         "internalType": "bytes",
         "name": "funcSelectorAndArgs",
         "type": "bytes"
@@ -104,17 +109,12 @@
         "type": "address"
       },
       {
-        "internalType": "uint256",
-        "name": "systemID",
-        "type": "uint256"
-      },
-      {
         "internalType": "bytes",
         "name": "funcSelectorAndArgs",
         "type": "bytes"
       }
     ],
-    "name": "reduceApproval",
+    "name": "reduceApprovalForSystem",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -145,7 +145,7 @@
         "type": "address"
       }
     ],
-    "name": "revokeApproval",
+    "name": "revokeApprovalForSystem",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

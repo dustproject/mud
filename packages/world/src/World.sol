@@ -23,7 +23,7 @@ import { Systems } from "./modules/core/tables/Systems.sol";
 import { SystemHooks } from "./modules/core/tables/SystemHooks.sol";
 import { FunctionSelectors } from "./modules/core/tables/FunctionSelectors.sol";
 
-//import { ApprovalSystem } from "./modules/core/implementations/ApprovalSystem.sol";
+import { ApprovalSystem } from "./modules/core/implementations/ApprovalSystem.sol";
 
 contract World is StoreRead, IStoreData, IWorldKernel {
   using ResourceSelector for bytes32;
@@ -273,7 +273,23 @@ contract World is StoreRead, IStoreData, IWorldKernel {
     address from,
     bytes memory funcSelectorAndArgs
   ) external payable virtual returns (bytes memory) {
-    //    (new ApprovalSystem()).reduceApproval(from, msg.sender, funcSelectorAndArgs);
+    //    ApprovalSystem approvalSystem = new ApprovalSystem();
+    //    .reduceApproval(from, msg.sender, funcSelectorAndArgs);
+    //    data = Call.withSender({
+    //      msgSender: msg.sender,
+    //      target: address(approvalSystem),
+    //      funcSelectorAndArgs: funcSelectorAndArgs,
+    //      delegate: namespace == ROOT_NAMESPACE, // Use delegatecall for root systems (= registered in the root namespace)
+    //      value: value
+    //    });
+    bytes4 approvalSelector = ApprovalSystem.reduceApproval.selector;
+    _call(
+      namespace,
+      name,
+      msg.sender,
+      abi.encodeWithSelector(approvalSelector, from, msg.sender, funcSelectorAndArgs),
+      0
+    );
     return _call(namespace, name, from, funcSelectorAndArgs, msg.value);
   }
 

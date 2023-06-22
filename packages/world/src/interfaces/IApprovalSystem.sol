@@ -14,9 +14,9 @@ interface IApprovalSystem {
 
   function revokeApproval(address grantee, uint256 systemID) external;
 
-  function revokeApproval(address grantee) external;
+  function revokeApprovalForSystem(address grantee) external;
 
-  function reduceApproval(address grantor, address grantee, bytes memory funcSelectorAndArgs) external;
+  function reduceApprovalForSystem(address grantor, address grantee, bytes memory funcSelectorAndArgs) external;
 
   function reduceApproval(
     address grantor,

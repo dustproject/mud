@@ -8,7 +8,7 @@ interface IApprovalSystem {
     address grantee,
     uint128 expiryTimestamp,
     uint128 numCalls,
-    bytes4 funcSignature,
+    bytes4 funcSelector,
     bytes memory args
   ) external;
 

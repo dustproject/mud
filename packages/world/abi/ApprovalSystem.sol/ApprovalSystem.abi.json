@@ -169,7 +169,7 @@
       },
       {
         "internalType": "bytes4",
-        "name": "funcSignature",
+        "name": "funcSelector",
         "type": "bytes4"
       },
       {

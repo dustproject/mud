@@ -11,7 +11,7 @@ import { encodeSchema } from "@latticexyz/schema-type/deprecated";
 import { StoreConfig } from "@latticexyz/store";
 import { resolveAbiOrUserType } from "@latticexyz/store/codegen";
 import { WorldConfig, resolveWorldConfig } from "@latticexyz/world";
-import { ApprovalDataStruct, IBaseWorld } from "@latticexyz/world/types/ethers-contracts/IBaseWorld";
+import { IBaseWorld } from "@latticexyz/world/types/ethers-contracts/IBaseWorld";
 import WorldData from "@latticexyz/world/abi/World.sol/World.json" assert { type: "json" };
 import IBaseWorldData from "@latticexyz/world/abi/IBaseWorld.sol/IBaseWorld.json" assert { type: "json" };
 import CoreModuleData from "@latticexyz/world/abi/CoreModule.sol/CoreModule.json" assert { type: "json" };
@@ -311,9 +311,9 @@ export async function deploy(
         const numCalls = 10; // TODO: reduce
         // a function selector is 4 bytes. Each hex char requires 4 bits, so 4 bytes = 8 hex chars
         // So take the first 10 chars since we need 8 chars + the "0x" prefix
-        const funcSelector = keccak256(
-          IBaseWorldData.methodIdentifiers["installModule(bytes16,address,bytes)"]
-        ).substring(0, 10);
+        console.log("ASDFSAFDASDFASDFSADFDSAFD");
+        const funcSelector = sigHash("installModule(bytes16,address,bytes)");
+        console.log("----------------------");
 
         const args = abi.encode(types, values);
         await fastTxExecute(
@@ -322,6 +322,7 @@ export async function deploy(
           [moduleAddress, expiryTimestamp, numCalls, funcSelector, args],
           confirmations
         );
+        console.log("1111111111111111");
 
         // 2) install the module
         // await fastTxExecute(

@@ -282,7 +282,7 @@ contract World is StoreRead, IStoreData, IWorldKernel {
     //      delegate: namespace == ROOT_NAMESPACE, // Use delegatecall for root systems (= registered in the root namespace)
     //      value: value
     //    });
-    bytes4 approvalSelector = ApprovalSystem.reduceApproval.selector;
+    bytes4 approvalSelector = ApprovalSystem.reduceApprovalForSystem.selector;
     _call(
       namespace,
       name,

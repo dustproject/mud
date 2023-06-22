@@ -303,21 +303,21 @@ export async function deploy(
       if (module.root) {
         await fastTxExecute(WorldContract, "installRootModule", [moduleAddress, args], confirmations);
       } else {
-        await fastTxExecute(WorldContract, "installModule", [moduleAddress, args], confirmations);
         // 1) permit the module to register a hook on the table
-        const expiryTimestamp = "9999999999999999";
+        const expiryTimestamp = "999999999999";
         const numCalls = 10; // TODO: reduce
 
         console.log("ASDFSAFDASDFASDFSADFDSAFD");
         const funcSelector = sigHash("installModule(bytes16,address,bytes)");
         console.log("----------------------");
 
-        // await fastTxExecute(
-        //   WorldContract,
-        //   "setApproval",
-        //   [moduleAddress, expiryTimestamp, numCalls, funcSelector, args],
-        //   confirmations
-        // );
+        const res = await fastTxExecute(
+          WorldContract,
+          "setApproval",
+          [moduleAddress, expiryTimestamp, numCalls, funcSelector, args],
+          confirmations
+        );
+        console.log(res);
         console.log("1111111111111111");
 
         // 2) install the module
@@ -522,7 +522,7 @@ export async function deploy(
       promises.push(txPromise);
       return txPromise;
     } catch (error: any) {
-      if (debug) console.error(error);
+      console.error(error);
       if (retryCount === 0 && error?.message.includes("transaction already imported")) {
         // If the deployment failed because the transaction was already imported,
         // retry with a higher priority fee

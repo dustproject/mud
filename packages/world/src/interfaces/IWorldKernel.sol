@@ -97,7 +97,7 @@ interface IWorldCall {
     bytes16 name,
     address from,
     bytes memory funcSelectorAndArgs
-  ) external payable virtual returns (bytes memory);
+  ) external payable returns (bytes memory);
 }
 
 /**

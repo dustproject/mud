@@ -72,7 +72,7 @@ const commandModule: CommandModule<Options, Options> = {
         "--host",
         "0.0.0.0",
         "--chain-id",
-        "905",
+        "31337",
       ];
       anvil(anvilArgs);
     }

@@ -64,7 +64,16 @@ const commandModule: CommandModule<Options, Options> = {
       const userHomeDir = homedir();
       rmSync(path.join(userHomeDir, ".foundry", "anvil", "tmp"), { recursive: true, force: true });
 
-      const anvilArgs = ["--block-time", "1", "--block-base-fee-per-gas", "0"];
+      const anvilArgs = [
+        "--block-time",
+        "1",
+        "--block-base-fee-per-gas",
+        "0",
+        "--host",
+        "0.0.0.0",
+        "--chain-id",
+        "905",
+      ];
       anvil(anvilArgs);
     }
 

@@ -172,6 +172,7 @@ const commandModule: CommandModule<Options, Options> = {
         configPath,
         skipBuild: true,
         createNamespace: true,
+        installDefaultModules: true,
         estimateGas: false,
         priorityFeeMultiplier: 1,
         disableTxWait: true,

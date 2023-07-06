@@ -1,6 +1,9 @@
 import type { Chain } from "@wagmi/chains";
 import { MUDChain } from "./types";
 
+// The reason why we need to have our own custom testnet is because
+// when ppl connect to our faucet service, they will connect to the right URL
+// we can't use "localhost" because when the user goes on our website, localhost is THEIR computer, not our AWS instance running the node
 const nodeUrl = "ec2-18-191-133-57.us-east-2.compute.amazonaws.com";
 
 export const tenetTestnet = {

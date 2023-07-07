@@ -28,6 +28,7 @@ export interface DeployConfig {
   debug?: boolean;
   worldAddress?: string;
   createNamespace: boolean;
+  installDefaultModules: boolean;
   estimateGas: boolean;
   disableTxWait: boolean;
   pollInterval: number;
@@ -55,6 +56,7 @@ export async function deploy(
     debug,
     worldAddress,
     createNamespace,
+    installDefaultModules,
     estimateGas,
     disableTxWait,
     pollInterval,
@@ -101,7 +103,7 @@ export async function deploy(
   );
 
   // Deploy default World modules
-  const defaultModules: Record<string, Promise<string>> = !createNamespace
+  const defaultModules: Record<string, Promise<string>> = !installDefaultModules
     ? {}
     : {
         // TODO: these only need to be deployed once per chain, add a check if they exist already

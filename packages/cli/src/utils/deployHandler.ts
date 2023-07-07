@@ -21,6 +21,7 @@ export type DeployOptions = {
   rpc?: string;
   worldAddress?: string;
   createNamespace: boolean;
+  installDefaultModules: boolean;
   estimateGas: boolean;
   srcDir?: string;
   disableTxWait: boolean;

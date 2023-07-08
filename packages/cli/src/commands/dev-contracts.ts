@@ -73,6 +73,8 @@ const commandModule: CommandModule<Options, Options> = {
         "0.0.0.0",
         "--chain-id",
         "31337",
+        "--gas-limit",
+        "1000000000",
       ];
       anvil(anvilArgs);
     }

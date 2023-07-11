@@ -161,9 +161,17 @@ export function createActionSystem<M = undefined>(world: World, txReduced$: Obse
         // Wait for all tx events to be reduced
         updateComponent(Action, action.entity, { state: ActionState.WaitingForTxEvents, txHash: tx.hash });
         const txConfirmed = tx.wait().catch((e) => handleError(e, action)); // Also catch the error if not awaiting
-        await awaitStreamValue(txReduced$, (v) => v === tx.hash);
+
+        if (!action.txMayNotWriteToTable) {
+          // Transactions are only reduced if it writes to a table. So this flag mediates it
+          await awaitStreamValue(txReduced$, (v) => v === tx.hash);
+        }
+
         updateComponent(Action, action.entity, { state: ActionState.TxReduced });
-        if (action.awaitConfirmation) await txConfirmed;
+
+        if (action.awaitConfirmation || action.txMayNotWriteToTable) {
+          await txConfirmed;
+        }
       }
 
       updateComponent(Action, action.entity, { state: ActionState.Complete });

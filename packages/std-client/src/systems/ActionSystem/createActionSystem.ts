@@ -17,6 +17,7 @@ import { ActionState } from "./constants";
 import { ActionData, ActionRequest } from "./types";
 import { defineActionComponent } from "../../components";
 import { merge, Observable } from "rxjs";
+import { ContractReceipt } from "ethers";
 
 export type ActionSystem = ReturnType<typeof createActionSystem>;
 
@@ -160,7 +161,16 @@ export function createActionSystem<M = undefined>(world: World, txReduced$: Obse
       if (tx) {
         // Wait for all tx events to be reduced
         updateComponent(Action, action.entity, { state: ActionState.WaitingForTxEvents, txHash: tx.hash });
-        const txConfirmed = tx.wait().catch((e) => handleError(e, action)); // Also catch the error if not awaiting
+        const txConfirmed = tx
+          .wait()
+          .then((receipt: any) => {
+            if (action.onSuccessCallback) {
+              console.log("success callbac called");
+              console.log(receipt);
+              action.onSuccessCallback(action.id, tx.hash);
+            }
+          })
+          .catch((e) => handleError(e, action)); // Also catch the error if not awaiting
 
         if (!action.txMayNotWriteToTable) {
           // Transactions are only reduced if it writes to a table. So this flag mediates it
@@ -177,6 +187,9 @@ export function createActionSystem<M = undefined>(world: World, txReduced$: Obse
       updateComponent(Action, action.entity, { state: ActionState.Complete });
     } catch (e) {
       handleError(e, action);
+      if (action.onErrorCallback) {
+        action.onErrorCallback(action.id, e);
+      }
     }
 
     // After the action is done executing (failed or completed), remove its actionData and remove the Action component

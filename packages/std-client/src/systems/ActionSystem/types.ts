@@ -49,6 +49,12 @@ export type ActionRequest<C extends Components, T, M = undefined> = {
 
   // Metadata
   metadata?: M;
+
+  // Called when the action is successfully executed
+  onSuccessCallback?(actionId: string, txHash: string): void;
+
+  // Called when the action fails to execute
+  onErrorCallback?(actionId: string, error: any): void;
 };
 
 export type ActionData<M = undefined> = ActionRequest<Components, unknown, M> & {

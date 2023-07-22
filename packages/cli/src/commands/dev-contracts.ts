@@ -45,7 +45,8 @@ const commandModule: CommandModule<Options, Options> = {
     }
 
     // Initial cleanup
-    await forge(["clean"]);
+    // Curtis commented because it forces forge to rebuild everything. We don't need to use "forge clean" most of the time.
+    // await forge(["clean"]);
 
     const rpc = args.rpc ?? (await getRpcUrl());
     const configPath = args.configPath ?? (await resolveConfigPath(args.configPath));

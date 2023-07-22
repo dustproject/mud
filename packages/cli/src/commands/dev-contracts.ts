@@ -18,6 +18,7 @@ type Options = {
   rpc?: string;
   configPath?: string;
   tsgenOutput: string;
+  rebuildAllContracts?: boolean;
 };
 
 const commandModule: CommandModule<Options, Options> = {
@@ -36,6 +37,7 @@ const commandModule: CommandModule<Options, Options> = {
         decs: "Path to MUD config",
       },
       tsgenOutput: { type: "string", demandOption: true, desc: "Directory to output MUD typescript definition files" },
+      rebuildAllContracts: { type: "boolean", desc: "Rebuild all contracts from scratch" },
     });
   },
 
@@ -44,8 +46,10 @@ const commandModule: CommandModule<Options, Options> = {
       console.error("No output provided");
     }
 
-    // Initial cleanup
-    await forge(["clean"]);
+    if (args.rebuildAllContracts) {
+      // Initial cleanup
+      await forge(["clean"]);
+    }
 
     const rpc = args.rpc ?? (await getRpcUrl());
     const configPath = args.configPath ?? (await resolveConfigPath(args.configPath));

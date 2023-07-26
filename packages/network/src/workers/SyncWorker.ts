@@ -114,8 +114,10 @@ export class SyncWorker<C extends Components> implements DoWork<Input, NetworkEv
       )
     );
     const config = computedConfig.get();
-    const { modeUrl, chainId, worldContract, disableCache, initialRecords } = config;
-    devObservables.worldAddress$.next(worldContract.address);
+    const { modeUrl, chainId, worldContract, disableCache, initialRecords, showInDevTools } = config;
+    if (showInDevTools) {
+      devObservables.worldAddress$.next(worldContract.address);
+    }
 
     // Set default values for cacheAgeThreshold and cacheInterval
     const cacheAgeThreshold = config.cacheAgeThreshold || 100;
@@ -133,7 +135,9 @@ export class SyncWorker<C extends Components> implements DoWork<Input, NetworkEv
     this.setLoadingState({ state: SyncState.INITIAL, msg: "Starting initial sync", percentage: 0 });
     let passLiveEventsToOutput = false;
     const cacheStore = { current: createCacheStore() };
-    devObservables.cacheStore$.next(cacheStore.current);
+    if (showInDevTools) {
+      devObservables.cacheStore$.next(cacheStore.current);
+    }
     const { blockNumber$ } = createBlockNumberStream(providers);
     // The RPC is only queried if this stream is subscribed to
 
@@ -250,7 +254,9 @@ export class SyncWorker<C extends Components> implements DoWork<Input, NetworkEv
       [...gapStateEvents, ...initialLiveEvents].filter((e) => !e.ephemeral)
     );
     cacheStore.current = initialState;
-    devObservables.cacheStore$.next(cacheStore.current);
+    if (showInDevTools) {
+      devObservables.cacheStore$.next(cacheStore.current);
+    }
     debug(`initial sync state size: ${cacheStore.current.state.size}`);
 
     this.setLoadingState({

@@ -37,6 +37,7 @@ type SetupMUDV2NetworkOptions<C extends ContractComponents, S extends StoreConfi
   syncStoreCache?: boolean;
   storeConfig: S;
   worldAbi: Abi; // TODO: should this extend IWorldKernel ABI or a subset of?
+  useABIInDevTools?: boolean;
 };
 
 export async function setupMUDV2Network<C extends ContractComponents, S extends StoreConfig>({
@@ -49,8 +50,11 @@ export async function setupMUDV2Network<C extends ContractComponents, S extends 
   storeConfig,
   syncStoreCache = true,
   worldAbi = IWorldKernel__factory.abi,
+  useABIInDevTools = true,
 }: SetupMUDV2NetworkOptions<C, S>) {
-  devObservables.worldAbi$.next(worldAbi);
+  if (useABIInDevTools) {
+    devObservables.worldAbi$.next(worldAbi);
+  }
 
   const SystemsRegistry = defineStringComponent(world, {
     id: "SystemsRegistry",

@@ -158,6 +158,7 @@ export type SyncWorkerConfig = {
   snapshotNumChunks?: number;
   pruneOptions?: { playerAddress: string; hashedComponentId: string };
   initialRecords?: RawTableRecord[];
+  showInDevTools?: boolean;
 };
 
 export enum ContractSchemaValue {

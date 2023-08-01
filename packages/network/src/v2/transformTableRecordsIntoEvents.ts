@@ -4,6 +4,7 @@ import { decodeStoreSetRecord } from "./decodeStoreSetRecord";
 import { Contract } from "ethers";
 import { keyTupleToEntityID } from "./keyTupleToEntityID";
 import { NetworkComponentUpdate } from "../types";
+import { TableId } from "@latticexyz/common";
 
 export async function transformTableRecordsIntoEvents(
   storeContract: Contract,
@@ -14,14 +15,15 @@ export async function transformTableRecordsIntoEvents(
 
   for (const record of records) {
     const { tableId, keyTuple, value } = record;
+    const useTableId = TableId.fromHex(TableId.toHex(tableId.namespace, tableId.name));
     const { indexedValues, namedValues, indexedKey, namedKey } = await decodeStoreSetRecord(
       storeContract,
-      tableId,
+      useTableId,
       keyTuple,
       value
     );
     const key = { ...indexedKey, ...namedKey };
-    const component = tableId.toString();
+    const component = useTableId.toString();
     const entityId = keyTupleToEntityID(keyTuple);
 
     const ecsEvent = {

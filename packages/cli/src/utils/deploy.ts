@@ -222,27 +222,28 @@ export async function deploy(
   promises = [
     ...promises,
     ...Object.entries(resolvedConfig.systems).map(
-      async ([systemName, { name, openAccess, registerFunctionSelectors }]) => {
+      async ([systemName, { name, openAccess, registerFunctionSelectors, registerAsRoot }]) => {
+        const useNamespace = registerAsRoot === undefined || !registerAsRoot ? namespace : "";
         // Register system at route
-        console.log(chalk.blue(`Registering system ${systemName} at ${namespace}/${name}`));
+        console.log(chalk.blue(`Registering system ${systemName} at ${useNamespace}/${name}`));
         await fastTxExecute(
           WorldContract,
           "registerSystem",
-          [toBytes16(namespace), toBytes16(name), await contractPromises[systemName], openAccess],
+          [toBytes16(useNamespace), toBytes16(name), await contractPromises[systemName], openAccess],
           confirmations
         );
-        console.log(chalk.green(`Registered system ${systemName} at ${namespace}/${name}`));
+        console.log(chalk.green(`Registered system ${systemName} at ${useNamespace}/${name}`));
 
         // Register function selectors for the system
         if (registerFunctionSelectors) {
           const functionSignatures: FunctionSignature[] = await loadFunctionSignatures(systemName);
-          const isRoot = namespace === "";
+          const isRoot = useNamespace === "";
           // Using Promise.all to avoid blocking on async calls
           await Promise.all(
             functionSignatures.map(async ({ functionName, functionArgs }) => {
               const functionSignature = isRoot
                 ? functionName + functionArgs
-                : `${namespace}_${name}_${functionName}${functionArgs}`;
+                : `${useNamespace}_${name}_${functionName}${functionArgs}`;
 
               console.log(chalk.blue(`Registering function "${functionSignature}"`));
               if (isRoot) {
@@ -255,14 +256,14 @@ export async function deploy(
                 await fastTxExecute(
                   WorldContract,
                   "registerRootFunctionSelector",
-                  [toBytes16(namespace), toBytes16(name), worldFunctionSelector, systemFunctionSelector],
+                  [toBytes16(useNamespace), toBytes16(name), worldFunctionSelector, systemFunctionSelector],
                   confirmations
                 );
               } else {
                 await fastTxExecute(
                   WorldContract,
                   "registerFunctionSelector",
-                  [toBytes16(namespace), toBytes16(name), functionName, functionArgs],
+                  [toBytes16(useNamespace), toBytes16(name), functionName, functionArgs],
                   confirmations
                 );
               }
@@ -279,8 +280,11 @@ export async function deploy(
   promises = [];
 
   // Grant access to systems
-  for (const [systemName, { name, accessListAddresses, accessListSystems }] of Object.entries(resolvedConfig.systems)) {
-    const resourceSelector = `${namespace}/${name}`;
+  for (const [systemName, { name, accessListAddresses, accessListSystems, registerAsRoot }] of Object.entries(
+    resolvedConfig.systems
+  )) {
+    const useNamespace = registerAsRoot === undefined || !registerAsRoot ? namespace : "";
+    const resourceSelector = `${useNamespace}/${name}`;
 
     // Grant access to addresses
     promises = [
@@ -290,10 +294,10 @@ export async function deploy(
         await fastTxExecute(
           WorldContract,
           "grantAccess",
-          [toBytes16(namespace), toBytes16(name), address],
+          [toBytes16(useNamespace), toBytes16(name), address],
           confirmations
         );
-        console.log(chalk.green(`Granted ${address} access to ${systemName} (${namespace}/${name})`));
+        console.log(chalk.green(`Granted ${address} access to ${systemName} (${useNamespace}/${name})`));
       }),
     ];
 
@@ -305,7 +309,7 @@ export async function deploy(
         await fastTxExecute(
           WorldContract,
           "grantAccess",
-          [toBytes16(namespace), toBytes16(name), await contractPromises[granteeSystem]],
+          [toBytes16(useNamespace), toBytes16(name), await contractPromises[granteeSystem]],
           confirmations
         );
         console.log(chalk.green(`Granted ${granteeSystem} access to ${systemName} (${resourceSelector})`));

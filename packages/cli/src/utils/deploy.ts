@@ -19,6 +19,7 @@ import KeysWithValueModuleData from "@latticexyz/world/abi/KeysWithValueModule.s
 import KeysInTableModuleData from "@latticexyz/world/abi/KeysInTableModule.sol/KeysInTableModule.json" assert { type: "json" };
 import UniqueEntityModuleData from "@latticexyz/world/abi/UniqueEntityModule.sol/UniqueEntityModule.json" assert { type: "json" };
 import SnapSyncModuleData from "@latticexyz/world/abi/SnapSyncModule.sol/SnapSyncModule.json" assert { type: "json" };
+import CallersModuleData from "@latticexyz/world/abi/CallersModule.sol/CallersModule.json" assert { type: "json" };
 
 export interface DeployConfig {
   profile?: string;
@@ -131,6 +132,12 @@ export async function deploy(
           SnapSyncModuleData.bytecode,
           disableTxWait,
           "SnapSyncModule"
+        ),
+        CallersModule: deployContract(
+          CallersModuleData.abi,
+          CallersModuleData.bytecode,
+          disableTxWait,
+          "CallersModule"
         ),
       };
 

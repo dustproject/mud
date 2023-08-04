@@ -136,6 +136,15 @@ export default mudConfig({
       tableIdArgument: true,
       storeArgument: true,
     },
+    Callers: {
+      directory: "modules/callers/tables",
+      keySchema: {},
+      schema: {
+        callerList: "address[]",
+      },
+      tableIdArgument: true,
+      storeArgument: true,
+    },
     /************************************************************************
      *
      *    TEST TABLES
@@ -165,6 +174,7 @@ export default mudConfig({
     // TODO: Move optional modules into a separate package
     // (see https://github.com/latticexyz/mud/pull/584)
     "UniqueEntitySystem",
+    "CallersSystem",
 
     "SnapSyncSystem",
 

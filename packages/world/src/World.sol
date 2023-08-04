@@ -24,8 +24,6 @@ import { Systems } from "./modules/core/tables/Systems.sol";
 import { SystemHooks } from "./modules/core/tables/SystemHooks.sol";
 import { FunctionSelectors } from "./modules/core/tables/FunctionSelectors.sol";
 
-import { console } from "forge-std/console.sol";
-
 contract World is StoreRead, IStoreData, IWorldKernel {
   using ResourceSelector for bytes32;
 
@@ -334,8 +332,6 @@ contract World is StoreRead, IStoreData, IWorldKernel {
    * Fallback function to call registered function selectors
    */
   fallback() external payable {
-    console.log("fallback");
-    console.logBytes4(msg.sig);
     (bytes16 namespace, bytes16 name, bytes4 systemFunctionSelector, bool staticCallOnly) = FunctionSelectors.get(
       msg.sig
     );

@@ -15,6 +15,7 @@ import { IWorldEphemeral } from "../../interfaces/IWorldEphemeral.sol";
 import { NamespaceOwner } from "../../tables/NamespaceOwner.sol";
 import { ResourceAccess } from "../../tables/ResourceAccess.sol";
 import { InstalledModules } from "../../tables/InstalledModules.sol";
+import { Callers } from "../../tables/Callers.sol";
 
 import { CoreSystem } from "./CoreSystem.sol";
 import { CORE_MODULE_NAME, CORE_SYSTEM_NAME } from "./constants.sol";
@@ -61,6 +62,9 @@ contract CoreModule is IModule, WorldContext {
 
     InstalledModules.registerSchema();
     InstalledModules.setMetadata();
+
+    Callers.registerSchema();
+    Callers.setMetadata();
 
     ResourceAccess.registerSchema();
     ResourceAccess.setMetadata();

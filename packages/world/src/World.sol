@@ -14,15 +14,17 @@ import { Call } from "./Call.sol";
 
 import { NamespaceOwner } from "./tables/NamespaceOwner.sol";
 import { InstalledModules } from "./tables/InstalledModules.sol";
+import { Callers } from "./tables/Callers.sol";
 
 import { ISystemHook } from "./interfaces/ISystemHook.sol";
 import { IModule } from "./interfaces/IModule.sol";
 import { IWorldKernel } from "./interfaces/IWorldKernel.sol";
-import { ICallersSystem } from "./interfaces/ICallersSystem.sol";
 
 import { Systems } from "./modules/core/tables/Systems.sol";
 import { SystemHooks } from "./modules/core/tables/SystemHooks.sol";
 import { FunctionSelectors } from "./modules/core/tables/FunctionSelectors.sol";
+
+import { console } from "forge-std/console.sol";
 
 contract World is StoreRead, IStoreData, IWorldKernel {
   using ResourceSelector for bytes32;
@@ -256,9 +258,10 @@ contract World is StoreRead, IStoreData, IWorldKernel {
   function call(
     bytes16 namespace,
     bytes16 name,
-    bytes memory funcSelectorAndArgs
+    bytes memory funcSelectorAndArgs,
+    bool staticCallOnly
   ) external payable virtual returns (bytes memory) {
-    return _call(namespace, name, funcSelectorAndArgs, msg.value);
+    return _call(namespace, name, funcSelectorAndArgs, msg.value, staticCallOnly);
   }
 
   /**
@@ -269,7 +272,8 @@ contract World is StoreRead, IStoreData, IWorldKernel {
     bytes16 namespace,
     bytes16 name,
     bytes memory funcSelectorAndArgs,
-    uint256 value
+    uint256 value,
+    bool staticCallOnly
   ) internal virtual returns (bytes memory data) {
     // Load the system data
     bytes32 resourceSelector = ResourceSelector.from(namespace, name);
@@ -281,10 +285,9 @@ contract World is StoreRead, IStoreData, IWorldKernel {
     // Allow access if the system is public or the caller has access to the namespace or name
     if (!publicAccess) AccessControl.requireAccess(namespace, name, msg.sender);
 
-    // Store the caller in a table so we know who the list of callers are
-    bool callerSuccess = false;
-    if (namespace != bytes16("callers")) {
-      (callerSuccess, ) = address(this).call(abi.encodeWithSignature("callers_system_pushCaller(address)", msg.sender));
+    if (!staticCallOnly) {
+      // Store the caller in a table so we know who the list of callers are
+      Callers.push(msg.sender);
     }
 
     // Get system hooks
@@ -311,9 +314,8 @@ contract World is StoreRead, IStoreData, IWorldKernel {
       hook.onAfterCallSystem(msg.sender, systemAddress, funcSelectorAndArgs);
     }
 
-    if (callerSuccess) {
-      (callerSuccess, ) = address(this).call(abi.encodeWithSignature("callers_system_popCaller()"));
-      require(callerSuccess, "Failed to pop caller when already pushed caller");
+    if (!staticCallOnly) {
+      Callers.pop();
     }
   }
 
@@ -332,7 +334,11 @@ contract World is StoreRead, IStoreData, IWorldKernel {
    * Fallback function to call registered function selectors
    */
   fallback() external payable {
-    (bytes16 namespace, bytes16 name, bytes4 systemFunctionSelector) = FunctionSelectors.get(msg.sig);
+    console.log("fallback");
+    console.logBytes4(msg.sig);
+    (bytes16 namespace, bytes16 name, bytes4 systemFunctionSelector, bool staticCallOnly) = FunctionSelectors.get(
+      msg.sig
+    );
 
     if (namespace == 0 && name == 0) revert FunctionSelectorNotFound(msg.sig);
 
@@ -340,7 +346,7 @@ contract World is StoreRead, IStoreData, IWorldKernel {
     bytes memory callData = Bytes.setBytes4(msg.data, 0, systemFunctionSelector);
 
     // Call the function and forward the call value
-    bytes memory returnData = _call(namespace, name, callData, msg.value);
+    bytes memory returnData = _call(namespace, name, callData, msg.value, staticCallOnly);
     assembly {
       return(add(returnData, 0x20), mload(returnData))
     }

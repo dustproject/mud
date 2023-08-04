@@ -42,6 +42,12 @@ export default mudConfig({
       // schema in `getField` too. (See https://github.com/latticexyz/mud/issues/444)
       dataStruct: true,
     },
+    Callers: {
+      keySchema: {},
+      schema: {
+        callerList: "address[]",
+      },
+    },
     /************************************************************************
      *
      *    MODULE TABLES
@@ -92,6 +98,7 @@ export default mudConfig({
         namespace: "bytes16",
         name: "bytes16",
         systemFunctionSelector: "bytes4",
+        staticCallOnly: "bool",
       },
       dataStruct: false,
     },
@@ -136,15 +143,6 @@ export default mudConfig({
       tableIdArgument: true,
       storeArgument: true,
     },
-    Callers: {
-      directory: "modules/callers/tables",
-      keySchema: {},
-      schema: {
-        callerList: "address[]",
-      },
-      tableIdArgument: true,
-      storeArgument: true,
-    },
     /************************************************************************
      *
      *    TEST TABLES
@@ -174,7 +172,6 @@ export default mudConfig({
     // TODO: Move optional modules into a separate package
     // (see https://github.com/latticexyz/mud/pull/584)
     "UniqueEntitySystem",
-    "CallersSystem",
 
     "SnapSyncSystem",
 

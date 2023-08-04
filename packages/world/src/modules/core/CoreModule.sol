@@ -145,7 +145,8 @@ contract CoreModule is IModule, WorldContext {
           ROOT_NAMESPACE,
           CORE_SYSTEM_NAME,
           functionSelectors[i],
-          functionSelectors[i]
+          functionSelectors[i],
+          false
         )
       });
     }

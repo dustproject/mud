@@ -50,6 +50,21 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
+    Callers: (() => {
+      const tableId = new TableId("", "Callers");
+      return defineComponent(
+        world,
+        {
+          callerList: RecsType.StringArray,
+        },
+        {
+          metadata: {
+            contractId: tableId.toHex(),
+            tableId: tableId.toString(),
+          },
+        }
+      );
+    })(),
     Systems: (() => {
       const tableId = new TableId("", "Systems");
       return defineComponent(
@@ -119,6 +134,7 @@ export function defineContractComponents(world: World) {
           namespace: RecsType.String,
           name: RecsType.String,
           systemFunctionSelector: RecsType.String,
+          staticCallOnly: RecsType.Boolean,
         },
         {
           metadata: {

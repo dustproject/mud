@@ -17,6 +17,9 @@ import { EncodeArray } from "@latticexyz/store/src/tightcoder/EncodeArray.sol";
 import { Schema, SchemaLib } from "@latticexyz/store/src/Schema.sol";
 import { PackedCounter, PackedCounterLib } from "@latticexyz/store/src/PackedCounter.sol";
 
+bytes32 constant _tableId = bytes32(abi.encodePacked(bytes16(""), bytes16("Callers")));
+bytes32 constant CallersTableId = _tableId;
+
 library Callers {
   /** Get the table's schema */
   function getSchema() internal pure returns (Schema) {
@@ -40,29 +43,29 @@ library Callers {
   }
 
   /** Register the table's schema */
-  function registerSchema(bytes32 _tableId) internal {
+  function registerSchema() internal {
     StoreSwitch.registerSchema(_tableId, getSchema(), getKeySchema());
   }
 
   /** Register the table's schema (using the specified store) */
-  function registerSchema(IStore _store, bytes32 _tableId) internal {
+  function registerSchema(IStore _store) internal {
     _store.registerSchema(_tableId, getSchema(), getKeySchema());
   }
 
   /** Set the table's metadata */
-  function setMetadata(bytes32 _tableId) internal {
+  function setMetadata() internal {
     (string memory _tableName, string[] memory _fieldNames) = getMetadata();
     StoreSwitch.setMetadata(_tableId, _tableName, _fieldNames);
   }
 
   /** Set the table's metadata (using the specified store) */
-  function setMetadata(IStore _store, bytes32 _tableId) internal {
+  function setMetadata(IStore _store) internal {
     (string memory _tableName, string[] memory _fieldNames) = getMetadata();
     _store.setMetadata(_tableId, _tableName, _fieldNames);
   }
 
   /** Get callerList */
-  function get(bytes32 _tableId) internal view returns (address[] memory callerList) {
+  function get() internal view returns (address[] memory callerList) {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
     bytes memory _blob = StoreSwitch.getField(_tableId, _keyTuple, 0);
@@ -70,7 +73,7 @@ library Callers {
   }
 
   /** Get callerList (using the specified store) */
-  function get(IStore _store, bytes32 _tableId) internal view returns (address[] memory callerList) {
+  function get(IStore _store) internal view returns (address[] memory callerList) {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
     bytes memory _blob = _store.getField(_tableId, _keyTuple, 0);
@@ -78,21 +81,21 @@ library Callers {
   }
 
   /** Set callerList */
-  function set(bytes32 _tableId, address[] memory callerList) internal {
+  function set(address[] memory callerList) internal {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
     StoreSwitch.setField(_tableId, _keyTuple, 0, EncodeArray.encode((callerList)));
   }
 
   /** Set callerList (using the specified store) */
-  function set(IStore _store, bytes32 _tableId, address[] memory callerList) internal {
+  function set(IStore _store, address[] memory callerList) internal {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
     _store.setField(_tableId, _keyTuple, 0, EncodeArray.encode((callerList)));
   }
 
   /** Get the length of callerList */
-  function length(bytes32 _tableId) internal view returns (uint256) {
+  function length() internal view returns (uint256) {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
     uint256 _byteLength = StoreSwitch.getFieldLength(_tableId, _keyTuple, 0, getSchema());
@@ -100,7 +103,7 @@ library Callers {
   }
 
   /** Get the length of callerList (using the specified store) */
-  function length(IStore _store, bytes32 _tableId) internal view returns (uint256) {
+  function length(IStore _store) internal view returns (uint256) {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
     uint256 _byteLength = _store.getFieldLength(_tableId, _keyTuple, 0, getSchema());
@@ -108,7 +111,7 @@ library Callers {
   }
 
   /** Get an item of callerList (unchecked, returns invalid data if index overflows) */
-  function getItem(bytes32 _tableId, uint256 _index) internal view returns (address) {
+  function getItem(uint256 _index) internal view returns (address) {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
     bytes memory _blob = StoreSwitch.getFieldSlice(_tableId, _keyTuple, 0, getSchema(), _index * 20, (_index + 1) * 20);
@@ -116,7 +119,7 @@ library Callers {
   }
 
   /** Get an item of callerList (using the specified store) (unchecked, returns invalid data if index overflows) */
-  function getItem(IStore _store, bytes32 _tableId, uint256 _index) internal view returns (address) {
+  function getItem(IStore _store, uint256 _index) internal view returns (address) {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
     bytes memory _blob = _store.getFieldSlice(_tableId, _keyTuple, 0, getSchema(), _index * 20, (_index + 1) * 20);
@@ -124,42 +127,42 @@ library Callers {
   }
 
   /** Push an element to callerList */
-  function push(bytes32 _tableId, address _element) internal {
+  function push(address _element) internal {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
     StoreSwitch.pushToField(_tableId, _keyTuple, 0, abi.encodePacked((_element)));
   }
 
   /** Push an element to callerList (using the specified store) */
-  function push(IStore _store, bytes32 _tableId, address _element) internal {
+  function push(IStore _store, address _element) internal {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
     _store.pushToField(_tableId, _keyTuple, 0, abi.encodePacked((_element)));
   }
 
   /** Pop an element from callerList */
-  function pop(bytes32 _tableId) internal {
+  function pop() internal {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
     StoreSwitch.popFromField(_tableId, _keyTuple, 0, 20);
   }
 
   /** Pop an element from callerList (using the specified store) */
-  function pop(IStore _store, bytes32 _tableId) internal {
+  function pop(IStore _store) internal {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
     _store.popFromField(_tableId, _keyTuple, 0, 20);
   }
 
   /** Update an element of callerList at `_index` */
-  function update(bytes32 _tableId, uint256 _index, address _element) internal {
+  function update(uint256 _index, address _element) internal {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
     StoreSwitch.updateInField(_tableId, _keyTuple, 0, _index * 20, abi.encodePacked((_element)));
   }
 
   /** Update an element of callerList (using the specified store) at `_index` */
-  function update(IStore _store, bytes32 _tableId, uint256 _index, address _element) internal {
+  function update(IStore _store, uint256 _index, address _element) internal {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
     _store.updateInField(_tableId, _keyTuple, 0, _index * 20, abi.encodePacked((_element)));
@@ -180,14 +183,14 @@ library Callers {
   }
 
   /* Delete all data for given keys */
-  function deleteRecord(bytes32 _tableId) internal {
+  function deleteRecord() internal {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
     StoreSwitch.deleteRecord(_tableId, _keyTuple);
   }
 
   /* Delete all data for given keys (using the specified store) */
-  function deleteRecord(IStore _store, bytes32 _tableId) internal {
+  function deleteRecord(IStore _store) internal {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
     _store.deleteRecord(_tableId, _keyTuple);

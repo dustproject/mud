@@ -702,7 +702,7 @@ contract WorldTest is Test, GasReporter {
     world.registerSystem(namespace, name, system, true);
 
     startGasReport("Register a function selector");
-    bytes4 functionSelector = world.registerFunctionSelector(namespace, name, "msgSender", "()");
+    bytes4 functionSelector = world.registerFunctionSelector(namespace, name, "msgSender", "()", true);
     endGasReport();
 
     string memory expectedWorldFunctionSignature = "testNamespace_testSystem_msgSender()";
@@ -716,7 +716,7 @@ contract WorldTest is Test, GasReporter {
     assertEq(abi.decode(data, (address)), address(this), "wrong address returned");
 
     // Register a function selector to the error function
-    functionSelector = world.registerFunctionSelector(namespace, name, "err", "(string)");
+    functionSelector = world.registerFunctionSelector(namespace, name, "err", "(string)", true);
 
     // Expect errors to be passed through
     vm.expectRevert(abi.encodeWithSelector(WorldTestSystem.WorldTestSystemError.selector, "test error"));
@@ -736,14 +736,14 @@ contract WorldTest is Test, GasReporter {
 
     // Expect an error when trying to register a root function selector from an account without access
     _expectAccessDenied(address(0x01), "", "");
-    world.registerRootFunctionSelector(namespace, name, worldFunc, sysFunc);
+    world.registerRootFunctionSelector(namespace, name, worldFunc, sysFunc, false);
 
     // Expect the World to be able to register a root function selector
     vm.prank(address(world));
-    world.registerRootFunctionSelector(namespace, name, "smth", "smth");
+    world.registerRootFunctionSelector(namespace, name, "smth", "smth", false);
 
     startGasReport("Register a root function selector");
-    bytes4 functionSelector = world.registerRootFunctionSelector(namespace, name, worldFunc, sysFunc);
+    bytes4 functionSelector = world.registerRootFunctionSelector(namespace, name, worldFunc, sysFunc, false);
     endGasReport();
 
     assertEq(functionSelector, worldFunc, "wrong function selector returned");
@@ -759,7 +759,8 @@ contract WorldTest is Test, GasReporter {
       namespace,
       name,
       WorldTestSystem.err.selector,
-      WorldTestSystem.err.selector
+      WorldTestSystem.err.selector,
+      true
     );
 
     // Expect errors to be passed through
@@ -776,7 +777,7 @@ contract WorldTest is Test, GasReporter {
     world.registerSystem(namespace, name, system, true);
 
     startGasReport("Register a fallback system");
-    bytes4 funcSelector1 = world.registerFunctionSelector(namespace, name, "", "");
+    bytes4 funcSelector1 = world.registerFunctionSelector(namespace, name, "", "", false);
     endGasReport();
 
     // Call the system's fallback function
@@ -788,7 +789,7 @@ contract WorldTest is Test, GasReporter {
     bytes4 worldFunc = bytes4(abi.encodeWithSignature("testSelector()"));
 
     startGasReport("Register a root fallback system");
-    bytes4 funcSelector2 = world.registerRootFunctionSelector(namespace, name, worldFunc, 0);
+    bytes4 funcSelector2 = world.registerRootFunctionSelector(namespace, name, worldFunc, 0, false);
     endGasReport();
 
     assertEq(funcSelector2, worldFunc, "wrong function selector returned");
@@ -831,7 +832,8 @@ contract WorldTest is Test, GasReporter {
       namespace,
       name,
       WorldTestSystem.receiveEther.selector,
-      WorldTestSystem.receiveEther.selector
+      WorldTestSystem.receiveEther.selector,
+      false
     );
 
     // create new funded address and impersonate
@@ -863,7 +865,8 @@ contract WorldTest is Test, GasReporter {
       namespace,
       name,
       WorldTestSystem.msgSender.selector,
-      WorldTestSystem.msgSender.selector
+      WorldTestSystem.msgSender.selector,
+      true
     );
 
     // create new funded address and impersonate
@@ -895,7 +898,8 @@ contract WorldTest is Test, GasReporter {
       namespace,
       name,
       bytes4(abi.encodeWithSignature("systemFallback()")),
-      bytes4("")
+      bytes4(""),
+      false
     );
 
     // create new funded address and impersonate
@@ -925,7 +929,8 @@ contract WorldTest is Test, GasReporter {
       namespace,
       name,
       bytes4(abi.encodeWithSignature("systemFallback()")),
-      bytes4("")
+      bytes4(""),
+      false
     );
 
     // create new funded address and impersonate
@@ -955,7 +960,8 @@ contract WorldTest is Test, GasReporter {
       namespace,
       name,
       WorldTestSystem.receiveEther.selector,
-      WorldTestSystem.receiveEther.selector
+      WorldTestSystem.receiveEther.selector,
+      false
     );
 
     // create new funded address and impersonate

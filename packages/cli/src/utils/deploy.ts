@@ -182,11 +182,12 @@ export async function deploy(
   const tableIds: { [tableName: string]: Uint8Array } = {};
   promises = [
     ...promises,
-    ...Object.entries(mudConfig.tables).map(async ([tableName, { name, schema, keySchema }]) => {
-      console.log(chalk.blue(`Registering table ${tableName} at ${namespace}/${name}`));
+    ...Object.entries(mudConfig.tables).map(async ([tableName, { name, schema, keySchema, registerAsRoot }]) => {
+      const useNamespace = registerAsRoot === undefined || !registerAsRoot ? namespace : "";
+      console.log(chalk.blue(`Registering table ${tableName} at ${useNamespace}/${name}`));
 
       // Store the tableId for later use
-      tableIds[tableName] = toResourceSelector(namespace, name);
+      tableIds[tableName] = toResourceSelector(useNamespace, name);
 
       // Register table
       const schemaTypes = Object.values(schema).map((abiOrUserType) => {
@@ -202,7 +203,7 @@ export async function deploy(
       await fastTxExecute(
         WorldContract,
         "registerTable",
-        [toBytes16(namespace), toBytes16(name), encodeSchema(schemaTypes), encodeSchema(keyTypes)],
+        [toBytes16(useNamespace), toBytes16(name), encodeSchema(schemaTypes), encodeSchema(keyTypes)],
         confirmations
       );
 
@@ -210,7 +211,7 @@ export async function deploy(
       await fastTxExecute(
         WorldContract,
         "setMetadata(bytes16,bytes16,string,string[])",
-        [toBytes16(namespace), toBytes16(name), tableName, Object.keys(schema)],
+        [toBytes16(useNamespace), toBytes16(name), tableName, Object.keys(schema)],
         confirmations
       );
 
@@ -222,47 +223,56 @@ export async function deploy(
   promises = [
     ...promises,
     ...Object.entries(resolvedConfig.systems).map(
-      async ([systemName, { name, openAccess, registerFunctionSelectors }]) => {
+      async ([systemName, { name, openAccess, registerFunctionSelectors, registerAsRoot }]) => {
+        const useNamespace = registerAsRoot === undefined || !registerAsRoot ? namespace : "";
         // Register system at route
-        console.log(chalk.blue(`Registering system ${systemName} at ${namespace}/${name}`));
+        console.log(chalk.blue(`Registering system ${systemName} at ${useNamespace}/${name}`));
         await fastTxExecute(
           WorldContract,
           "registerSystem",
-          [toBytes16(namespace), toBytes16(name), await contractPromises[systemName], openAccess],
+          [toBytes16(useNamespace), toBytes16(name), await contractPromises[systemName], openAccess],
           confirmations
         );
-        console.log(chalk.green(`Registered system ${systemName} at ${namespace}/${name}`));
+        console.log(chalk.green(`Registered system ${systemName} at ${useNamespace}/${name}`));
 
         // Register function selectors for the system
         if (registerFunctionSelectors) {
           const functionSignatures: FunctionSignature[] = await loadFunctionSignatures(systemName);
-          const isRoot = namespace === "";
+          const isRoot = useNamespace === "";
           // Using Promise.all to avoid blocking on async calls
           await Promise.all(
-            functionSignatures.map(async ({ functionName, functionArgs }) => {
+            functionSignatures.map(async ({ functionName, functionArgs, staticCallOnly }) => {
               const functionSignature = isRoot
                 ? functionName + functionArgs
-                : `${namespace}_${name}_${functionName}${functionArgs}`;
+                : `${useNamespace}_${name}_${functionName}${functionArgs}`;
 
-              console.log(chalk.blue(`Registering function "${functionSignature}"`));
+              console.log(
+                chalk.blue(`Registering ${staticCallOnly ? "static" : "non-static"} function "${functionSignature}"`)
+              );
               if (isRoot) {
                 const worldFunctionSelector = toFunctionSelector(
                   functionSignature === ""
-                    ? { functionName: systemName, functionArgs } // Register the system's fallback function as `<systemName>(<args>)`
-                    : { functionName, functionArgs }
+                    ? { functionName: systemName, functionArgs, staticCallOnly } // Register the system's fallback function as `<systemName>(<args>)`
+                    : { functionName, functionArgs, staticCallOnly }
                 );
-                const systemFunctionSelector = toFunctionSelector({ functionName, functionArgs });
+                const systemFunctionSelector = toFunctionSelector({ functionName, functionArgs, staticCallOnly });
                 await fastTxExecute(
                   WorldContract,
                   "registerRootFunctionSelector",
-                  [toBytes16(namespace), toBytes16(name), worldFunctionSelector, systemFunctionSelector],
+                  [
+                    toBytes16(useNamespace),
+                    toBytes16(name),
+                    worldFunctionSelector,
+                    systemFunctionSelector,
+                    staticCallOnly,
+                  ],
                   confirmations
                 );
               } else {
                 await fastTxExecute(
                   WorldContract,
                   "registerFunctionSelector",
-                  [toBytes16(namespace), toBytes16(name), functionName, functionArgs],
+                  [toBytes16(useNamespace), toBytes16(name), functionName, functionArgs, staticCallOnly],
                   confirmations
                 );
               }
@@ -279,8 +289,11 @@ export async function deploy(
   promises = [];
 
   // Grant access to systems
-  for (const [systemName, { name, accessListAddresses, accessListSystems }] of Object.entries(resolvedConfig.systems)) {
-    const resourceSelector = `${namespace}/${name}`;
+  for (const [systemName, { name, accessListAddresses, accessListSystems, registerAsRoot }] of Object.entries(
+    resolvedConfig.systems
+  )) {
+    const useNamespace = registerAsRoot === undefined || !registerAsRoot ? namespace : "";
+    const resourceSelector = `${useNamespace}/${name}`;
 
     // Grant access to addresses
     promises = [
@@ -290,10 +303,10 @@ export async function deploy(
         await fastTxExecute(
           WorldContract,
           "grantAccess",
-          [toBytes16(namespace), toBytes16(name), address],
+          [toBytes16(useNamespace), toBytes16(name), address],
           confirmations
         );
-        console.log(chalk.green(`Granted ${address} access to ${systemName} (${namespace}/${name})`));
+        console.log(chalk.green(`Granted ${address} access to ${systemName} (${useNamespace}/${name})`));
       }),
     ];
 
@@ -305,7 +318,7 @@ export async function deploy(
         await fastTxExecute(
           WorldContract,
           "grantAccess",
-          [toBytes16(namespace), toBytes16(name), await contractPromises[granteeSystem]],
+          [toBytes16(useNamespace), toBytes16(name), await contractPromises[granteeSystem]],
           confirmations
         );
         console.log(chalk.green(`Granted ${granteeSystem} access to ${systemName} (${resourceSelector})`));
@@ -490,11 +503,13 @@ export async function deploy(
     return abi
       .filter((item) => ["fallback", "function"].includes(item.type))
       .map((item) => {
-        if (item.type === "fallback") return { functionName: "", functionArgs: "" };
+        const staticCallOnly = item.stateMutability === "view" || item.stateMutability === "pure";
+        if (item.type === "fallback") return { functionName: "", functionArgs: "", staticCallOnly: staticCallOnly };
 
         return {
           functionName: item.name,
           functionArgs: parseComponents(item.inputs),
+          staticCallOnly: staticCallOnly,
         };
       });
   }
@@ -623,6 +638,7 @@ function toResourceSelector(namespace: string, file: string): Uint8Array {
 interface FunctionSignature {
   functionName: string;
   functionArgs: string;
+  staticCallOnly: boolean;
 }
 
 // TODO: move this to utils as soon as utils are usable inside cli

@@ -30,7 +30,7 @@ contract SnapSyncModule is IModule, WorldContext {
     // Register system
     world.registerSystem(NAMESPACE, SYSTEM_NAME, snapSyncSystem, true);
     // Register system's functions
-    world.registerFunctionSelector(NAMESPACE, SYSTEM_NAME, "getRecords", "(bytes32,uint256,uint256)");
-    world.registerFunctionSelector(NAMESPACE, SYSTEM_NAME, "getNumKeysInTable", "(bytes32)");
+    world.registerFunctionSelector(NAMESPACE, SYSTEM_NAME, "getRecords", "(bytes32,uint256,uint256)", true);
+    world.registerFunctionSelector(NAMESPACE, SYSTEM_NAME, "getNumKeysInTable", "(bytes32)", true);
   }
 }

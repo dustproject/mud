@@ -89,7 +89,8 @@ interface IWorldCall {
   function call(
     bytes16 namespace,
     bytes16 name,
-    bytes memory funcSelectorAndArgs
+    bytes memory funcSelectorAndArgs,
+    bool staticCallOnly
   ) external payable returns (bytes memory);
 }
 

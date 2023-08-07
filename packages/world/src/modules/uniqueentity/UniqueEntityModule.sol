@@ -36,6 +36,6 @@ contract UniqueEntityModule is IModule, WorldContext {
     // Register system
     world.registerSystem(NAMESPACE, SYSTEM_NAME, uniqueEntitySystem, true);
     // Register system's functions
-    world.registerFunctionSelector(NAMESPACE, SYSTEM_NAME, "getUniqueEntity", "()");
+    world.registerFunctionSelector(NAMESPACE, SYSTEM_NAME, "getUniqueEntity", "()", false);
   }
 }

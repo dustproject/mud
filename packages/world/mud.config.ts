@@ -42,6 +42,12 @@ export default mudConfig({
       // schema in `getField` too. (See https://github.com/latticexyz/mud/issues/444)
       dataStruct: true,
     },
+    Callers: {
+      keySchema: {},
+      schema: {
+        callerList: "address[]",
+      },
+    },
     /************************************************************************
      *
      *    MODULE TABLES
@@ -89,6 +95,7 @@ export default mudConfig({
         functionSelector: "bytes4",
       },
       schema: {
+        staticCallOnly: "bool",
         namespace: "bytes16",
         name: "bytes16",
         systemFunctionSelector: "bytes4",

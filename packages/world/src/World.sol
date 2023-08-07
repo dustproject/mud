@@ -14,6 +14,7 @@ import { Call } from "./Call.sol";
 
 import { NamespaceOwner } from "./tables/NamespaceOwner.sol";
 import { InstalledModules } from "./tables/InstalledModules.sol";
+import { Callers } from "./tables/Callers.sol";
 
 import { ISystemHook } from "./interfaces/ISystemHook.sol";
 import { IModule } from "./interfaces/IModule.sol";
@@ -255,9 +256,10 @@ contract World is StoreRead, IStoreData, IWorldKernel {
   function call(
     bytes16 namespace,
     bytes16 name,
-    bytes memory funcSelectorAndArgs
+    bytes memory funcSelectorAndArgs,
+    bool staticCallOnly
   ) external payable virtual returns (bytes memory) {
-    return _call(namespace, name, funcSelectorAndArgs, msg.value);
+    return _call(namespace, name, funcSelectorAndArgs, msg.value, staticCallOnly);
   }
 
   /**
@@ -268,7 +270,8 @@ contract World is StoreRead, IStoreData, IWorldKernel {
     bytes16 namespace,
     bytes16 name,
     bytes memory funcSelectorAndArgs,
-    uint256 value
+    uint256 value,
+    bool staticCallOnly
   ) internal virtual returns (bytes memory data) {
     // Load the system data
     bytes32 resourceSelector = ResourceSelector.from(namespace, name);
@@ -279,6 +282,11 @@ contract World is StoreRead, IStoreData, IWorldKernel {
 
     // Allow access if the system is public or the caller has access to the namespace or name
     if (!publicAccess) AccessControl.requireAccess(namespace, name, msg.sender);
+
+    if (!staticCallOnly) {
+      // Store the caller in a table so we know who the list of callers are
+      Callers.push(msg.sender);
+    }
 
     // Get system hooks
     address[] memory hooks = SystemHooks.get(resourceSelector);
@@ -303,6 +311,10 @@ contract World is StoreRead, IStoreData, IWorldKernel {
       ISystemHook hook = ISystemHook(hooks[i]);
       hook.onAfterCallSystem(msg.sender, systemAddress, funcSelectorAndArgs);
     }
+
+    if (!staticCallOnly) {
+      Callers.pop();
+    }
   }
 
   /************************************************************************
@@ -320,7 +332,9 @@ contract World is StoreRead, IStoreData, IWorldKernel {
    * Fallback function to call registered function selectors
    */
   fallback() external payable {
-    (bytes16 namespace, bytes16 name, bytes4 systemFunctionSelector) = FunctionSelectors.get(msg.sig);
+    (bool staticCallOnly, bytes16 namespace, bytes16 name, bytes4 systemFunctionSelector) = FunctionSelectors.get(
+      msg.sig
+    );
 
     if (namespace == 0 && name == 0) revert FunctionSelectorNotFound(msg.sig);
 
@@ -328,7 +342,7 @@ contract World is StoreRead, IStoreData, IWorldKernel {
     bytes memory callData = Bytes.setBytes4(msg.data, 0, systemFunctionSelector);
 
     // Call the function and forward the call value
-    bytes memory returnData = _call(namespace, name, callData, msg.value);
+    bytes memory returnData = _call(namespace, name, callData, msg.value, staticCallOnly);
     assembly {
       return(add(returnData, 0x20), mload(returnData))
     }

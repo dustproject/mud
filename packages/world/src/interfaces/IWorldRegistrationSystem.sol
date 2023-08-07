@@ -42,13 +42,15 @@ interface IWorldRegistrationSystem {
     bytes16 namespace,
     bytes16 name,
     string memory systemFunctionName,
-    string memory systemFunctionArguments
+    string memory systemFunctionArguments,
+    bool staticCallOnly
   ) external returns (bytes4 worldFunctionSelector);
 
   function registerRootFunctionSelector(
     bytes16 namespace,
     bytes16 name,
     bytes4 worldFunctionSelector,
-    bytes4 systemFunctionSelector
+    bytes4 systemFunctionSelector,
+    bool staticCallOnly
   ) external returns (bytes4);
 }

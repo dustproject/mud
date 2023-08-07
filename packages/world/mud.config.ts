@@ -95,10 +95,10 @@ export default mudConfig({
         functionSelector: "bytes4",
       },
       schema: {
+        staticCallOnly: "bool",
         namespace: "bytes16",
         name: "bytes16",
         systemFunctionSelector: "bytes4",
-        staticCallOnly: "bool",
       },
       dataStruct: false,
     },

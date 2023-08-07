@@ -246,7 +246,9 @@ export async function deploy(
                 ? functionName + functionArgs
                 : `${useNamespace}_${name}_${functionName}${functionArgs}`;
 
-              console.log(chalk.blue(`Registering function "${functionSignature}"`));
+              console.log(
+                chalk.blue(`Registering ${staticCallOnly ? "static" : "non-static"} function "${functionSignature}"`)
+              );
               if (isRoot) {
                 const worldFunctionSelector = toFunctionSelector(
                   functionSignature === ""

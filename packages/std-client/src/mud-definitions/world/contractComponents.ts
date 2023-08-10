@@ -53,6 +53,21 @@ export function defineContractComponents(world: World) {
         },
       } as const
     ),
+    Callers: defineComponent(
+      world,
+      {
+        callerList: RecsType.StringArray,
+      },
+      {
+        id: "0x0000000000000000000000000000000043616c6c657273000000000000000000",
+        metadata: {
+          componentName: "Callers",
+          tableName: ":Callers",
+          keySchema: {},
+          valueSchema: { callerList: "address[]" },
+        },
+      } as const
+    ),
     Systems: defineComponent(
       world,
       {
@@ -117,6 +132,7 @@ export function defineContractComponents(world: World) {
     FunctionSelectors: defineComponent(
       world,
       {
+        staticCallOnly: RecsType.Boolean,
         namespace: RecsType.String,
         name: RecsType.String,
         systemFunctionSelector: RecsType.String,
@@ -128,6 +144,7 @@ export function defineContractComponents(world: World) {
           tableName: ":FunctionSelector",
           keySchema: { functionSelector: "bytes4" },
           valueSchema: {
+            staticCallOnly: "bool",
             namespace: "bytes16",
             name: "bytes16",
             systemFunctionSelector: "bytes4",

@@ -31,7 +31,7 @@ const clean = (value: any) => {
  * @param component {@link defineComponent Component} to index.
  * @returns Indexed version of the component.
  */
-export function createIndexer<S extends Schema, M extends Metadata, T = undefined>(
+export function createIndexer<S extends Schema, M extends Metadata, T = unknown>(
   component: Component<S, M, T>
 ): Indexer<S, M, T> {
   const valueToEntities = new Map<string, Set<EntitySymbol>>();

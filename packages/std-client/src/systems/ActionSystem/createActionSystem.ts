@@ -20,7 +20,8 @@ import { merge, Observable } from "rxjs";
 
 export type ActionSystem = ReturnType<typeof createActionSystem>;
 
-export function createActionSystem<M = unknown>(world: World, txReduced$: Observable<string>) {
+// export function createActionSystem<M = unknown>(world: World, txReduced$: Observable<string>) {
+export function createActionSystem<M = unknown>(world: World) {
   // Action component
   const Action = defineActionComponent<M>(world);
 
@@ -164,7 +165,7 @@ export function createActionSystem<M = unknown>(world: World, txReduced$: Observ
 
         if (!action.txMayNotWriteToTable) {
           // Transactions are only reduced if it writes to a table. So this flag mediates it
-          await awaitStreamValue(txReduced$, (v) => v === tx.hash);
+          // await awaitStreamValue(txReduced$, (v) => v === tx.hash);
         }
 
         updateComponent(Action, action.entity, { state: ActionState.TxReduced });

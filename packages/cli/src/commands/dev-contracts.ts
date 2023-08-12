@@ -6,7 +6,6 @@ import { loadConfig, resolveConfigPath } from "@latticexyz/config/node";
 import { StoreConfig } from "@latticexyz/store";
 import { tablegen } from "@latticexyz/store/codegen";
 import path from "path";
-import { tsgen } from "../render-ts";
 import { debounce } from "throttle-debounce";
 import { worldgenHandler } from "./worldgen";
 import { WorldConfig } from "@latticexyz/world";
@@ -17,7 +16,6 @@ import { rmSync } from "fs";
 type Options = {
   rpc?: string;
   configPath?: string;
-  tsgenOutput: string;
   rebuildAllContracts?: boolean;
 };
 
@@ -36,16 +34,11 @@ const commandModule: CommandModule<Options, Options> = {
         type: "string",
         decs: "Path to MUD config",
       },
-      tsgenOutput: { type: "string", demandOption: true, desc: "Directory to output MUD typescript definition files" },
       rebuildAllContracts: { type: "boolean", desc: "Rebuild all contracts from scratch" },
     });
   },
 
   async handler(args) {
-    if (!args.tsgenOutputDir) {
-      console.error("No output provided");
-    }
-
     if (args.rebuildAllContracts) {
       // Initial cleanup
       await forge(["clean"]);
@@ -152,9 +145,6 @@ const commandModule: CommandModule<Options, Options> = {
       // Run tablegen to generate tables based on the config
       const outPath = path.join(srcDirectory, config.codegenDirectory);
       await tablegen(config, outPath);
-
-      // Run tsgen to regenerate recs types based on the mud config
-      await tsgen(config, args.tsgenOutput);
     }
 
     /** Codegen to run if contracts changed */

@@ -159,8 +159,10 @@ export function createActionSystem<M = unknown>(world: World) {
 
       // If the result includes a hash key (single tx) or hashes (multiple tx) key, wait for the transactions to complete before removing the pending actions
       if (tx) {
+        console.log("my transaction ", tx);
         // Wait for all tx events to be reduced
         updateComponent(Action, action.entity, { state: ActionState.WaitingForTxEvents, txHash: tx.hash });
+        console.log("my transaction 2", tx);
         const txConfirmed = tx.wait().catch((e) => handleError(e, action)); // Also catch the error if not awaiting
 
         if (!action.txMayNotWriteToTable) {

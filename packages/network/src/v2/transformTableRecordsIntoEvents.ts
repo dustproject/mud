@@ -4,7 +4,7 @@ import { decodeStoreSetRecord } from "./decodeStoreSetRecord";
 import { Contract } from "ethers";
 import { keyTupleToEntityID } from "./keyTupleToEntityID";
 import { NetworkComponentUpdate } from "../types";
-import { TableId } from "@latticexyz/common";
+import { TableId } from "@latticexyz/common/deprecated";
 
 export async function transformTableRecordsIntoEvents(
   storeContract: Contract,

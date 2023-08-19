@@ -6,6 +6,8 @@ import { createChannel, createClient } from "nice-grpc-web";
 import { awaitPromise, awaitStreamValue } from "@latticexyz/utils";
 import { grpc } from "@improbable-eng/grpc-web";
 import { ECSRelayServiceDefinition, Message, PushRequest } from "@latticexyz/services/ecs-relay";
+import { recoverAddress } from "./workers/Recover.worker";
+// import RecoverWorker from './workers/Recover.worker.js';
 
 /**
  * Create a RelayService connection, including event$ and utils
@@ -17,9 +19,9 @@ export async function createRelayStream(signer: Signer, url: string, id: string)
   const httpClient = createClient(ECSRelayServiceDefinition, createChannel(url));
   const wsClient = createClient(ECSRelayServiceDefinition, createChannel(url, grpc.WebsocketTransport()));
 
-  const recoverWorker = await spawn(
-    new Worker(new URL("./workers/Recover.worker.js", import.meta.url), { type: "module" })
-  );
+  // const recoverWorker = await spawn(
+  //   new Worker(new URL("./workers/Recover.worker.js", import.meta.url), { type: "module" })
+  // );
 
   // Signature that should be used to prove identity
   const signature = { signature: await signer.signMessage("ecs-relay-service") };
@@ -29,9 +31,9 @@ export async function createRelayStream(signer: Signer, url: string, id: string)
   const event$ = from(wsClient.openStream(signature)).pipe(
     map(async (message) => ({
       message,
-      address: await recoverWorker.recoverAddress(message),
-    })),
-    awaitPromise()
+      address: await recoverAddress(message),
+    }))
+    // awaitPromise()
   );
 
   // Subscribe to new labels

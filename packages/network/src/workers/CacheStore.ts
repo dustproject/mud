@@ -1,6 +1,5 @@
 import { Components, ComponentValue, Entity, SchemaOf } from "@latticexyz/recs";
 import { packTuple, transformIterator, unpackTuple } from "@latticexyz/utils";
-import { initCache } from "../initCache";
 import { ECSStateReply } from "@latticexyz/services/ecs-snapshot";
 import { NetworkComponentUpdate, NetworkEvents } from "../types";
 import { debug as parentDebug } from "./debug";
@@ -193,7 +192,8 @@ export async function getIndexDBCacheStoreBlockNumber(cache: ECSCache): Promise<
   return (await cache.get("BlockNumber", "current")) ?? 0;
 }
 
-export function getIndexDbECSCache(chainId: number, worldAddress: string, version?: number, idb?: IDBFactory) {
+export async function getIndexDbECSCache(chainId: number, worldAddress: string, version?: number, idb?: IDBFactory) {
+  const { initCache } = await import("../initCache");
   return initCache<{
     ComponentValues: State;
     BlockNumber: number;

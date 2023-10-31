@@ -225,6 +225,8 @@ export type FullEnumsConfig<EnumNames extends StringForUnion> = {
   enums: Record<EnumNames, string[]>;
 };
 
+// TODO: Fix .any() should be zUserEnum, but for some reason when
+// compiling to cjs, it doesn't work
 export const zEnumsConfig = z.object({
   enums: z.record(zUserEnumName, z.any()).default(DEFAULTS.enums),
 });

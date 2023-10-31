@@ -3,6 +3,7 @@ import { readFileSync, writeFileSync } from "fs";
 import execa from "execa";
 import chalk from "chalk";
 import { table, getBorderCharacters } from "table";
+// TODO: Fix this import for cjs
 // import stripAnsi from "strip-ansi";
 // const stripAnsi = require('strip-ansi');
 

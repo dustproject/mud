@@ -3,7 +3,7 @@
  * central changelog (https://github.com/changesets/changesets/issues/1059).
  */
 
-import { execa } from "execa";
+import execa from "execa";
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "path";
 

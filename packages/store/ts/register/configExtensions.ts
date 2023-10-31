@@ -6,8 +6,6 @@ extendMUDCoreConfig((config) => {
   // This function gets called within mudConfig.
   // The call order of config extenders depends on the order of their imports.
   // Any config validation and transformation should be placed here.
-  console.log("EXTENDEDDDDDD");
-  console.log(config);
   try {
     return zPluginStoreConfig.parse(config);
   } catch (error) {

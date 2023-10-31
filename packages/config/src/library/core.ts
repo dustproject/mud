@@ -14,7 +14,6 @@ export function mudCoreConfig(config: MUDCoreUserConfig): MUDCoreConfig {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let configAsAny = config as any;
   const context = MUDCoreContext.getContext();
-  console.log(context);
   for (const extender of context.configExtenders) {
     configAsAny = extender(configAsAny);
   }

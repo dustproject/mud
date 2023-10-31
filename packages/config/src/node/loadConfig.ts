@@ -1,4 +1,4 @@
-import { findUp } from "find-up";
+import findUp from "find-up";
 import path from "path";
 import { NotInsideProjectError } from "../library/errors";
 import esbuild from "esbuild";
@@ -13,7 +13,6 @@ const TEMP_CONFIG = "mud.config.temp.mjs";
 export async function loadConfig(configPath?: string): Promise<unknown> {
   configPath = await resolveConfigPath(configPath);
   try {
-    console.log("preee");
     await esbuild.build({
       entryPoints: [configPath],
       format: "esm",
@@ -25,15 +24,13 @@ export async function loadConfig(configPath?: string): Promise<unknown> {
       // avoid bundling external imports (it's unnecessary and esbuild can't handle all node features)
       packages: "external",
     });
-    console.log("here");
     configPath = await resolveConfigPath(TEMP_CONFIG, true);
     // Node.js caches dynamic imports, so without appending a cache breaking
     // param like `?update={Date.now()}` this import always returns the same config
     // if called multiple times in a single process, like the `dev-contracts` cli
-    console.log("all the way here");
     return (await import(configPath + `?update=${Date.now()}`)).default;
   } finally {
-    // rmSync(TEMP_CONFIG, { force: true });
+    rmSync(TEMP_CONFIG, { force: true });
   }
 }
 

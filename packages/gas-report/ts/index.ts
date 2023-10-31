@@ -3,7 +3,7 @@ import { readFileSync, writeFileSync } from "fs";
 import execa from "execa";
 import chalk from "chalk";
 import { table, getBorderCharacters } from "table";
-import stripAnsi from "strip-ansi";
+// import stripAnsi from "strip-ansi";
 // const stripAnsi = require('strip-ansi');
 
 /**
@@ -113,7 +113,8 @@ async function runGasReport(): Promise<GasReport> {
   }
 
   // Extract the gas reports from the logs
-  const lines = stdout.split("\n").map(stripAnsi);
+  // const lines = stdout.split("\n").map(stripAnsi);
+  const lines = stdout.split("\n");
   const gasReportPattern = /^\s*GAS REPORT: (\d+) (.*)$/;
   const testFunctionPattern = /^\[(?:PASS|FAIL).*\] (\w+)\(\)/;
   const testFilePattern = /^Running \d+ tests? for (.*):(.*)$/;

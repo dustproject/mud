@@ -83,9 +83,9 @@
     "@latticexyz/schema-type": "workspace:*",
     "@solidity-parser/parser": "^0.16.0",
     "abitype": "0.9.3",
-    "chalk": "^5.2.0",
+    "chalk": "4.1.2",
     "debug": "^4.3.4",
-    "execa": "^7.0.0",
+    "execa": "^5.1.1",
     "prettier": "^2.8.4",
     "prettier-plugin-solidity": "^1.1.2",
     "viem": "1.6.0"

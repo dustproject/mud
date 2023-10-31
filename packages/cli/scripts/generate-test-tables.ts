@@ -73,10 +73,12 @@ try {
   logError(error);
 }
 
-const srcDirectory = await getSrcDirectory();
+(async () => {
+  const srcDirectory = await getSrcDirectory();
 
-if (config !== undefined) {
-  tablegen(config, path.join(srcDirectory, config.codegenDirectory));
-} else {
-  process.exit(1);
-}
+  if (config !== undefined) {
+    tablegen(config, path.join(srcDirectory, config.codegenDirectory));
+  } else {
+    process.exit(1);
+  }
+})();

@@ -6,6 +6,6 @@ import { StoreConfig } from "..";
 
 (async () => {
   const config = (await loadConfig()) as StoreConfig;
-  const srcDir = await getSrcDirectory();
-  await tablegen(config, path.join(srcDir, config.codegenDirectory));
+  // const srcDir = await getSrcDirectory();
+  // await tablegen(config, path.join(srcDir, config.codegenDirectory));
 })();

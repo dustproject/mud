@@ -226,7 +226,7 @@ export type FullEnumsConfig<EnumNames extends StringForUnion> = {
 };
 
 export const zEnumsConfig = z.object({
-  enums: z.record(zUserEnumName, zUserEnum).default(DEFAULTS.enums),
+  enums: z.record(zUserEnumName, z.any()).default(DEFAULTS.enums),
 });
 
 /************************************************************************
@@ -305,6 +305,8 @@ function validateStoreConfig(config: z.output<typeof StoreConfigUnrefined>, ctx:
   // Global names must be unique
   const tableLibraryNames = Object.keys(config.tables);
   const staticUserTypeNames = Object.keys(config.enums);
+  console.log("ENUMS");
+  console.log(staticUserTypeNames);
   const userTypeNames = staticUserTypeNames;
   const globalNames = [...tableLibraryNames, ...userTypeNames];
   const duplicateGlobalNames = getDuplicates(globalNames);

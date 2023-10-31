@@ -1,9 +1,10 @@
 import type { CommandModule } from "yargs";
 import { readFileSync, writeFileSync } from "fs";
-import { execa } from "execa";
+import execa from "execa";
 import chalk from "chalk";
 import { table, getBorderCharacters } from "table";
 import stripAnsi from "strip-ansi";
+// const stripAnsi = require('strip-ansi');
 
 /**
  * Print the gas report to the console, save it to a file and compare it to a previous gas report if provided.

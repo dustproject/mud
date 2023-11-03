@@ -2,9 +2,11 @@
   "name": "@latticexyz/noise",
   "version": "2.0.0-next.4",
   "license": "MIT",
-  "type": "module",
   "exports": {
-    ".": "./dist/index.js"
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.js"
+    }
   },
   "types": "ts/index.ts",
   "scripts": {

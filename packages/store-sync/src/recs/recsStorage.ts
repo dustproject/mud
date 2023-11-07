@@ -1,8 +1,9 @@
-import { BlockLogsToStorageOptions } from "../blockLogsToStorage";
-import { StoreConfig } from "@latticexyz/store";
-import { debug } from "./debug";
+import { tableIdToHex } from "@latticexyz/common";
+import { isDefined } from "@latticexyz/common/utils";
 import {
+  ComponentUpdate,
   ComponentValue,
+  Entity,
   Component as RecsComponent,
   Schema as RecsSchema,
   getComponentValue,
@@ -10,21 +11,35 @@ import {
   setComponent,
   updateComponent,
 } from "@latticexyz/recs";
-import { isDefined } from "@latticexyz/common/utils";
+import { StoreConfig } from "@latticexyz/store";
+import { BlockLogsToStorageOptions } from "../blockLogsToStorage";
+import { BlockLogs } from "../common";
 import { schemaToDefaults } from "../schemaToDefaults";
-import { defineInternalComponents } from "./defineInternalComponents";
-import { getTableEntity } from "./getTableEntity";
 import { StoreComponentMetadata } from "./common";
-import { tableIdToHex } from "@latticexyz/common";
+import { debug } from "./debug";
+import { defineInternalComponents } from "./defineInternalComponents";
 import { encodeEntity } from "./encodeEntity";
+import { getTableEntity } from "./getTableEntity";
 
-export function recsStorage<TConfig extends StoreConfig = StoreConfig>({
-  components,
-}: {
-  components: ReturnType<typeof defineInternalComponents> &
-    Record<string, RecsComponent<RecsSchema, StoreComponentMetadata>>;
-  config?: TConfig;
-}): BlockLogsToStorageOptions<TConfig> {
+export type ComponentEntityUpdates = Map<string, Map<Entity, ComponentUpdate[]>>;
+
+export type RecsUpdatesHook = (
+  blockNumber: BlockLogs["blockNumber"],
+  componentEntityUpdates: ComponentEntityUpdates
+) => Promise<void>;
+
+export function recsStorage<TConfig extends StoreConfig = StoreConfig>(
+  {
+    components,
+    address,
+  }: {
+    components: ReturnType<typeof defineInternalComponents> &
+      Record<string, RecsComponent<RecsSchema, StoreComponentMetadata>>;
+    config?: TConfig;
+    address: `0x${string}` | undefined;
+  },
+  recsAllUpdatesHook?: RecsUpdatesHook
+): BlockLogsToStorageOptions<TConfig> {
   // TODO: do we need to store block number?
 
   const componentsByTableId = Object.fromEntries(
@@ -44,7 +59,9 @@ export function recsStorage<TConfig extends StoreConfig = StoreConfig>({
         .map((table) => getComponentValue(components.RegisteredTables, getTableEntity(table))?.table)
         .filter(isDefined);
     },
-    async storeOperations({ operations }) {
+    async storeOperations({ blockNumber, operations }) {
+      const componentEntityUpdates: ComponentEntityUpdates = new Map<string, Map<Entity, ComponentUpdate[]>>();
+      console.log("processing updates for world", blockNumber, address);
       for (const operation of operations) {
         const table = getComponentValue(
           components.RegisteredTables,
@@ -68,14 +85,15 @@ export function recsStorage<TConfig extends StoreConfig = StoreConfig>({
 
         const entity = encodeEntity(table.keySchema, operation.key);
 
+        let newUpdate = undefined;
         if (operation.type === "SetRecord") {
           debug("setting component", tableId, entity, operation.value);
-          setComponent(component, entity, operation.value as ComponentValue);
+          newUpdate = setComponent(component, entity, operation.value as ComponentValue);
         } else if (operation.type === "SetField") {
           debug("updating component", tableId, entity, {
             [operation.fieldName]: operation.fieldValue,
           });
-          updateComponent(
+          newUpdate = updateComponent(
             component,
             entity,
             { [operation.fieldName]: operation.fieldValue } as ComponentValue,
@@ -83,8 +101,41 @@ export function recsStorage<TConfig extends StoreConfig = StoreConfig>({
           );
         } else if (operation.type === "DeleteRecord") {
           debug("deleting component", tableId, entity);
-          removeComponent(component, entity);
+          newUpdate = removeComponent(component, entity);
         }
+
+        if (newUpdate) {
+          // console.log("component updates");
+          if (componentEntityUpdates.has(newUpdate.component.id)) {
+            // JS reference so don't need to set again
+            if (componentEntityUpdates.get(newUpdate.component.id)?.has(newUpdate.entity)) {
+              componentEntityUpdates.get(newUpdate.component.id)?.get(newUpdate.entity)?.push(newUpdate);
+            } else {
+              componentEntityUpdates.get(newUpdate.component.id)?.set(newUpdate.entity, [newUpdate]);
+            }
+          } else {
+            const entityUpdates = new Map<Entity, ComponentUpdate[]>();
+            entityUpdates.set(newUpdate.entity, [newUpdate]);
+            componentEntityUpdates.set(newUpdate.component.id, entityUpdates);
+          }
+        }
+      }
+
+      // console.log("end of tx");
+      // console.log("blockNumber", blockNumber);
+      // componentEntityUpdates.forEach((entityUpdates, component) => {
+      //   console.log('component', component);
+      //   entityUpdates.forEach((updates, entity) => {
+      //     console.log('entity', entity);
+      //     updates.forEach((update) => {
+      //       console.log(update.value);
+      //     });
+      //   });
+      //   console.log("done");
+      // });
+      if (recsAllUpdatesHook !== undefined) {
+        console.log("calling hook for world", blockNumber, address);
+        await recsAllUpdatesHook(blockNumber, componentEntityUpdates);
       }
     },
   } as BlockLogsToStorageOptions<TConfig>;

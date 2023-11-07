@@ -1,20 +1,21 @@
-import { StoreConfig } from "@latticexyz/store";
 import { World as RecsWorld, getComponentValue, setComponent } from "@latticexyz/recs";
-import { SyncOptions, SyncResult } from "../common";
-import { recsStorage } from "./recsStorage";
-import { defineInternalComponents } from "./defineInternalComponents";
-import { createStoreSync } from "../createStoreSync";
-import { ConfigToRecsComponents } from "./common";
+import { StoreConfig } from "@latticexyz/store";
 import storeConfig from "@latticexyz/store/mud.config.js";
 import worldConfig from "@latticexyz/world/mud.config.js";
-import { configToRecsComponents } from "./configToRecsComponents";
-import { singletonEntity } from "./singletonEntity";
 import { SyncStep } from "../SyncStep";
+import { SyncOptions, SyncResult } from "../common";
+import { createStoreSync } from "../createStoreSync";
+import { ConfigToRecsComponents } from "./common";
+import { configToRecsComponents } from "./configToRecsComponents";
+import { defineInternalComponents } from "./defineInternalComponents";
+import { RecsUpdatesHook, recsStorage } from "./recsStorage";
+import { singletonEntity } from "./singletonEntity";
 
 type SyncToRecsOptions<TConfig extends StoreConfig = StoreConfig> = SyncOptions<TConfig> & {
   world: RecsWorld;
   config: TConfig;
   startSync?: boolean;
+  recsAllUpdatesHook?: RecsUpdatesHook;
 };
 
 type SyncToRecsResult<TConfig extends StoreConfig = StoreConfig> = SyncResult<TConfig> & {
@@ -34,6 +35,7 @@ export async function syncToRecs<TConfig extends StoreConfig = StoreConfig>({
   maxBlockRange,
   initialState,
   indexerUrl,
+  recsAllUpdatesHook,
   startSync = true,
 }: SyncToRecsOptions<TConfig>): Promise<SyncToRecsResult<TConfig>> {
   const components = {
@@ -45,8 +47,10 @@ export async function syncToRecs<TConfig extends StoreConfig = StoreConfig>({
 
   world.registerEntity({ id: singletonEntity });
 
+  console.log("syncWithRecs", startBlock, address);
+
   const storeSync = await createStoreSync({
-    storageAdapter: recsStorage({ components, config }),
+    storageAdapter: recsStorage({ components, config, address }, recsAllUpdatesHook),
     config,
     address,
     publicClient,

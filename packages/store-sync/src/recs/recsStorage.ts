@@ -61,7 +61,6 @@ export function recsStorage<TConfig extends StoreConfig = StoreConfig>(
     },
     async storeOperations({ blockNumber, operations }) {
       const componentEntityUpdates: ComponentEntityUpdates = new Map<string, Map<Entity, ComponentUpdate[]>>();
-      console.log("processing updates for world", blockNumber, address);
       for (const operation of operations) {
         const table = getComponentValue(
           components.RegisteredTables,
@@ -105,9 +104,7 @@ export function recsStorage<TConfig extends StoreConfig = StoreConfig>(
         }
 
         if (newUpdate) {
-          // console.log("component updates");
           if (componentEntityUpdates.has(newUpdate.component.id)) {
-            // JS reference so don't need to set again
             if (componentEntityUpdates.get(newUpdate.component.id)?.has(newUpdate.entity)) {
               componentEntityUpdates.get(newUpdate.component.id)?.get(newUpdate.entity)?.push(newUpdate);
             } else {
@@ -121,20 +118,7 @@ export function recsStorage<TConfig extends StoreConfig = StoreConfig>(
         }
       }
 
-      // console.log("end of tx");
-      // console.log("blockNumber", blockNumber);
-      // componentEntityUpdates.forEach((entityUpdates, component) => {
-      //   console.log('component', component);
-      //   entityUpdates.forEach((updates, entity) => {
-      //     console.log('entity', entity);
-      //     updates.forEach((update) => {
-      //       console.log(update.value);
-      //     });
-      //   });
-      //   console.log("done");
-      // });
       if (recsAllUpdatesHook !== undefined) {
-        console.log("calling hook for world", blockNumber, address);
         await recsAllUpdatesHook(blockNumber, componentEntityUpdates);
       }
     },

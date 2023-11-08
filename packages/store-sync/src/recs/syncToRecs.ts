@@ -47,7 +47,7 @@ export async function syncToRecs<TConfig extends StoreConfig = StoreConfig>({
 
   world.registerEntity({ id: singletonEntity });
 
-  console.log("syncWithRecs", startBlock, address);
+  // console.log("syncWithRecs", startBlock, address);
 
   const storeSync = await createStoreSync({
     storageAdapter: recsStorage({ components, config, address }, recsAllUpdatesHook),

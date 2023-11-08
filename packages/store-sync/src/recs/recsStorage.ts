@@ -31,12 +31,10 @@ export type RecsUpdatesHook = (
 export function recsStorage<TConfig extends StoreConfig = StoreConfig>(
   {
     components,
-    address,
   }: {
     components: ReturnType<typeof defineInternalComponents> &
       Record<string, RecsComponent<RecsSchema, StoreComponentMetadata>>;
     config?: TConfig;
-    address: `0x${string}` | undefined;
   },
   recsAllUpdatesHook?: RecsUpdatesHook
 ): BlockLogsToStorageOptions<TConfig> {

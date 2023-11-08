@@ -110,6 +110,8 @@ export function setComponent<S extends Schema, T = unknown>(
     }
   }
   component.update$.next({ entity, value: [value, prevValue], component });
+  const updateValue = { entity, value: [value, prevValue], component };
+  return updateValue;
 }
 
 /**
@@ -139,9 +141,9 @@ export function updateComponent<S extends Schema, T = unknown>(
     if (initialValue === undefined) {
       throw new Error(`Can't update component ${getComponentName(component)} without a current value or initial value`);
     }
-    setComponent(component, entity, { ...initialValue, ...value });
+    return setComponent(component, entity, { ...initialValue, ...value });
   } else {
-    setComponent(component, entity, { ...currentValue, ...value });
+    return setComponent(component, entity, { ...currentValue, ...value });
   }
 }
 
@@ -161,6 +163,8 @@ export function removeComponent<S extends Schema, M extends Metadata, T = unknow
     component.values[key].delete(entitySymbol);
   }
   component.update$.next({ entity, value: [undefined, prevValue], component });
+  const updateValue = { entity, value: [undefined, prevValue], component };
+  return updateValue;
 }
 
 /**

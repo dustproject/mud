@@ -130,7 +130,12 @@ export function createContract<
                 retries: 3,
                 onFailedAttempt: async (error) => {
                   // On nonce errors, reset the nonce and retry
-                  if (contract.nonceManager.shouldResetNonce(error)) {
+                  if (
+                    (error.name === "TransactionExecutionError" && error.message.includes("nonce")) ||
+                    error.name === "NonceTooLowError" ||
+                    error.name === "NonceTooHighError" ||
+                    contract.nonceManager.shouldResetNonce(error)
+                  ) {
                     debug("got nonce error, retrying", error);
                     await contract.nonceManager.resetNonce();
                     return;

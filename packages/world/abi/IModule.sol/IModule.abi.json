@@ -1,39 +1,39 @@
 [
   {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "resourceSelector",
-        "type": "string"
-      }
-    ],
-    "name": "RequiredModuleNotFound",
-    "type": "error"
-  },
-  {
-    "inputs": [],
+    "type": "function",
     "name": "getName",
+    "inputs": [],
     "outputs": [
       {
-        "internalType": "bytes16",
         "name": "name",
-        "type": "bytes16"
+        "type": "bytes16",
+        "internalType": "bytes16"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "stateMutability": "view"
   },
   {
+    "type": "function",
+    "name": "install",
     "inputs": [
       {
-        "internalType": "bytes",
         "name": "args",
-        "type": "bytes"
+        "type": "bytes",
+        "internalType": "bytes"
       }
     ],
-    "name": "install",
     "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "error",
+    "name": "RequiredModuleNotFound",
+    "inputs": [
+      {
+        "name": "resourceSelector",
+        "type": "string",
+        "internalType": "string"
+      }
+    ]
   }
 ]

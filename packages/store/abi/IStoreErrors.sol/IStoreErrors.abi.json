@@ -1,108 +1,108 @@
 [
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "length",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "received",
-        "type": "uint256"
-      }
-    ],
+    "type": "error",
     "name": "StoreCore_DataIndexOverflow",
-    "type": "error"
-  },
-  {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "expected",
-        "type": "uint256"
+        "name": "length",
+        "type": "uint256",
+        "internalType": "uint256"
       },
       {
-        "internalType": "uint256",
         "name": "received",
-        "type": "uint256"
+        "type": "uint256",
+        "internalType": "uint256"
       }
-    ],
+    ]
+  },
+  {
+    "type": "error",
     "name": "StoreCore_InvalidDataLength",
-    "type": "error"
-  },
-  {
     "inputs": [
       {
-        "internalType": "uint256",
         "name": "expected",
-        "type": "uint256"
+        "type": "uint256",
+        "internalType": "uint256"
       },
       {
-        "internalType": "uint256",
         "name": "received",
-        "type": "uint256"
+        "type": "uint256",
+        "internalType": "uint256"
       }
-    ],
+    ]
+  },
+  {
+    "type": "error",
     "name": "StoreCore_InvalidFieldNamesLength",
-    "type": "error"
-  },
-  {
     "inputs": [
       {
-        "internalType": "uint256",
         "name": "expected",
-        "type": "uint256"
+        "type": "uint256",
+        "internalType": "uint256"
       },
       {
-        "internalType": "uint256",
         "name": "received",
-        "type": "uint256"
+        "type": "uint256",
+        "internalType": "uint256"
       }
-    ],
+    ]
+  },
+  {
+    "type": "error",
     "name": "StoreCore_InvalidKeyNamesLength",
-    "type": "error"
+    "inputs": [
+      {
+        "name": "expected",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "received",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ]
   },
   {
-    "inputs": [],
+    "type": "error",
     "name": "StoreCore_NotDynamicField",
-    "type": "error"
+    "inputs": []
   },
   {
-    "inputs": [],
+    "type": "error",
     "name": "StoreCore_NotImplemented",
-    "type": "error"
+    "inputs": []
   },
   {
-    "inputs": [
-      {
-        "internalType": "bytes32",
-        "name": "tableId",
-        "type": "bytes32"
-      },
-      {
-        "internalType": "string",
-        "name": "tableIdString",
-        "type": "string"
-      }
-    ],
+    "type": "error",
     "name": "StoreCore_TableAlreadyExists",
-    "type": "error"
-  },
-  {
     "inputs": [
       {
-        "internalType": "bytes32",
         "name": "tableId",
-        "type": "bytes32"
+        "type": "bytes32",
+        "internalType": "bytes32"
       },
       {
-        "internalType": "string",
         "name": "tableIdString",
-        "type": "string"
+        "type": "string",
+        "internalType": "string"
       }
-    ],
+    ]
+  },
+  {
+    "type": "error",
     "name": "StoreCore_TableNotFound",
-    "type": "error"
+    "inputs": [
+      {
+        "name": "tableId",
+        "type": "bytes32",
+        "internalType": "bytes32"
+      },
+      {
+        "name": "tableIdString",
+        "type": "string",
+        "internalType": "string"
+      }
+    ]
   }
 ]

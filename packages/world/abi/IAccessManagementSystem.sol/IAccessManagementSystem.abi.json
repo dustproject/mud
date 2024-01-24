@@ -1,38 +1,38 @@
 [
   {
+    "type": "function",
+    "name": "grantAccess",
     "inputs": [
       {
-        "internalType": "bytes32",
         "name": "resourceSelector",
-        "type": "bytes32"
+        "type": "bytes32",
+        "internalType": "bytes32"
       },
       {
-        "internalType": "address",
         "name": "grantee",
-        "type": "address"
+        "type": "address",
+        "internalType": "address"
       }
     ],
-    "name": "grantAccess",
     "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "stateMutability": "nonpayable"
   },
   {
+    "type": "function",
+    "name": "revokeAccess",
     "inputs": [
       {
-        "internalType": "bytes32",
         "name": "resourceSelector",
-        "type": "bytes32"
+        "type": "bytes32",
+        "internalType": "bytes32"
       },
       {
-        "internalType": "address",
         "name": "grantee",
-        "type": "address"
+        "type": "address",
+        "internalType": "address"
       }
     ],
-    "name": "revokeAccess",
     "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "stateMutability": "nonpayable"
   }
 ]

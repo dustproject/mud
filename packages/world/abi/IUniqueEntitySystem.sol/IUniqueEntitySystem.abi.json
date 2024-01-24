@@ -1,15 +1,15 @@
 [
   {
-    "inputs": [],
+    "type": "function",
     "name": "uniqueEntity_system_getUniqueEntity",
+    "inputs": [],
     "outputs": [
       {
-        "internalType": "bytes32",
         "name": "uniqueEntity",
-        "type": "bytes32"
+        "type": "bytes32",
+        "internalType": "bytes32"
       }
     ],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "stateMutability": "nonpayable"
   }
 ]

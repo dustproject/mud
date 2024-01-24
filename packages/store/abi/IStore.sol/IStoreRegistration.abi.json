@@ -1,53 +1,53 @@
 [
   {
+    "type": "function",
+    "name": "registerStoreHook",
     "inputs": [
       {
-        "internalType": "bytes32",
         "name": "table",
-        "type": "bytes32"
+        "type": "bytes32",
+        "internalType": "bytes32"
       },
       {
-        "internalType": "contract IStoreHook",
         "name": "hook",
-        "type": "address"
+        "type": "address",
+        "internalType": "contract IStoreHook"
       }
     ],
-    "name": "registerStoreHook",
     "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "stateMutability": "nonpayable"
   },
   {
+    "type": "function",
+    "name": "registerTable",
     "inputs": [
       {
-        "internalType": "bytes32",
         "name": "table",
-        "type": "bytes32"
+        "type": "bytes32",
+        "internalType": "bytes32"
       },
       {
-        "internalType": "Schema",
         "name": "keySchema",
-        "type": "bytes32"
+        "type": "bytes32",
+        "internalType": "Schema"
       },
       {
-        "internalType": "Schema",
         "name": "valueSchema",
-        "type": "bytes32"
+        "type": "bytes32",
+        "internalType": "Schema"
       },
       {
-        "internalType": "string[]",
         "name": "keyNames",
-        "type": "string[]"
+        "type": "string[]",
+        "internalType": "string[]"
       },
       {
-        "internalType": "string[]",
         "name": "fieldNames",
-        "type": "string[]"
+        "type": "string[]",
+        "internalType": "string[]"
       }
     ],
-    "name": "registerTable",
     "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "stateMutability": "nonpayable"
   }
 ]

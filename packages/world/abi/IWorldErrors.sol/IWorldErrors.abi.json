@@ -1,95 +1,95 @@
 [
   {
+    "type": "error",
+    "name": "AccessDenied",
     "inputs": [
       {
-        "internalType": "string",
         "name": "resource",
-        "type": "string"
+        "type": "string",
+        "internalType": "string"
       },
       {
-        "internalType": "address",
         "name": "caller",
-        "type": "address"
+        "type": "address",
+        "internalType": "address"
       }
-    ],
-    "name": "AccessDenied",
-    "type": "error"
+    ]
   },
   {
-    "inputs": [
-      {
-        "internalType": "bytes4",
-        "name": "functionSelector",
-        "type": "bytes4"
-      }
-    ],
+    "type": "error",
     "name": "FunctionSelectorExists",
-    "type": "error"
-  },
-  {
     "inputs": [
       {
-        "internalType": "bytes4",
         "name": "functionSelector",
-        "type": "bytes4"
+        "type": "bytes4",
+        "internalType": "bytes4"
       }
-    ],
+    ]
+  },
+  {
+    "type": "error",
     "name": "FunctionSelectorNotFound",
-    "type": "error"
-  },
-  {
     "inputs": [
       {
-        "internalType": "string",
-        "name": "resource",
-        "type": "string"
+        "name": "functionSelector",
+        "type": "bytes4",
+        "internalType": "bytes4"
       }
-    ],
+    ]
+  },
+  {
+    "type": "error",
     "name": "InvalidSelector",
-    "type": "error"
-  },
-  {
     "inputs": [
       {
-        "internalType": "string",
-        "name": "module",
-        "type": "string"
+        "name": "resource",
+        "type": "string",
+        "internalType": "string"
       }
-    ],
+    ]
+  },
+  {
+    "type": "error",
     "name": "ModuleAlreadyInstalled",
-    "type": "error"
-  },
-  {
     "inputs": [
       {
-        "internalType": "string",
-        "name": "resource",
-        "type": "string"
+        "name": "module",
+        "type": "string",
+        "internalType": "string"
       }
-    ],
+    ]
+  },
+  {
+    "type": "error",
     "name": "ResourceExists",
-    "type": "error"
-  },
-  {
     "inputs": [
       {
-        "internalType": "string",
         "name": "resource",
-        "type": "string"
+        "type": "string",
+        "internalType": "string"
       }
-    ],
-    "name": "ResourceNotFound",
-    "type": "error"
+    ]
   },
   {
+    "type": "error",
+    "name": "ResourceNotFound",
     "inputs": [
       {
-        "internalType": "address",
-        "name": "system",
-        "type": "address"
+        "name": "resource",
+        "type": "string",
+        "internalType": "string"
       }
-    ],
+    ]
+  },
+  {
+    "type": "error",
     "name": "SystemExists",
-    "type": "error"
+    "inputs": [
+      {
+        "name": "system",
+        "type": "address",
+        "internalType": "address"
+      }
+    ]
   }
 ]

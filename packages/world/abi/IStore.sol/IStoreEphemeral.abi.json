@@ -1,55 +1,55 @@
 [
   {
-    "anonymous": false,
+    "type": "function",
+    "name": "emitEphemeralRecord",
     "inputs": [
       {
-        "indexed": false,
-        "internalType": "bytes32",
         "name": "table",
-        "type": "bytes32"
+        "type": "bytes32",
+        "internalType": "bytes32"
       },
       {
-        "indexed": false,
-        "internalType": "bytes32[]",
         "name": "key",
-        "type": "bytes32[]"
+        "type": "bytes32[]",
+        "internalType": "bytes32[]"
       },
       {
-        "indexed": false,
-        "internalType": "bytes",
         "name": "data",
-        "type": "bytes"
+        "type": "bytes",
+        "internalType": "bytes"
+      },
+      {
+        "name": "valueSchema",
+        "type": "bytes32",
+        "internalType": "Schema"
       }
     ],
-    "name": "StoreEphemeralRecord",
-    "type": "event"
+    "outputs": [],
+    "stateMutability": "nonpayable"
   },
   {
+    "type": "event",
+    "name": "StoreEphemeralRecord",
     "inputs": [
       {
-        "internalType": "bytes32",
         "name": "table",
-        "type": "bytes32"
+        "type": "bytes32",
+        "indexed": false,
+        "internalType": "bytes32"
       },
       {
-        "internalType": "bytes32[]",
         "name": "key",
-        "type": "bytes32[]"
+        "type": "bytes32[]",
+        "indexed": false,
+        "internalType": "bytes32[]"
       },
       {
-        "internalType": "bytes",
         "name": "data",
-        "type": "bytes"
-      },
-      {
-        "internalType": "Schema",
-        "name": "valueSchema",
-        "type": "bytes32"
+        "type": "bytes",
+        "indexed": false,
+        "internalType": "bytes"
       }
     ],
-    "name": "emitEphemeralRecord",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "anonymous": false
   }
 ]

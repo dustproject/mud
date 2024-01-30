@@ -1,102 +1,102 @@
 [
   {
-    "type": "event",
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "table",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32[]",
+        "name": "key",
+        "type": "bytes32[]"
+      }
+    ],
     "name": "StoreDeleteRecord",
-    "inputs": [
-      {
-        "name": "table",
-        "type": "bytes32",
-        "indexed": false,
-        "internalType": "bytes32"
-      },
-      {
-        "name": "key",
-        "type": "bytes32[]",
-        "indexed": false,
-        "internalType": "bytes32[]"
-      }
-    ],
-    "anonymous": false
+    "type": "event"
   },
   {
-    "type": "event",
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "table",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32[]",
+        "name": "key",
+        "type": "bytes32[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
+      }
+    ],
     "name": "StoreEphemeralRecord",
-    "inputs": [
-      {
-        "name": "table",
-        "type": "bytes32",
-        "indexed": false,
-        "internalType": "bytes32"
-      },
-      {
-        "name": "key",
-        "type": "bytes32[]",
-        "indexed": false,
-        "internalType": "bytes32[]"
-      },
-      {
-        "name": "data",
-        "type": "bytes",
-        "indexed": false,
-        "internalType": "bytes"
-      }
-    ],
-    "anonymous": false
+    "type": "event"
   },
   {
-    "type": "event",
-    "name": "StoreSetField",
+    "anonymous": false,
     "inputs": [
       {
+        "indexed": false,
+        "internalType": "bytes32",
         "name": "table",
-        "type": "bytes32",
-        "indexed": false,
-        "internalType": "bytes32"
+        "type": "bytes32"
       },
       {
+        "indexed": false,
+        "internalType": "bytes32[]",
         "name": "key",
-        "type": "bytes32[]",
-        "indexed": false,
-        "internalType": "bytes32[]"
+        "type": "bytes32[]"
       },
       {
+        "indexed": false,
+        "internalType": "uint8",
         "name": "schemaIndex",
-        "type": "uint8",
-        "indexed": false,
-        "internalType": "uint8"
+        "type": "uint8"
       },
       {
-        "name": "data",
-        "type": "bytes",
         "indexed": false,
-        "internalType": "bytes"
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
       }
     ],
-    "anonymous": false
+    "name": "StoreSetField",
+    "type": "event"
   },
   {
-    "type": "event",
-    "name": "StoreSetRecord",
+    "anonymous": false,
     "inputs": [
       {
+        "indexed": false,
+        "internalType": "bytes32",
         "name": "table",
-        "type": "bytes32",
-        "indexed": false,
-        "internalType": "bytes32"
+        "type": "bytes32"
       },
       {
+        "indexed": false,
+        "internalType": "bytes32[]",
         "name": "key",
-        "type": "bytes32[]",
-        "indexed": false,
-        "internalType": "bytes32[]"
+        "type": "bytes32[]"
       },
       {
-        "name": "data",
-        "type": "bytes",
         "indexed": false,
-        "internalType": "bytes"
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
       }
     ],
-    "anonymous": false
+    "name": "StoreSetRecord",
+    "type": "event"
   }
 ]

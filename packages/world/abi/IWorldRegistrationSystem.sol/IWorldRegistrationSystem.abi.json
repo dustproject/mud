@@ -1,124 +1,124 @@
 [
   {
-    "type": "function",
-    "name": "registerFunctionSelector",
     "inputs": [
       {
+        "internalType": "bytes32",
         "name": "resourceSelector",
-        "type": "bytes32",
-        "internalType": "bytes32"
+        "type": "bytes32"
       },
       {
+        "internalType": "string",
         "name": "systemFunctionName",
-        "type": "string",
-        "internalType": "string"
+        "type": "string"
       },
       {
+        "internalType": "string",
         "name": "systemFunctionArguments",
-        "type": "string",
-        "internalType": "string"
+        "type": "string"
       },
       {
+        "internalType": "bool",
         "name": "staticCallOnly",
-        "type": "bool",
-        "internalType": "bool"
+        "type": "bool"
       }
     ],
+    "name": "registerFunctionSelector",
     "outputs": [
       {
+        "internalType": "bytes4",
         "name": "worldFunctionSelector",
-        "type": "bytes4",
-        "internalType": "bytes4"
+        "type": "bytes4"
       }
     ],
-    "stateMutability": "nonpayable"
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    "type": "function",
-    "name": "registerNamespace",
     "inputs": [
       {
+        "internalType": "bytes16",
         "name": "namespace",
-        "type": "bytes16",
-        "internalType": "bytes16"
+        "type": "bytes16"
       }
     ],
+    "name": "registerNamespace",
     "outputs": [],
-    "stateMutability": "nonpayable"
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    "type": "function",
-    "name": "registerRootFunctionSelector",
     "inputs": [
       {
+        "internalType": "bytes32",
         "name": "resourceSelector",
-        "type": "bytes32",
-        "internalType": "bytes32"
+        "type": "bytes32"
       },
       {
+        "internalType": "bytes4",
         "name": "worldFunctionSelector",
-        "type": "bytes4",
-        "internalType": "bytes4"
+        "type": "bytes4"
       },
       {
+        "internalType": "bytes4",
         "name": "systemFunctionSelector",
-        "type": "bytes4",
-        "internalType": "bytes4"
+        "type": "bytes4"
       },
       {
+        "internalType": "bool",
         "name": "staticCallOnly",
-        "type": "bool",
-        "internalType": "bool"
+        "type": "bool"
       }
     ],
+    "name": "registerRootFunctionSelector",
     "outputs": [
       {
+        "internalType": "bytes4",
         "name": "",
-        "type": "bytes4",
-        "internalType": "bytes4"
+        "type": "bytes4"
       }
     ],
-    "stateMutability": "nonpayable"
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    "type": "function",
-    "name": "registerSystem",
     "inputs": [
       {
+        "internalType": "bytes32",
         "name": "resourceSelector",
-        "type": "bytes32",
-        "internalType": "bytes32"
+        "type": "bytes32"
       },
       {
+        "internalType": "contract System",
         "name": "system",
-        "type": "address",
-        "internalType": "contract System"
+        "type": "address"
       },
       {
+        "internalType": "bool",
         "name": "publicAccess",
-        "type": "bool",
-        "internalType": "bool"
+        "type": "bool"
       }
     ],
+    "name": "registerSystem",
     "outputs": [],
-    "stateMutability": "nonpayable"
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    "type": "function",
-    "name": "registerSystemHook",
     "inputs": [
       {
+        "internalType": "bytes32",
         "name": "resourceSelector",
-        "type": "bytes32",
-        "internalType": "bytes32"
+        "type": "bytes32"
       },
       {
+        "internalType": "contract ISystemHook",
         "name": "hook",
-        "type": "address",
-        "internalType": "contract ISystemHook"
+        "type": "address"
       }
     ],
+    "name": "registerSystemHook",
     "outputs": [],
-    "stateMutability": "nonpayable"
+    "stateMutability": "nonpayable",
+    "type": "function"
   }
 ]

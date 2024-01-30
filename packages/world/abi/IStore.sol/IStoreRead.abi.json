@@ -1,181 +1,181 @@
 [
   {
-    "type": "function",
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "table",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes32[]",
+        "name": "key",
+        "type": "bytes32[]"
+      },
+      {
+        "internalType": "uint8",
+        "name": "schemaIndex",
+        "type": "uint8"
+      },
+      {
+        "internalType": "Schema",
+        "name": "valueSchema",
+        "type": "bytes32"
+      }
+    ],
     "name": "getField",
-    "inputs": [
-      {
-        "name": "table",
-        "type": "bytes32",
-        "internalType": "bytes32"
-      },
-      {
-        "name": "key",
-        "type": "bytes32[]",
-        "internalType": "bytes32[]"
-      },
-      {
-        "name": "schemaIndex",
-        "type": "uint8",
-        "internalType": "uint8"
-      },
-      {
-        "name": "valueSchema",
-        "type": "bytes32",
-        "internalType": "Schema"
-      }
-    ],
     "outputs": [
       {
+        "internalType": "bytes",
         "name": "data",
-        "type": "bytes",
-        "internalType": "bytes"
+        "type": "bytes"
       }
     ],
-    "stateMutability": "view"
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "type": "function",
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "table",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes32[]",
+        "name": "key",
+        "type": "bytes32[]"
+      },
+      {
+        "internalType": "uint8",
+        "name": "schemaIndex",
+        "type": "uint8"
+      },
+      {
+        "internalType": "Schema",
+        "name": "valueSchema",
+        "type": "bytes32"
+      }
+    ],
     "name": "getFieldLength",
-    "inputs": [
-      {
-        "name": "table",
-        "type": "bytes32",
-        "internalType": "bytes32"
-      },
-      {
-        "name": "key",
-        "type": "bytes32[]",
-        "internalType": "bytes32[]"
-      },
-      {
-        "name": "schemaIndex",
-        "type": "uint8",
-        "internalType": "uint8"
-      },
-      {
-        "name": "valueSchema",
-        "type": "bytes32",
-        "internalType": "Schema"
-      }
-    ],
     "outputs": [
       {
+        "internalType": "uint256",
         "name": "",
-        "type": "uint256",
-        "internalType": "uint256"
+        "type": "uint256"
       }
     ],
-    "stateMutability": "view"
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "type": "function",
-    "name": "getFieldSlice",
     "inputs": [
       {
+        "internalType": "bytes32",
         "name": "table",
-        "type": "bytes32",
-        "internalType": "bytes32"
+        "type": "bytes32"
       },
       {
+        "internalType": "bytes32[]",
         "name": "key",
-        "type": "bytes32[]",
-        "internalType": "bytes32[]"
+        "type": "bytes32[]"
       },
       {
+        "internalType": "uint8",
         "name": "schemaIndex",
-        "type": "uint8",
-        "internalType": "uint8"
+        "type": "uint8"
       },
       {
+        "internalType": "Schema",
         "name": "valueSchema",
-        "type": "bytes32",
-        "internalType": "Schema"
+        "type": "bytes32"
       },
       {
+        "internalType": "uint256",
         "name": "start",
-        "type": "uint256",
-        "internalType": "uint256"
+        "type": "uint256"
       },
       {
+        "internalType": "uint256",
         "name": "end",
-        "type": "uint256",
-        "internalType": "uint256"
+        "type": "uint256"
       }
     ],
+    "name": "getFieldSlice",
     "outputs": [
       {
+        "internalType": "bytes",
         "name": "data",
-        "type": "bytes",
-        "internalType": "bytes"
+        "type": "bytes"
       }
     ],
-    "stateMutability": "view"
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "type": "function",
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "table",
+        "type": "bytes32"
+      }
+    ],
     "name": "getKeySchema",
-    "inputs": [
-      {
-        "name": "table",
-        "type": "bytes32",
-        "internalType": "bytes32"
-      }
-    ],
     "outputs": [
       {
+        "internalType": "Schema",
         "name": "schema",
-        "type": "bytes32",
-        "internalType": "Schema"
+        "type": "bytes32"
       }
     ],
-    "stateMutability": "view"
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "type": "function",
-    "name": "getRecord",
     "inputs": [
       {
+        "internalType": "bytes32",
         "name": "table",
-        "type": "bytes32",
-        "internalType": "bytes32"
+        "type": "bytes32"
       },
       {
+        "internalType": "bytes32[]",
         "name": "key",
-        "type": "bytes32[]",
-        "internalType": "bytes32[]"
+        "type": "bytes32[]"
       },
       {
+        "internalType": "Schema",
         "name": "valueSchema",
-        "type": "bytes32",
-        "internalType": "Schema"
+        "type": "bytes32"
       }
     ],
+    "name": "getRecord",
     "outputs": [
       {
+        "internalType": "bytes",
         "name": "data",
-        "type": "bytes",
-        "internalType": "bytes"
+        "type": "bytes"
       }
     ],
-    "stateMutability": "view"
+    "stateMutability": "view",
+    "type": "function"
   },
   {
-    "type": "function",
-    "name": "getValueSchema",
     "inputs": [
       {
+        "internalType": "bytes32",
         "name": "table",
-        "type": "bytes32",
-        "internalType": "bytes32"
+        "type": "bytes32"
       }
     ],
+    "name": "getValueSchema",
     "outputs": [
       {
+        "internalType": "Schema",
         "name": "schema",
-        "type": "bytes32",
-        "internalType": "Schema"
+        "type": "bytes32"
       }
     ],
-    "stateMutability": "view"
+    "stateMutability": "view",
+    "type": "function"
   }
 ]

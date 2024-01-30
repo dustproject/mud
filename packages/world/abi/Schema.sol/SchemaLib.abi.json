@@ -1,18 +1,18 @@
 [
   {
-    "type": "error",
-    "name": "SchemaLib_InvalidLength",
     "inputs": [
       {
+        "internalType": "uint256",
         "name": "length",
-        "type": "uint256",
-        "internalType": "uint256"
+        "type": "uint256"
       }
-    ]
+    ],
+    "name": "SchemaLib_InvalidLength",
+    "type": "error"
   },
   {
-    "type": "error",
+    "inputs": [],
     "name": "SchemaLib_StaticTypeAfterDynamicType",
-    "inputs": []
+    "type": "error"
   }
 ]

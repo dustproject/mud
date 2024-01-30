@@ -1,20 +1,20 @@
 [
   {
-    "type": "function",
-    "name": "installRootModule",
     "inputs": [
       {
+        "internalType": "contract IModule",
         "name": "module",
-        "type": "address",
-        "internalType": "contract IModule"
+        "type": "address"
       },
       {
+        "internalType": "bytes",
         "name": "args",
-        "type": "bytes",
-        "internalType": "bytes"
+        "type": "bytes"
       }
     ],
+    "name": "installRootModule",
     "outputs": [],
-    "stateMutability": "nonpayable"
+    "stateMutability": "nonpayable",
+    "type": "function"
   }
 ]

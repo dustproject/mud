@@ -1,124 +1,124 @@
 [
   {
-    "type": "function",
-    "name": "emitEphemeralRecord",
     "inputs": [
       {
-        "name": "resourceSelector",
-        "type": "bytes32",
-        "internalType": "bytes32"
-      },
-      {
-        "name": "key",
-        "type": "bytes32[]",
-        "internalType": "bytes32[]"
-      },
-      {
-        "name": "data",
-        "type": "bytes",
-        "internalType": "bytes"
-      },
-      {
-        "name": "valueSchema",
-        "type": "bytes32",
-        "internalType": "Schema"
-      }
-    ],
-    "outputs": [],
-    "stateMutability": "nonpayable"
-  },
-  {
-    "type": "event",
-    "name": "StoreEphemeralRecord",
-    "inputs": [
-      {
-        "name": "table",
-        "type": "bytes32",
-        "indexed": false,
-        "internalType": "bytes32"
-      },
-      {
-        "name": "key",
-        "type": "bytes32[]",
-        "indexed": false,
-        "internalType": "bytes32[]"
-      },
-      {
-        "name": "data",
-        "type": "bytes",
-        "indexed": false,
-        "internalType": "bytes"
-      }
-    ],
-    "anonymous": false
-  },
-  {
-    "type": "error",
-    "name": "AccessDenied",
-    "inputs": [
-      {
+        "internalType": "string",
         "name": "resource",
-        "type": "string",
-        "internalType": "string"
+        "type": "string"
       },
       {
+        "internalType": "address",
         "name": "caller",
-        "type": "address",
-        "internalType": "address"
+        "type": "address"
       }
-    ]
+    ],
+    "name": "AccessDenied",
+    "type": "error"
   },
   {
-    "type": "error",
-    "name": "SchemaLib_InvalidLength",
     "inputs": [
       {
+        "internalType": "uint256",
         "name": "length",
-        "type": "uint256",
-        "internalType": "uint256"
+        "type": "uint256"
       }
-    ]
+    ],
+    "name": "SchemaLib_InvalidLength",
+    "type": "error"
   },
   {
-    "type": "error",
+    "inputs": [],
     "name": "SchemaLib_StaticTypeAfterDynamicType",
-    "inputs": []
+    "type": "error"
   },
   {
-    "type": "error",
-    "name": "Slice_OutOfBounds",
     "inputs": [
       {
+        "internalType": "bytes",
         "name": "data",
-        "type": "bytes",
-        "internalType": "bytes"
+        "type": "bytes"
       },
       {
+        "internalType": "uint256",
         "name": "start",
-        "type": "uint256",
-        "internalType": "uint256"
+        "type": "uint256"
       },
       {
+        "internalType": "uint256",
         "name": "end",
-        "type": "uint256",
-        "internalType": "uint256"
+        "type": "uint256"
       }
-    ]
+    ],
+    "name": "Slice_OutOfBounds",
+    "type": "error"
   },
   {
-    "type": "error",
-    "name": "StoreCore_InvalidDataLength",
     "inputs": [
       {
+        "internalType": "uint256",
         "name": "expected",
-        "type": "uint256",
-        "internalType": "uint256"
+        "type": "uint256"
       },
       {
+        "internalType": "uint256",
         "name": "received",
-        "type": "uint256",
-        "internalType": "uint256"
+        "type": "uint256"
       }
-    ]
+    ],
+    "name": "StoreCore_InvalidDataLength",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "table",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32[]",
+        "name": "key",
+        "type": "bytes32[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
+      }
+    ],
+    "name": "StoreEphemeralRecord",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "resourceSelector",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes32[]",
+        "name": "key",
+        "type": "bytes32[]"
+      },
+      {
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
+      },
+      {
+        "internalType": "Schema",
+        "name": "valueSchema",
+        "type": "bytes32"
+      }
+    ],
+    "name": "emitEphemeralRecord",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   }
 ]

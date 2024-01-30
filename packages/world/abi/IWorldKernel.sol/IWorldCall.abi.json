@@ -1,31 +1,31 @@
 [
   {
-    "type": "function",
-    "name": "call",
     "inputs": [
       {
+        "internalType": "bytes32",
         "name": "resourceSelector",
-        "type": "bytes32",
-        "internalType": "bytes32"
+        "type": "bytes32"
       },
       {
+        "internalType": "bytes",
         "name": "funcSelectorAndArgs",
-        "type": "bytes",
-        "internalType": "bytes"
+        "type": "bytes"
       },
       {
+        "internalType": "bool",
         "name": "staticCallOnly",
-        "type": "bool",
-        "internalType": "bool"
+        "type": "bool"
       }
     ],
+    "name": "call",
     "outputs": [
       {
+        "internalType": "bytes",
         "name": "",
-        "type": "bytes",
-        "internalType": "bytes"
+        "type": "bytes"
       }
     ],
-    "stateMutability": "payable"
+    "stateMutability": "payable",
+    "type": "function"
   }
 ]

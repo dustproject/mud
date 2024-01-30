@@ -1,263 +1,263 @@
 [
   {
-    "type": "function",
-    "name": "registerStoreHook",
     "inputs": [
       {
-        "name": "tableId",
-        "type": "bytes32",
-        "internalType": "bytes32"
-      },
-      {
-        "name": "hook",
-        "type": "address",
-        "internalType": "contract IStoreHook"
-      }
-    ],
-    "outputs": [],
-    "stateMutability": "nonpayable"
-  },
-  {
-    "type": "function",
-    "name": "registerTable",
-    "inputs": [
-      {
-        "name": "resourceSelector",
-        "type": "bytes32",
-        "internalType": "bytes32"
-      },
-      {
-        "name": "keySchema",
-        "type": "bytes32",
-        "internalType": "Schema"
-      },
-      {
-        "name": "valueSchema",
-        "type": "bytes32",
-        "internalType": "Schema"
-      },
-      {
-        "name": "keyNames",
-        "type": "string[]",
-        "internalType": "string[]"
-      },
-      {
-        "name": "fieldNames",
-        "type": "string[]",
-        "internalType": "string[]"
-      }
-    ],
-    "outputs": [],
-    "stateMutability": "nonpayable"
-  },
-  {
-    "type": "error",
-    "name": "AccessDenied",
-    "inputs": [
-      {
+        "internalType": "string",
         "name": "resource",
-        "type": "string",
-        "internalType": "string"
+        "type": "string"
       },
       {
+        "internalType": "address",
         "name": "caller",
-        "type": "address",
-        "internalType": "address"
+        "type": "address"
       }
-    ]
+    ],
+    "name": "AccessDenied",
+    "type": "error"
   },
   {
-    "type": "error",
+    "inputs": [
+      {
+        "internalType": "bytes4",
+        "name": "functionSelector",
+        "type": "bytes4"
+      }
+    ],
     "name": "FunctionSelectorExists",
-    "inputs": [
-      {
-        "name": "functionSelector",
-        "type": "bytes4",
-        "internalType": "bytes4"
-      }
-    ]
+    "type": "error"
   },
   {
-    "type": "error",
+    "inputs": [
+      {
+        "internalType": "bytes4",
+        "name": "functionSelector",
+        "type": "bytes4"
+      }
+    ],
     "name": "FunctionSelectorNotFound",
-    "inputs": [
-      {
-        "name": "functionSelector",
-        "type": "bytes4",
-        "internalType": "bytes4"
-      }
-    ]
+    "type": "error"
   },
   {
-    "type": "error",
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "resource",
+        "type": "string"
+      }
+    ],
     "name": "InvalidSelector",
-    "inputs": [
-      {
-        "name": "resource",
-        "type": "string",
-        "internalType": "string"
-      }
-    ]
+    "type": "error"
   },
   {
-    "type": "error",
-    "name": "ModuleAlreadyInstalled",
     "inputs": [
       {
+        "internalType": "string",
         "name": "module",
-        "type": "string",
-        "internalType": "string"
+        "type": "string"
       }
-    ]
+    ],
+    "name": "ModuleAlreadyInstalled",
+    "type": "error"
   },
   {
-    "type": "error",
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "length",
+        "type": "uint256"
+      }
+    ],
     "name": "PackedCounter_InvalidLength",
-    "inputs": [
-      {
-        "name": "length",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
-    ]
+    "type": "error"
   },
   {
-    "type": "error",
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "resource",
+        "type": "string"
+      }
+    ],
     "name": "ResourceExists",
-    "inputs": [
-      {
-        "name": "resource",
-        "type": "string",
-        "internalType": "string"
-      }
-    ]
+    "type": "error"
   },
   {
-    "type": "error",
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "resource",
+        "type": "string"
+      }
+    ],
     "name": "ResourceNotFound",
-    "inputs": [
-      {
-        "name": "resource",
-        "type": "string",
-        "internalType": "string"
-      }
-    ]
+    "type": "error"
   },
   {
-    "type": "error",
-    "name": "SchemaLib_InvalidLength",
     "inputs": [
       {
+        "internalType": "uint256",
         "name": "length",
-        "type": "uint256",
-        "internalType": "uint256"
+        "type": "uint256"
       }
-    ]
+    ],
+    "name": "SchemaLib_InvalidLength",
+    "type": "error"
   },
   {
-    "type": "error",
+    "inputs": [],
     "name": "SchemaLib_StaticTypeAfterDynamicType",
-    "inputs": []
+    "type": "error"
   },
   {
-    "type": "error",
-    "name": "Slice_OutOfBounds",
     "inputs": [
       {
+        "internalType": "bytes",
         "name": "data",
-        "type": "bytes",
-        "internalType": "bytes"
+        "type": "bytes"
       },
       {
+        "internalType": "uint256",
         "name": "start",
-        "type": "uint256",
-        "internalType": "uint256"
+        "type": "uint256"
       },
       {
+        "internalType": "uint256",
         "name": "end",
-        "type": "uint256",
-        "internalType": "uint256"
+        "type": "uint256"
       }
-    ]
+    ],
+    "name": "Slice_OutOfBounds",
+    "type": "error"
   },
   {
-    "type": "error",
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "expected",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "received",
+        "type": "uint256"
+      }
+    ],
     "name": "StoreCore_InvalidDataLength",
-    "inputs": [
-      {
-        "name": "expected",
-        "type": "uint256",
-        "internalType": "uint256"
-      },
-      {
-        "name": "received",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
-    ]
+    "type": "error"
   },
   {
-    "type": "error",
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "expected",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "received",
+        "type": "uint256"
+      }
+    ],
     "name": "StoreCore_InvalidFieldNamesLength",
-    "inputs": [
-      {
-        "name": "expected",
-        "type": "uint256",
-        "internalType": "uint256"
-      },
-      {
-        "name": "received",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
-    ]
+    "type": "error"
   },
   {
-    "type": "error",
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "expected",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "received",
+        "type": "uint256"
+      }
+    ],
     "name": "StoreCore_InvalidKeyNamesLength",
-    "inputs": [
-      {
-        "name": "expected",
-        "type": "uint256",
-        "internalType": "uint256"
-      },
-      {
-        "name": "received",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
-    ]
+    "type": "error"
   },
   {
-    "type": "error",
+    "inputs": [],
     "name": "StoreCore_NotDynamicField",
-    "inputs": []
+    "type": "error"
   },
   {
-    "type": "error",
-    "name": "StoreCore_TableAlreadyExists",
     "inputs": [
       {
+        "internalType": "bytes32",
         "name": "tableId",
-        "type": "bytes32",
-        "internalType": "bytes32"
+        "type": "bytes32"
       },
       {
+        "internalType": "string",
         "name": "tableIdString",
-        "type": "string",
-        "internalType": "string"
+        "type": "string"
       }
-    ]
+    ],
+    "name": "StoreCore_TableAlreadyExists",
+    "type": "error"
   },
   {
-    "type": "error",
-    "name": "SystemExists",
     "inputs": [
       {
+        "internalType": "address",
         "name": "system",
-        "type": "address",
-        "internalType": "address"
+        "type": "address"
       }
-    ]
+    ],
+    "name": "SystemExists",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "tableId",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "contract IStoreHook",
+        "name": "hook",
+        "type": "address"
+      }
+    ],
+    "name": "registerStoreHook",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "resourceSelector",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "Schema",
+        "name": "keySchema",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "Schema",
+        "name": "valueSchema",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "string[]",
+        "name": "keyNames",
+        "type": "string[]"
+      },
+      {
+        "internalType": "string[]",
+        "name": "fieldNames",
+        "type": "string[]"
+      }
+    ],
+    "name": "registerTable",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   }
 ]

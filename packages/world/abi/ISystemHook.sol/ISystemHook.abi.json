@@ -1,48 +1,48 @@
 [
   {
-    "type": "function",
-    "name": "onAfterCallSystem",
     "inputs": [
       {
+        "internalType": "address",
         "name": "msgSender",
-        "type": "address",
-        "internalType": "address"
+        "type": "address"
       },
       {
+        "internalType": "address",
         "name": "systemAddress",
-        "type": "address",
-        "internalType": "address"
+        "type": "address"
       },
       {
+        "internalType": "bytes",
         "name": "funcSelectorAndArgs",
-        "type": "bytes",
-        "internalType": "bytes"
+        "type": "bytes"
       }
     ],
+    "name": "onAfterCallSystem",
     "outputs": [],
-    "stateMutability": "nonpayable"
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
-    "type": "function",
-    "name": "onBeforeCallSystem",
     "inputs": [
       {
+        "internalType": "address",
         "name": "msgSender",
-        "type": "address",
-        "internalType": "address"
+        "type": "address"
       },
       {
+        "internalType": "address",
         "name": "systemAddress",
-        "type": "address",
-        "internalType": "address"
+        "type": "address"
       },
       {
+        "internalType": "bytes",
         "name": "funcSelectorAndArgs",
-        "type": "bytes",
-        "internalType": "bytes"
+        "type": "bytes"
       }
     ],
+    "name": "onBeforeCallSystem",
     "outputs": [],
-    "stateMutability": "nonpayable"
+    "stateMutability": "nonpayable",
+    "type": "function"
   }
 ]

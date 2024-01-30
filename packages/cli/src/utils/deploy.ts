@@ -17,6 +17,7 @@ import IBaseWorldData from "@latticexyz/world/abi/IBaseWorld.sol/IBaseWorld.json
 import CoreModuleData from "@latticexyz/world/abi/CoreModule.sol/CoreModule.json" assert { type: "json" };
 import KeysWithValueModuleData from "@latticexyz/world/abi/KeysWithValueModule.sol/KeysWithValueModule.json" assert { type: "json" };
 import KeysInTableModuleData from "@latticexyz/world/abi/KeysInTableModule.sol/KeysInTableModule.json" assert { type: "json" };
+import HasKeysModuleData from "@latticexyz/world/abi/HasKeysModule.sol/HasKeysModule.json" assert { type: "json" };
 import UniqueEntityModuleData from "@latticexyz/world/abi/UniqueEntityModule.sol/UniqueEntityModule.json" assert { type: "json" };
 import { tableIdToHex } from "@latticexyz/common";
 import { abiTypesToSchema, schemaToHex } from "@latticexyz/protocol-parser";
@@ -123,6 +124,12 @@ export async function deploy(
           KeysInTableModuleData.bytecode,
           disableTxWait,
           "KeysInTableModule"
+        ),
+        HasKeysModule: deployContract(
+          HasKeysModuleData.abi,
+          HasKeysModuleData.bytecode,
+          disableTxWait,
+          "HasKeysModule"
         ),
         UniqueEntityModule: deployContract(
           UniqueEntityModuleData.abi,

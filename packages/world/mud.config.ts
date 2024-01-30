@@ -135,6 +135,15 @@ export default mudConfig({
       schema: { has: "bool", index: "uint40" },
       dataStruct: false,
     },
+    HasKeys: {
+      directory: "modules/haskeys/tables",
+      keySchema: {
+        sourceTable: "bytes32",
+        keysHash: "bytes32",
+      },
+      schema: { has: "bool" },
+      dataStruct: false,
+    },
     UniqueEntity: {
       directory: "modules/uniqueentity/tables",
       keySchema: {},

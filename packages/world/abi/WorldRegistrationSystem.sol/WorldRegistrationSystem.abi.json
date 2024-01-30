@@ -1,286 +1,286 @@
 [
   {
-    "type": "function",
-    "name": "registerFunctionSelector",
     "inputs": [
       {
-        "name": "resourceSelector",
-        "type": "bytes32",
-        "internalType": "bytes32"
-      },
-      {
-        "name": "systemFunctionName",
-        "type": "string",
-        "internalType": "string"
-      },
-      {
-        "name": "systemFunctionArguments",
-        "type": "string",
-        "internalType": "string"
-      },
-      {
-        "name": "staticCallOnly",
-        "type": "bool",
-        "internalType": "bool"
-      }
-    ],
-    "outputs": [
-      {
-        "name": "worldFunctionSelector",
-        "type": "bytes4",
-        "internalType": "bytes4"
-      }
-    ],
-    "stateMutability": "nonpayable"
-  },
-  {
-    "type": "function",
-    "name": "registerNamespace",
-    "inputs": [
-      {
-        "name": "namespace",
-        "type": "bytes16",
-        "internalType": "bytes16"
-      }
-    ],
-    "outputs": [],
-    "stateMutability": "nonpayable"
-  },
-  {
-    "type": "function",
-    "name": "registerRootFunctionSelector",
-    "inputs": [
-      {
-        "name": "resourceSelector",
-        "type": "bytes32",
-        "internalType": "bytes32"
-      },
-      {
-        "name": "worldFunctionSelector",
-        "type": "bytes4",
-        "internalType": "bytes4"
-      },
-      {
-        "name": "systemFunctionSelector",
-        "type": "bytes4",
-        "internalType": "bytes4"
-      },
-      {
-        "name": "staticCallOnly",
-        "type": "bool",
-        "internalType": "bool"
-      }
-    ],
-    "outputs": [
-      {
-        "name": "",
-        "type": "bytes4",
-        "internalType": "bytes4"
-      }
-    ],
-    "stateMutability": "nonpayable"
-  },
-  {
-    "type": "function",
-    "name": "registerSystem",
-    "inputs": [
-      {
-        "name": "resourceSelector",
-        "type": "bytes32",
-        "internalType": "bytes32"
-      },
-      {
-        "name": "system",
-        "type": "address",
-        "internalType": "contract System"
-      },
-      {
-        "name": "publicAccess",
-        "type": "bool",
-        "internalType": "bool"
-      }
-    ],
-    "outputs": [],
-    "stateMutability": "nonpayable"
-  },
-  {
-    "type": "function",
-    "name": "registerSystemHook",
-    "inputs": [
-      {
-        "name": "resourceSelector",
-        "type": "bytes32",
-        "internalType": "bytes32"
-      },
-      {
-        "name": "hook",
-        "type": "address",
-        "internalType": "contract ISystemHook"
-      }
-    ],
-    "outputs": [],
-    "stateMutability": "nonpayable"
-  },
-  {
-    "type": "error",
-    "name": "AccessDenied",
-    "inputs": [
-      {
+        "internalType": "string",
         "name": "resource",
-        "type": "string",
-        "internalType": "string"
+        "type": "string"
       },
       {
+        "internalType": "address",
         "name": "caller",
-        "type": "address",
-        "internalType": "address"
+        "type": "address"
       }
-    ]
+    ],
+    "name": "AccessDenied",
+    "type": "error"
   },
   {
-    "type": "error",
+    "inputs": [
+      {
+        "internalType": "bytes4",
+        "name": "functionSelector",
+        "type": "bytes4"
+      }
+    ],
     "name": "FunctionSelectorExists",
-    "inputs": [
-      {
-        "name": "functionSelector",
-        "type": "bytes4",
-        "internalType": "bytes4"
-      }
-    ]
+    "type": "error"
   },
   {
-    "type": "error",
+    "inputs": [
+      {
+        "internalType": "bytes4",
+        "name": "functionSelector",
+        "type": "bytes4"
+      }
+    ],
     "name": "FunctionSelectorNotFound",
-    "inputs": [
-      {
-        "name": "functionSelector",
-        "type": "bytes4",
-        "internalType": "bytes4"
-      }
-    ]
+    "type": "error"
   },
   {
-    "type": "error",
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "resource",
+        "type": "string"
+      }
+    ],
     "name": "InvalidSelector",
-    "inputs": [
-      {
-        "name": "resource",
-        "type": "string",
-        "internalType": "string"
-      }
-    ]
+    "type": "error"
   },
   {
-    "type": "error",
-    "name": "ModuleAlreadyInstalled",
     "inputs": [
       {
+        "internalType": "string",
         "name": "module",
-        "type": "string",
-        "internalType": "string"
+        "type": "string"
       }
-    ]
+    ],
+    "name": "ModuleAlreadyInstalled",
+    "type": "error"
   },
   {
-    "type": "error",
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "length",
+        "type": "uint256"
+      }
+    ],
     "name": "PackedCounter_InvalidLength",
-    "inputs": [
-      {
-        "name": "length",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
-    ]
+    "type": "error"
   },
   {
-    "type": "error",
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "resource",
+        "type": "string"
+      }
+    ],
     "name": "ResourceExists",
-    "inputs": [
-      {
-        "name": "resource",
-        "type": "string",
-        "internalType": "string"
-      }
-    ]
+    "type": "error"
   },
   {
-    "type": "error",
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "resource",
+        "type": "string"
+      }
+    ],
     "name": "ResourceNotFound",
-    "inputs": [
-      {
-        "name": "resource",
-        "type": "string",
-        "internalType": "string"
-      }
-    ]
+    "type": "error"
   },
   {
-    "type": "error",
-    "name": "SchemaLib_InvalidLength",
     "inputs": [
       {
+        "internalType": "uint256",
         "name": "length",
-        "type": "uint256",
-        "internalType": "uint256"
+        "type": "uint256"
       }
-    ]
+    ],
+    "name": "SchemaLib_InvalidLength",
+    "type": "error"
   },
   {
-    "type": "error",
+    "inputs": [],
     "name": "SchemaLib_StaticTypeAfterDynamicType",
-    "inputs": []
+    "type": "error"
   },
   {
-    "type": "error",
-    "name": "Slice_OutOfBounds",
     "inputs": [
       {
+        "internalType": "bytes",
         "name": "data",
-        "type": "bytes",
-        "internalType": "bytes"
+        "type": "bytes"
       },
       {
+        "internalType": "uint256",
         "name": "start",
-        "type": "uint256",
-        "internalType": "uint256"
+        "type": "uint256"
       },
       {
+        "internalType": "uint256",
         "name": "end",
-        "type": "uint256",
-        "internalType": "uint256"
+        "type": "uint256"
       }
-    ]
+    ],
+    "name": "Slice_OutOfBounds",
+    "type": "error"
   },
   {
-    "type": "error",
-    "name": "StoreCore_InvalidDataLength",
     "inputs": [
       {
+        "internalType": "uint256",
         "name": "expected",
-        "type": "uint256",
-        "internalType": "uint256"
+        "type": "uint256"
       },
       {
+        "internalType": "uint256",
         "name": "received",
-        "type": "uint256",
-        "internalType": "uint256"
+        "type": "uint256"
       }
-    ]
+    ],
+    "name": "StoreCore_InvalidDataLength",
+    "type": "error"
   },
   {
-    "type": "error",
+    "inputs": [],
     "name": "StoreCore_NotDynamicField",
-    "inputs": []
+    "type": "error"
   },
   {
-    "type": "error",
-    "name": "SystemExists",
     "inputs": [
       {
+        "internalType": "address",
         "name": "system",
-        "type": "address",
-        "internalType": "address"
+        "type": "address"
       }
-    ]
+    ],
+    "name": "SystemExists",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "resourceSelector",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "string",
+        "name": "systemFunctionName",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "systemFunctionArguments",
+        "type": "string"
+      },
+      {
+        "internalType": "bool",
+        "name": "staticCallOnly",
+        "type": "bool"
+      }
+    ],
+    "name": "registerFunctionSelector",
+    "outputs": [
+      {
+        "internalType": "bytes4",
+        "name": "worldFunctionSelector",
+        "type": "bytes4"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes16",
+        "name": "namespace",
+        "type": "bytes16"
+      }
+    ],
+    "name": "registerNamespace",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "resourceSelector",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes4",
+        "name": "worldFunctionSelector",
+        "type": "bytes4"
+      },
+      {
+        "internalType": "bytes4",
+        "name": "systemFunctionSelector",
+        "type": "bytes4"
+      },
+      {
+        "internalType": "bool",
+        "name": "staticCallOnly",
+        "type": "bool"
+      }
+    ],
+    "name": "registerRootFunctionSelector",
+    "outputs": [
+      {
+        "internalType": "bytes4",
+        "name": "",
+        "type": "bytes4"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "resourceSelector",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "contract System",
+        "name": "system",
+        "type": "address"
+      },
+      {
+        "internalType": "bool",
+        "name": "publicAccess",
+        "type": "bool"
+      }
+    ],
+    "name": "registerSystem",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "resourceSelector",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "contract ISystemHook",
+        "name": "hook",
+        "type": "address"
+      }
+    ],
+    "name": "registerSystemHook",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   }
 ]

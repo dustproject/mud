@@ -1,55 +1,55 @@
 [
   {
-    "type": "function",
-    "name": "getName",
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "resourceSelector",
+        "type": "string"
+      }
+    ],
+    "name": "RequiredModuleNotFound",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "length",
+        "type": "uint256"
+      }
+    ],
+    "name": "SchemaLib_InvalidLength",
+    "type": "error"
+  },
+  {
     "inputs": [],
+    "name": "SchemaLib_StaticTypeAfterDynamicType",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "getName",
     "outputs": [
       {
+        "internalType": "bytes16",
         "name": "",
-        "type": "bytes16",
-        "internalType": "bytes16"
+        "type": "bytes16"
       }
     ],
-    "stateMutability": "pure"
+    "stateMutability": "pure",
+    "type": "function"
   },
   {
-    "type": "function",
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
     "name": "install",
-    "inputs": [
-      {
-        "name": "",
-        "type": "bytes",
-        "internalType": "bytes"
-      }
-    ],
     "outputs": [],
-    "stateMutability": "nonpayable"
-  },
-  {
-    "type": "error",
-    "name": "RequiredModuleNotFound",
-    "inputs": [
-      {
-        "name": "resourceSelector",
-        "type": "string",
-        "internalType": "string"
-      }
-    ]
-  },
-  {
-    "type": "error",
-    "name": "SchemaLib_InvalidLength",
-    "inputs": [
-      {
-        "name": "length",
-        "type": "uint256",
-        "internalType": "uint256"
-      }
-    ]
-  },
-  {
-    "type": "error",
-    "name": "SchemaLib_StaticTypeAfterDynamicType",
-    "inputs": []
+    "stateMutability": "nonpayable",
+    "type": "function"
   }
 ]

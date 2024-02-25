@@ -63,6 +63,21 @@ export default defineWorld({
     },
     /************************************************************************
      *
+     *    HAS KEYS MODULE
+     *
+     ************************************************************************/
+    HasKeys: {
+      directory: "modules/haskeys/tables",
+      keySchema: {
+        sourceTable: "ResourceId",
+        keysHash: "bytes32",
+      },
+      valueSchema: { has: "bool" },
+      dataStruct: false,
+      storeArgument: true,
+    },
+    /************************************************************************
+     *
      *    UNIQUE ENTITY MODULE
      *
      ************************************************************************/

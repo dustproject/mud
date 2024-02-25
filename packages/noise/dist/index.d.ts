@@ -4,4 +4,8 @@ declare function createSplines(splines: [number, number][]): (x: number) => numb
 type Perlin = (_x: number, _y: number, _z: number, denom: number) => number;
 declare function createPerlin(): Promise<Perlin>;
 
+<<<<<<< HEAD
 export { createPerlin, createSplines, fetchAndCompileWasmModule, lerp };
+=======
+export { Perlin, createPerlin, createSplines, fetchAndCompileWasmModule, lerp };
+>>>>>>> a4f03cd4 (chore: export types)

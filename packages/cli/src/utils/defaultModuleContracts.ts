@@ -1,5 +1,6 @@
 import KeysWithValueModuleData from "@latticexyz/world-modules/out/KeysWithValueModule.sol/KeysWithValueModule.json" assert { type: "json" };
 import KeysInTableModuleData from "@latticexyz/world-modules/out/KeysInTableModule.sol/KeysInTableModule.json" assert { type: "json" };
+import HasKeysModuleData from "@latticexyz/world-modules/out/HasKeysModule.sol/HasKeysModule.json" assert { type: "json" };
 import UniqueEntityModuleData from "@latticexyz/world-modules/out/UniqueEntityModule.sol/UniqueEntityModule.json" assert { type: "json" };
 // eslint-disable-next-line max-len
 import Unstable_CallWithSignatureModuleData from "@latticexyz/world-modules/out/Unstable_CallWithSignatureModule.sol/Unstable_CallWithSignatureModule.json" assert { type: "json" };
@@ -21,6 +22,12 @@ export const defaultModuleContracts = [
     bytecode: KeysInTableModuleData.bytecode.object as Hex,
     placeholders: findPlaceholders(KeysInTableModuleData.bytecode.linkReferences),
     deployedBytecodeSize: size(KeysInTableModuleData.deployedBytecode.object as Hex),
+  },
+  {
+    name: "HasKeysModule",
+    abi: HasKeysModuleData.abi as Abi,
+    bytecode: HasKeysModuleData.bytecode.object as Hex,
+    deployedBytecodeSize: size(HasKeysModuleData.deployedBytecode.object as Hex),
   },
   {
     name: "UniqueEntityModule",

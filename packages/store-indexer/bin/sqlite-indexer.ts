@@ -20,6 +20,7 @@ import { helloWorld } from "../src/koa-middleware/helloWorld";
 import { apiRoutes } from "../src/sqlite/apiRoutes";
 import { sentry } from "../src/koa-middleware/sentry";
 
+(async (): Promise<void> => {
 const env = parseEnv(
   z.intersection(
     z.intersection(indexerEnvSchema, frontendEnvSchema),
@@ -30,12 +31,12 @@ const env = parseEnv(
   ),
 );
 
-const transports: Transport[] = [
-  // prefer WS when specified
-  env.RPC_WS_URL ? webSocket(env.RPC_WS_URL) : undefined,
-  // otherwise use or fallback to HTTP
-  env.RPC_HTTP_URL ? http(env.RPC_HTTP_URL) : undefined,
-].filter(isDefined);
+  const transports: Transport[] = [
+    // prefer WS when specified
+    env.RPC_WS_URL ? webSocket(env.RPC_WS_URL) : undefined,
+    // otherwise use or fallback to HTTP
+    env.RPC_HTTP_URL ? http(env.RPC_HTTP_URL) : undefined,
+  ].filter(isDefined);
 
 const publicClient = createPublicClient({
   transport: fallback(transports),
@@ -95,11 +96,10 @@ combineLatest([latestBlockNumber$, storedBlockLogs$])
     console.log("all caught up");
   });
 
-const server = new Koa();
+  const chainId = await publicClient.getChainId();
+  const database = drizzle(new Database(env.SQLITE_FILENAME));
 
-if (env.SENTRY_DSN) {
-  server.use(sentry(env.SENTRY_DSN));
-}
+  let startBlock = env.START_BLOCK;
 
 server.use(cors());
 server.use(
@@ -120,5 +120,53 @@ server.use(
   }),
 );
 
-server.listen({ host: env.HOST, port: env.PORT });
-console.log(`sqlite indexer frontend listening on http://${env.HOST}:${env.PORT}`);
+  const { latestBlockNumber$, storedBlockLogs$ } = await syncToSqlite({
+    database,
+    publicClient,
+    startBlock,
+    maxBlockRange: env.MAX_BLOCK_RANGE,
+    address: env.STORE_ADDRESS,
+  });
+
+  let isCaughtUp = false;
+  combineLatest([latestBlockNumber$, storedBlockLogs$])
+    .pipe(
+      filter(
+        ([latestBlockNumber, { blockNumber: lastBlockNumberProcessed }]) =>
+          latestBlockNumber === lastBlockNumberProcessed
+      ),
+      first()
+    )
+    .subscribe(() => {
+      isCaughtUp = true;
+      console.log("all caught up");
+    });
+
+  const server = new Koa();
+
+  if (env.SENTRY_DSN) {
+    server.use(sentry(env.SENTRY_DSN));
+  }
+
+  server.use(cors());
+  server.use(
+    healthcheck({
+      isReady: () => isCaughtUp,
+    })
+  );
+  server.use(helloWorld());
+  server.use(apiRoutes(database));
+
+  server.use(
+    createKoaMiddleware({
+      prefix: "/trpc",
+      router: createAppRouter(),
+      createContext: async () => ({
+        queryAdapter: await createQueryAdapter(database),
+      }),
+    })
+  );
+
+  server.listen({ host: env.HOST, port: env.PORT });
+  console.log(`sqlite indexer frontend listening on http://${env.HOST}:${env.PORT}`);
+})();

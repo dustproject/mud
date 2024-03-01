@@ -8,7 +8,6 @@
     "directory": "packages/world-modules"
   },
   "license": "MIT",
-  "type": "module",
   "exports": {
     "./internal/mud.config": "./dist/mud.config.js",
     "./out/*": "./out/*"

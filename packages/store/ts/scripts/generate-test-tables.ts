@@ -50,7 +50,9 @@ const config = defineStore({
   },
 });
 
-const srcDir = await getSrcDirectory();
-const remappings = await getRemappings();
+(async () => {
+  const srcDir = await getSrcDirectory();
+  const remappings = await getRemappings();
 
-await tablegen(config, path.join(srcDir, config.codegen.outputDirectory), remappings);
+  await tablegen(config, path.join(srcDir, config.codegen.outputDirectory), remappings);
+})();

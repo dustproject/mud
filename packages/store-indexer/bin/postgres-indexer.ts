@@ -11,6 +11,7 @@ import { cleanDatabase, createStorageAdapter, shouldCleanDatabase } from "@latti
 import { createStoreSync } from "@latticexyz/store-sync";
 import { indexerEnvSchema, parseEnv } from "./parseEnv";
 
+(async (): Promise<void> => {
 const env = parseEnv(
   z.intersection(
     indexerEnvSchema,
@@ -22,12 +23,12 @@ const env = parseEnv(
   ),
 );
 
-const transports: Transport[] = [
-  // prefer WS when specified
-  env.RPC_WS_URL ? webSocket(env.RPC_WS_URL) : undefined,
-  // otherwise use or fallback to HTTP
-  env.RPC_HTTP_URL ? http(env.RPC_HTTP_URL) : undefined,
-].filter(isDefined);
+  const transports: Transport[] = [
+    // prefer WS when specified
+    env.RPC_WS_URL ? webSocket(env.RPC_WS_URL) : undefined,
+    // otherwise use or fallback to HTTP
+    env.RPC_HTTP_URL ? http(env.RPC_HTTP_URL) : undefined,
+  ].filter(isDefined);
 
 const publicClient = createPublicClient({
   transport: fallback(transports),
@@ -92,13 +93,13 @@ combineLatest([latestBlockNumber$, storedBlockLogs$])
     console.log("all caught up");
   });
 
-if (env.HEALTHCHECK_HOST != null || env.HEALTHCHECK_PORT != null) {
-  const { default: Koa } = await import("koa");
-  const { default: cors } = await import("@koa/cors");
-  const { healthcheck } = await import("../src/koa-middleware/healthcheck");
-  const { helloWorld } = await import("../src/koa-middleware/helloWorld");
+  const chainId = await publicClient.getChainId();
+  const database = drizzle(postgres(env.DATABASE_URL, { prepare: false }));
 
-  const server = new Koa();
+  if (await shouldCleanDatabase(database, chainId)) {
+    console.log("outdated database detected, clearing data to start fresh");
+    await cleanDatabase(database);
+  }
 
   server.use(cors());
   server.use(
@@ -112,4 +113,4 @@ if (env.HEALTHCHECK_HOST != null || env.HEALTHCHECK_PORT != null) {
   console.log(
     `postgres indexer healthcheck server listening on http://${env.HEALTHCHECK_HOST}:${env.HEALTHCHECK_PORT}`,
   );
-}
+})();

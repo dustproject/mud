@@ -21,25 +21,27 @@ const server = fastify({
   logger: true,
 });
 
-await server.register(import("@fastify/compress"));
-await server.register(import("@fastify/cors"));
+(async (): Promise<void> => {
+  await server.register(import("@fastify/compress"));
+  await server.register(import("@fastify/cors"));
 
-// k8s healthchecks
-server.get("/healthz", (req, res) => res.code(200).send());
-server.get("/readyz", (req, res) => res.code(200).send());
+  // k8s healthchecks
+  server.get("/healthz", (req, res) => res.code(200).send());
+  server.get("/readyz", (req, res) => res.code(200).send());
 
-// @see https://trpc.io/docs/server/adapters/fastify
-server.register(fastifyTRPCPlugin<AppRouter>, {
-  prefix: "/trpc",
-  trpcOptions: {
-    router: createAppRouter(),
-    createContext: async () => ({
-      client,
-      faucetAccount,
-      dripAmount: env.DRIP_AMOUNT_ETHER,
-    }),
-  },
-});
+  // @see https://trpc.io/docs/server/adapters/fastify
+  server.register(fastifyTRPCPlugin<AppRouter>, {
+    prefix: "/trpc",
+    trpcOptions: {
+      router: createAppRouter(),
+      createContext: async () => ({
+        client,
+        faucetAccount,
+        dripAmount: env.DRIP_AMOUNT_ETHER,
+      }),
+    },
+  });
 
-await server.listen({ host: env.HOST, port: env.PORT });
-console.log(`faucet server listening on http://${env.HOST}:${env.PORT}`);
+  await server.listen({ host: env.HOST, port: env.PORT });
+  console.log(`faucet server listening on http://${env.HOST}:${env.PORT}`);
+})();

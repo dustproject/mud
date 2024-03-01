@@ -8,7 +8,6 @@
     "directory": "packages/config"
   },
   "license": "MIT",
-  "type": "module",
   "exports": {
     ".": "./dist/index.js",
     "./internal": "./dist/internal.js",
@@ -48,7 +47,7 @@
     "@latticexyz/common": "workspace:*",
     "@latticexyz/schema-type": "workspace:*",
     "esbuild": "^0.17.15",
-    "find-up": "^6.3.0",
+    "find-up": "5.0.0",
     "viem": "2.9.20",
     "zod": "^3.21.4",
     "zod-validation-error": "^1.3.0"

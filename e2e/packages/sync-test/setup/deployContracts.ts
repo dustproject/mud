@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { execa } from "execa";
+import execa from "execa";
 
 export function deployContracts(rpc: string) {
   const deploymentProcess = execa("pnpm", ["mud", "deploy", "--rpc", rpc], {

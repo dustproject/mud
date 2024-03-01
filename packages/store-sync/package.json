@@ -8,7 +8,6 @@
     "directory": "packages/store-sync"
   },
   "license": "MIT",
-  "type": "module",
   "exports": {
     ".": "./dist/index.js",
     "./indexer-client": "./dist/indexer-client/index.js",

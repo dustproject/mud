@@ -9,7 +9,7 @@ export default defineConfig({
     "bin/sqlite-indexer.ts",
   ],
   target: "esnext",
-  format: ["esm"],
+  format: ["esm", "cjs"],
   dts: !process.env.TSUP_SKIP_DTS,
   sourcemap: true,
   clean: true,

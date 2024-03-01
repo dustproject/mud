@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { execa } from "execa";
+import execa from "execa";
 import { rmSync } from "node:fs";
 import { cleanDatabase } from "@latticexyz/store-sync/postgres";
 import { drizzle } from "drizzle-orm/postgres-js";

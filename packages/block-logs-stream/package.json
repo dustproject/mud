@@ -8,7 +8,6 @@
     "directory": "packages/block-logs-stream"
   },
   "license": "MIT",
-  "type": "module",
   "exports": {
     ".": "./dist/index.js"
   },

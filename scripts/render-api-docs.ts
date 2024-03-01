@@ -2,7 +2,7 @@
  * Parse raw `forge doc` output from contract packages, clean it up, and render as markdown in docs.
  */
 
-import { execa } from "execa";
+import execa from "execa";
 import prettier from "prettier";
 import { readFileSync, readdirSync, writeFileSync } from "fs";
 import path from "path";

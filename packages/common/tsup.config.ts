@@ -13,7 +13,7 @@ export default defineConfig({
     kms: "src/exports/kms.ts",
   },
   target: "esnext",
-  format: ["esm"],
+  format: ["esm", "cjs"],
   dts: !process.env.TSUP_SKIP_DTS,
   sourcemap: true,
   clean: true,

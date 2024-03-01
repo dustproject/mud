@@ -5,7 +5,7 @@ export default defineConfig({
     faucet: "ts/faucet/index.ts",
   },
   target: "esnext",
-  format: ["esm"],
+  format: ["esm", "cjs"],
   dts: !process.env.TSUP_SKIP_DTS,
   sourcemap: true,
   clean: true,

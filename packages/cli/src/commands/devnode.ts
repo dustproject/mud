@@ -2,7 +2,7 @@ import { rmSync } from "fs";
 import { homedir } from "os";
 import path from "path";
 import type { CommandModule } from "yargs";
-import { execa } from "execa";
+import execa from "execa";
 
 type Options = {
   blocktime: number;

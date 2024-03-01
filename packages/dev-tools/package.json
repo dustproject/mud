@@ -8,7 +8,6 @@
     "directory": "packages/dev-tools"
   },
   "license": "MIT",
-  "type": "module",
   "exports": {
     ".": "./dist/index.js"
   },

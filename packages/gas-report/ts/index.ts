@@ -1,6 +1,6 @@
 import type { CommandModule } from "yargs";
 import { readFileSync, writeFileSync } from "fs";
-import { execa } from "execa";
+import execa from "execa";
 import chalk from "chalk";
 import { table, getBorderCharacters } from "table";
 import stripAnsi from "strip-ansi";

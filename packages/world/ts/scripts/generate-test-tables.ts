@@ -33,8 +33,9 @@ const config = defineWorld({
     },
   },
 });
+(async () => {
+  const srcDir = await getSrcDirectory();
+  const remappings = await getRemappings();
 
-const srcDir = await getSrcDirectory();
-const remappings = await getRemappings();
-
-await tablegen(config, path.join(srcDir, config.codegen.outputDirectory), remappings);
+  await tablegen(config, path.join(srcDir, config.codegen.outputDirectory), remappings);
+})();

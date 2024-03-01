@@ -9,7 +9,7 @@ export default defineConfig({
     "deprecated/node": "src/deprecated/node/index.ts",
   },
   target: "esnext",
-  format: ["esm"],
+  format: ["esm", "cjs"],
   dts: !process.env.TSUP_SKIP_DTS,
   sourcemap: true,
   clean: true,

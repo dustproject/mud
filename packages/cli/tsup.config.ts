@@ -20,7 +20,7 @@ const mudPackages: MudPackages = Object.fromEntries(
 export default defineConfig({
   entry: ["src/index.ts", "src/mud.ts"],
   target: "esnext",
-  format: ["esm"],
+  format: ["esm", "cjs"],
   dts: !process.env.TSUP_SKIP_DTS,
   sourcemap: true,
   clean: true,

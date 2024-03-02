@@ -1,5 +1,26 @@
+import { createBlockStream } from "@latticexyz/block-logs-stream";
+import { bigIntMax, chunk, isDefined, waitForIdle } from "@latticexyz/common/utils";
 import { storeEventsAbi } from "@latticexyz/store";
+import {
+  catchError,
+  combineLatest,
+  concat,
+  concatMap,
+  defer,
+  filter,
+  firstValueFrom,
+  from,
+  identity,
+  map,
+  of,
+  scan,
+  share,
+  shareReplay,
+  tap,
+  mergeMap,
+} from "rxjs";
 import { Hex, TransactionReceiptNotFoundError } from "viem";
+import { SyncStep } from "./SyncStep";
 import {
   StorageAdapter,
   StorageAdapterBlock,
@@ -29,11 +50,9 @@ import {
   mergeMap,
 } from "rxjs";
 import { debug as parentDebug } from "./debug";
-import { SyncStep } from "./SyncStep";
-import { bigIntMax, chunk, isDefined, waitForIdle } from "@latticexyz/common/utils";
-import { getSnapshot } from "./getSnapshot";
 import { fetchAndStoreLogs } from "./fetchAndStoreLogs";
 import { Store as StoreConfig } from "@latticexyz/store";
+import { getSnapshot } from "./getSnapshot";
 
 const debug = parentDebug.extend("createStoreSync");
 
@@ -290,8 +309,8 @@ export async function createStoreSync<config extends StoreConfig = StoreConfig>(
           if (lastBlock.blockNumber >= blockNumber) {
             return { status, blockNumber, transactionHash };
           }
-        } catch (error) {
-          if (error instanceof TransactionReceiptNotFoundError) {
+        } catch (error: any) {
+          if (error instanceof TransactionReceiptNotFoundError || error.name === "TransactionReceiptNotFoundError") {
             return;
           }
           throw error;

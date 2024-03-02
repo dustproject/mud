@@ -73,10 +73,13 @@ export function createNonceManager({
     debug("reset nonce to", nonceRef.current);
   }
 
-  function shouldResetNonce(error: unknown): boolean {
+  function shouldResetNonce(error: any): boolean {
     return (
-      error instanceof BaseError &&
-      error.walk((e) => e instanceof NonceTooLowError || e instanceof NonceTooHighError) != null
+      (error instanceof BaseError &&
+        error.walk((e) => e instanceof NonceTooLowError || e instanceof NonceTooHighError) != null) ||
+      error.name === "NonceTooLowError" ||
+      error.name === "NonceTooHighError" ||
+      (error.name === "TransactionExecutionError" && error.message && error.message.includes("nonce"))
     );
   }
 

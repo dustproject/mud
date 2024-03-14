@@ -27,6 +27,7 @@ export const defaultModuleContracts = [
     name: "HasKeysModule",
     abi: HasKeysModuleData.abi as Abi,
     bytecode: HasKeysModuleData.bytecode.object as Hex,
+    placeholders: findPlaceholders(HasKeysModuleData.bytecode.linkReferences),
     deployedBytecodeSize: size(HasKeysModuleData.deployedBytecode.object as Hex),
   },
   {

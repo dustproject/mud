@@ -13,7 +13,7 @@ import { ResourceId, WorldResourceIdInstance } from "@latticexyz/world/src/World
 import { revertWithBytes } from "@latticexyz/world/src/revertWithBytes.sol";
 
 import { HasKeysHook } from "./HasKeysHook.sol";
-import { HasKeys, HasKeysTableId } from "./tables/HasKeys.sol";
+import { HasKeys } from "./tables/HasKeys.sol";
 
 /**
  * This module deploys a hook that is called when a value is set in the `sourceTableId`
@@ -44,16 +44,16 @@ contract HasKeysModule is Module {
     bool success;
     bytes memory returnData;
 
-    if (!ResourceIds._getExists(HasKeysTableId)) {
+    if (!ResourceIds._getExists(HasKeys._tableId)) {
       // Register the tables
       (success, returnData) = address(world).delegatecall(
         abi.encodeCall(
           world.registerTable,
           (
-            HasKeysTableId,
-            HasKeys.getFieldLayout(),
-            HasKeys.getKeySchema(),
-            HasKeys.getValueSchema(),
+            HasKeys._tableId,
+            HasKeys._fieldLayout,
+            HasKeys._keySchema,
+            HasKeys._valueSchema,
             HasKeys.getKeyNames(),
             HasKeys.getFieldNames()
           )
@@ -63,7 +63,7 @@ contract HasKeysModule is Module {
 
       // Grant the hook access to the tables
       (success, returnData) = address(world).delegatecall(
-        abi.encodeCall(world.grantAccess, (HasKeysTableId, address(hook)))
+        abi.encodeCall(world.grantAccess, (HasKeys._tableId, address(hook)))
       );
       if (!success) revertWithBytes(returnData);
     }

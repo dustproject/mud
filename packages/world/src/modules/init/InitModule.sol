@@ -28,6 +28,7 @@ import { Systems } from "../../codegen/tables/Systems.sol";
 import { FunctionSelectors } from "../../codegen/tables/FunctionSelectors.sol";
 import { FunctionSignatures } from "../../codegen/tables/FunctionSignatures.sol";
 import { SystemHooks } from "../../codegen/tables/SystemHooks.sol";
+import { OptionalSystemHooks } from "../../codegen/tables/OptionalSystemHooks.sol";
 import { SystemRegistry } from "../../codegen/tables/SystemRegistry.sol";
 import { InitModuleAddress } from "../../codegen/tables/InitModuleAddress.sol";
 import { Balances } from "../../codegen/tables/Balances.sol";
@@ -92,6 +93,7 @@ contract InitModule is Module {
     FunctionSelectors.register();
     FunctionSignatures.register();
     SystemHooks.register();
+    OptionalSystemHooks.register();
     SystemRegistry.register();
     InitModuleAddress.register();
 

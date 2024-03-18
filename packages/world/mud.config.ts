@@ -81,6 +81,16 @@ export default defineWorld({
       },
       key: ["systemId"],
     },
+    OptionalSystemHooks: {
+      keySchema: {
+        player: "address",
+        systemId: "ResourceId",
+        callDataHash: "bytes32",
+      },
+      valueSchema: {
+        hooks: "bytes21[]",
+      },
+    },
     FunctionSelectors: {
       schema: {
         worldFunctionSelector: "bytes4",

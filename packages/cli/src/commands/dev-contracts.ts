@@ -46,7 +46,7 @@ const commandModule: CommandModule<typeof devOptions, InferredOptionTypes<typeof
       const userHomeDir = homedir();
       rmSync(path.join(userHomeDir, ".foundry", "anvil", "tmp"), { recursive: true, force: true });
 
-      const anvilArgs = ["--block-time", "1", "--block-base-fee-per-gas", "0", "--gas-limit", "100000000"];
+      const anvilArgs = ["--block-time", "2", "--block-base-fee-per-gas", "0", "--gas-limit", "100000000"];
       anvil(anvilArgs);
       rpc = "http://127.0.0.1:8545";
     }

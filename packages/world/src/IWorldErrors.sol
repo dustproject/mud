@@ -81,6 +81,12 @@ interface IWorldErrors {
   error World_UnlimitedDelegationNotAllowed();
 
   /**
+   * @notice Raised when unregister delegation is called but a custom unregister delegation blocks it
+   * e.g. if the delegation agreement wanted to enforce some conditions before allowing the delegation to be removed
+   */
+  error World_CustomUnregisterDelegationNotAllowed();
+
+  /**
    * @notice Raised when there's an insufficient balance for a particular operation.
    * @param balance The current balance.
    * @param amount The amount needed.

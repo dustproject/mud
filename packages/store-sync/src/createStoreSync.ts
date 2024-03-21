@@ -289,7 +289,8 @@ export async function createStoreSync<config extends StoreConfig = StoreConfig>(
           debug("fetching tx receipt for block", lastBlock.blockNumber);
           const receipt = await publicClient.getTransactionReceipt({ hash: tx });
           return lastBlock.blockNumber >= receipt.blockNumber;
-        } catch (error: unknown) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
           if (error instanceof TransactionReceiptNotFoundError || error.name === "TransactionReceiptNotFoundError") {
             return;
           }

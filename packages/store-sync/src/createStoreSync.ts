@@ -1,5 +1,3 @@
-import { createBlockStream } from "@latticexyz/block-logs-stream";
-import { bigIntMax, chunk, isDefined, waitForIdle } from "@latticexyz/common/utils";
 import { storeEventsAbi } from "@latticexyz/store";
 import {
   catchError,
@@ -20,7 +18,6 @@ import {
   mergeMap,
 } from "rxjs";
 import { Hex, TransactionReceiptNotFoundError } from "viem";
-import { SyncStep } from "./SyncStep";
 import {
   StorageAdapter,
   StorageAdapterBlock,
@@ -32,27 +29,12 @@ import {
   WaitForTransactionResult,
 } from "./common";
 import { createBlockStream } from "@latticexyz/block-logs-stream";
-import {
-  filter,
-  map,
-  tap,
-  from,
-  concat,
-  concatMap,
-  share,
-  firstValueFrom,
-  defer,
-  of,
-  catchError,
-  shareReplay,
-  combineLatest,
-  scan,
-  mergeMap,
-} from "rxjs";
 import { debug as parentDebug } from "./debug";
+import { SyncStep } from "./SyncStep";
+import { bigIntMax, chunk, isDefined, waitForIdle } from "@latticexyz/common/utils";
+import { getSnapshot } from "./getSnapshot";
 import { fetchAndStoreLogs } from "./fetchAndStoreLogs";
 import { Store as StoreConfig } from "@latticexyz/store";
-import { getSnapshot } from "./getSnapshot";
 
 const debug = parentDebug.extend("createStoreSync");
 
@@ -305,11 +287,9 @@ export async function createStoreSync<config extends StoreConfig = StoreConfig>(
         try {
           const lastBlock = blocks[0];
           debug("fetching tx receipt for block", lastBlock.blockNumber);
-          const { status, blockNumber, transactionHash } = await publicClient.getTransactionReceipt({ hash: tx });
-          if (lastBlock.blockNumber >= blockNumber) {
-            return { status, blockNumber, transactionHash };
-          }
-        } catch (error: any) {
+          const receipt = await publicClient.getTransactionReceipt({ hash: tx });
+          return lastBlock.blockNumber >= receipt.blockNumber;
+        } catch (error: unknown) {
           if (error instanceof TransactionReceiptNotFoundError || error.name === "TransactionReceiptNotFoundError") {
             return;
           }

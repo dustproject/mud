@@ -67,14 +67,17 @@ export default defineWorld({
      *
      ************************************************************************/
     HasKeys: {
-      directory: "modules/haskeys/tables",
-      keySchema: {
+      schema: {
         sourceTable: "ResourceId",
         keysHash: "bytes32",
+        has: "bool",
       },
-      valueSchema: { has: "bool" },
-      dataStruct: false,
-      storeArgument: true,
+      key: ["sourceTable", "keysHash"],
+      codegen: {
+        outputDirectory: "modules/haskeys/tables",
+        dataStruct: false,
+        storeArgument: true,
+      },
     },
     /************************************************************************
      *

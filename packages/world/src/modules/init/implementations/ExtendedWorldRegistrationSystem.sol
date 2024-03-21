@@ -18,7 +18,6 @@ import { NamespaceOwner } from "../../../codegen/tables/NamespaceOwner.sol";
 import { ResourceAccess } from "../../../codegen/tables/ResourceAccess.sol";
 import { UserDelegationControl } from "../../../codegen/tables/UserDelegationControl.sol";
 import { NamespaceDelegationControl } from "../../../codegen/tables/NamespaceDelegationControl.sol";
-import { ISystemHook } from "../../../ISystemHook.sol";
 import { IOptionalSystemHook } from "../../../IOptionalSystemHook.sol";
 import { IWorldErrors } from "../../../IWorldErrors.sol";
 import { IDelegationControl } from "../../../IDelegationControl.sol";
@@ -53,7 +52,7 @@ contract ExtendedWorldRegistrationSystem is System, IWorldErrors, LimitedCallCon
    */
   function registerOptionalSystemHook(
     ResourceId systemId,
-    ISystemHook hookAddress,
+    IOptionalSystemHook hookAddress,
     uint8 enabledHooksBitmap,
     bytes32 callDataHash
   ) public onlyDelegatecall {
@@ -62,7 +61,7 @@ contract ExtendedWorldRegistrationSystem is System, IWorldErrors, LimitedCallCon
       revert World_InvalidResourceType(RESOURCE_SYSTEM, systemId, systemId.toString());
     }
 
-    // Require the provided address to implement the ISystemHook interface
+    // Require the provided address to implement the IOptionalSystemHook interface
     requireInterface(address(hookAddress), type(IOptionalSystemHook).interfaceId);
 
     // Require the system to exist
@@ -90,7 +89,7 @@ contract ExtendedWorldRegistrationSystem is System, IWorldErrors, LimitedCallCon
    */
   function unregisterOptionalSystemHook(
     ResourceId systemId,
-    ISystemHook hookAddress,
+    IOptionalSystemHook hookAddress,
     bytes32 callDataHash
   ) public virtual onlyDelegatecall {
     // Remove the hook from the list of hooks for this system in the optional system hooks table

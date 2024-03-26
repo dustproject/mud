@@ -60,3 +60,14 @@ function getFunctionSignaturesRegistration() pure returns (string[14] memory) {
     "unregisterNamespaceDelegation(bytes32)"
   ];
 }
+
+/**
+ * @dev Function signatures for extended registration system
+ */
+function getFunctionSignaturesExtendedRegistration() pure returns (string[2] memory) {
+  return [
+    // --- ExtendedWorldRegistrationSystem ---
+    "registerOptionalSystemHook(bytes32,address,uint8,bytes32)",
+    "unregisterOptionalSystemHook(bytes32,address,bytes32)"
+  ];
+}

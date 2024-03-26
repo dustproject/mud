@@ -37,3 +37,11 @@ ResourceId constant BATCH_CALL_SYSTEM_ID = ResourceId.wrap(
 ResourceId constant REGISTRATION_SYSTEM_ID = ResourceId.wrap(
   bytes32(abi.encodePacked(RESOURCE_SYSTEM, ROOT_NAMESPACE, bytes16("Registration")))
 );
+
+/**
+ * @dev Resource ID for extended core registration system.
+ * @dev This ID is derived from the RESOURCE_SYSTEM type, the ROOT_NAMESPACE, and the system name.
+ */
+ResourceId constant EXTENDED_REGISTRATION_SYSTEM_ID = ResourceId.wrap(
+  bytes32(abi.encodePacked(RESOURCE_SYSTEM, ROOT_NAMESPACE, bytes16("ExtendedRegistra")))
+);

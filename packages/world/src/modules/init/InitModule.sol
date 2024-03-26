@@ -21,8 +21,9 @@ import { BalanceTransferSystem } from "./implementations/BalanceTransferSystem.s
 import { BatchCallSystem } from "./implementations/BatchCallSystem.sol";
 
 import { RegistrationSystem } from "./RegistrationSystem.sol";
-import { ACCESS_MANAGEMENT_SYSTEM_ID, BALANCE_TRANSFER_SYSTEM_ID, BATCH_CALL_SYSTEM_ID, REGISTRATION_SYSTEM_ID } from "./constants.sol";
-import { getFunctionSignaturesAccessManagement, getFunctionSignaturesBalanceTransfer, getFunctionSignaturesBatchCall, getFunctionSignaturesRegistration } from "./functionSignatures.sol";
+import { ExtendedRegistrationSystem } from "./ExtendedRegistrationSystem.sol";
+import { ACCESS_MANAGEMENT_SYSTEM_ID, BALANCE_TRANSFER_SYSTEM_ID, BATCH_CALL_SYSTEM_ID, REGISTRATION_SYSTEM_ID, EXTENDED_REGISTRATION_SYSTEM_ID } from "./constants.sol";
+import { getFunctionSignaturesAccessManagement, getFunctionSignaturesBalanceTransfer, getFunctionSignaturesBatchCall, getFunctionSignaturesRegistration, getFunctionSignaturesExtendedRegistration } from "./functionSignatures.sol";
 
 import { Systems } from "../../codegen/tables/Systems.sol";
 import { FunctionSelectors } from "../../codegen/tables/FunctionSelectors.sol";
@@ -46,17 +47,20 @@ contract InitModule is Module {
   address internal immutable balanceTransferSystem;
   address internal immutable batchCallSystem;
   address internal immutable registrationSystem;
+  address internal immutable extendedRegistrationSystem;
 
   constructor(
     AccessManagementSystem _accessManagementSystem,
     BalanceTransferSystem _balanceTransferSystem,
     BatchCallSystem _batchCallSystem,
-    RegistrationSystem _registrationSystem
+    RegistrationSystem _registrationSystem,
+    ExtendedRegistrationSystem _extendedRegistrationSystem
   ) {
     accessManagementSystem = address(_accessManagementSystem);
     balanceTransferSystem = address(_balanceTransferSystem);
     batchCallSystem = address(_batchCallSystem);
     registrationSystem = address(_registrationSystem);
+    extendedRegistrationSystem = address(_extendedRegistrationSystem);
   }
 
   /**
@@ -118,6 +122,7 @@ contract InitModule is Module {
     _registerSystem(balanceTransferSystem, BALANCE_TRANSFER_SYSTEM_ID);
     _registerSystem(batchCallSystem, BATCH_CALL_SYSTEM_ID);
     _registerSystem(registrationSystem, REGISTRATION_SYSTEM_ID);
+    _registerSystem(extendedRegistrationSystem, EXTENDED_REGISTRATION_SYSTEM_ID);
   }
 
   /**
@@ -156,6 +161,11 @@ contract InitModule is Module {
     string[14] memory functionSignaturesRegistration = getFunctionSignaturesRegistration();
     for (uint256 i = 0; i < functionSignaturesRegistration.length; i++) {
       _registerRootFunctionSelector(REGISTRATION_SYSTEM_ID, functionSignaturesRegistration[i]);
+    }
+
+    string[2] memory functionSignaturesExtendedRegistration = getFunctionSignaturesExtendedRegistration();
+    for (uint256 i = 0; i < functionSignaturesExtendedRegistration.length; i++) {
+      _registerRootFunctionSelector(EXTENDED_REGISTRATION_SYSTEM_ID, functionSignaturesExtendedRegistration[i]);
     }
   }
 

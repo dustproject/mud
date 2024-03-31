@@ -41,6 +41,9 @@ export default defineWorld({
         delegationControlId: "ResourceId",
       },
       key: ["delegator", "delegatee"],
+      codegen: {
+        storeArgument: true,
+      },
     },
     NamespaceDelegationControl: {
       schema: {
@@ -89,6 +92,9 @@ export default defineWorld({
         hooks: "bytes21[]",
       },
       key: ["player", "systemId", "callDataHash"],
+      codegen: {
+        storeArgument: true,
+      },
     },
     FunctionSelectors: {
       schema: {

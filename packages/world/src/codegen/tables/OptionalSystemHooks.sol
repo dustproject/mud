@@ -66,6 +66,13 @@ library OptionalSystemHooks {
   }
 
   /**
+   * @notice Register the table with its config (using the specified store).
+   */
+  function register(IStore _store) internal {
+    _store.registerTable(_tableId, _fieldLayout, _keySchema, _valueSchema, getKeyNames(), getFieldNames());
+  }
+
+  /**
    * @notice Get hooks.
    */
   function getHooks(
@@ -96,6 +103,24 @@ library OptionalSystemHooks {
     _keyTuple[2] = callDataHash;
 
     bytes memory _blob = StoreCore.getDynamicField(_tableId, _keyTuple, 0);
+    return (SliceLib.getSubslice(_blob, 0, _blob.length).decodeArray_bytes21());
+  }
+
+  /**
+   * @notice Get hooks (using the specified store).
+   */
+  function getHooks(
+    IStore _store,
+    address player,
+    ResourceId systemId,
+    bytes32 callDataHash
+  ) internal view returns (bytes21[] memory hooks) {
+    bytes32[] memory _keyTuple = new bytes32[](3);
+    _keyTuple[0] = bytes32(uint256(uint160(player)));
+    _keyTuple[1] = ResourceId.unwrap(systemId);
+    _keyTuple[2] = callDataHash;
+
+    bytes memory _blob = _store.getDynamicField(_tableId, _keyTuple, 0);
     return (SliceLib.getSubslice(_blob, 0, _blob.length).decodeArray_bytes21());
   }
 
@@ -134,6 +159,24 @@ library OptionalSystemHooks {
   }
 
   /**
+   * @notice Get hooks (using the specified store).
+   */
+  function get(
+    IStore _store,
+    address player,
+    ResourceId systemId,
+    bytes32 callDataHash
+  ) internal view returns (bytes21[] memory hooks) {
+    bytes32[] memory _keyTuple = new bytes32[](3);
+    _keyTuple[0] = bytes32(uint256(uint160(player)));
+    _keyTuple[1] = ResourceId.unwrap(systemId);
+    _keyTuple[2] = callDataHash;
+
+    bytes memory _blob = _store.getDynamicField(_tableId, _keyTuple, 0);
+    return (SliceLib.getSubslice(_blob, 0, _blob.length).decodeArray_bytes21());
+  }
+
+  /**
    * @notice Set hooks.
    */
   function setHooks(address player, ResourceId systemId, bytes32 callDataHash, bytes21[] memory hooks) internal {
@@ -158,6 +201,24 @@ library OptionalSystemHooks {
   }
 
   /**
+   * @notice Set hooks (using the specified store).
+   */
+  function setHooks(
+    IStore _store,
+    address player,
+    ResourceId systemId,
+    bytes32 callDataHash,
+    bytes21[] memory hooks
+  ) internal {
+    bytes32[] memory _keyTuple = new bytes32[](3);
+    _keyTuple[0] = bytes32(uint256(uint160(player)));
+    _keyTuple[1] = ResourceId.unwrap(systemId);
+    _keyTuple[2] = callDataHash;
+
+    _store.setDynamicField(_tableId, _keyTuple, 0, EncodeArray.encode((hooks)));
+  }
+
+  /**
    * @notice Set hooks.
    */
   function set(address player, ResourceId systemId, bytes32 callDataHash, bytes21[] memory hooks) internal {
@@ -179,6 +240,24 @@ library OptionalSystemHooks {
     _keyTuple[2] = callDataHash;
 
     StoreCore.setDynamicField(_tableId, _keyTuple, 0, EncodeArray.encode((hooks)));
+  }
+
+  /**
+   * @notice Set hooks (using the specified store).
+   */
+  function set(
+    IStore _store,
+    address player,
+    ResourceId systemId,
+    bytes32 callDataHash,
+    bytes21[] memory hooks
+  ) internal {
+    bytes32[] memory _keyTuple = new bytes32[](3);
+    _keyTuple[0] = bytes32(uint256(uint160(player)));
+    _keyTuple[1] = ResourceId.unwrap(systemId);
+    _keyTuple[2] = callDataHash;
+
+    _store.setDynamicField(_tableId, _keyTuple, 0, EncodeArray.encode((hooks)));
   }
 
   /**
@@ -212,6 +291,26 @@ library OptionalSystemHooks {
   }
 
   /**
+   * @notice Get the length of hooks (using the specified store).
+   */
+  function lengthHooks(
+    IStore _store,
+    address player,
+    ResourceId systemId,
+    bytes32 callDataHash
+  ) internal view returns (uint256) {
+    bytes32[] memory _keyTuple = new bytes32[](3);
+    _keyTuple[0] = bytes32(uint256(uint160(player)));
+    _keyTuple[1] = ResourceId.unwrap(systemId);
+    _keyTuple[2] = callDataHash;
+
+    uint256 _byteLength = _store.getDynamicFieldLength(_tableId, _keyTuple, 0);
+    unchecked {
+      return _byteLength / 21;
+    }
+  }
+
+  /**
    * @notice Get the length of hooks.
    */
   function length(address player, ResourceId systemId, bytes32 callDataHash) internal view returns (uint256) {
@@ -236,6 +335,26 @@ library OptionalSystemHooks {
     _keyTuple[2] = callDataHash;
 
     uint256 _byteLength = StoreCore.getDynamicFieldLength(_tableId, _keyTuple, 0);
+    unchecked {
+      return _byteLength / 21;
+    }
+  }
+
+  /**
+   * @notice Get the length of hooks (using the specified store).
+   */
+  function length(
+    IStore _store,
+    address player,
+    ResourceId systemId,
+    bytes32 callDataHash
+  ) internal view returns (uint256) {
+    bytes32[] memory _keyTuple = new bytes32[](3);
+    _keyTuple[0] = bytes32(uint256(uint160(player)));
+    _keyTuple[1] = ResourceId.unwrap(systemId);
+    _keyTuple[2] = callDataHash;
+
+    uint256 _byteLength = _store.getDynamicFieldLength(_tableId, _keyTuple, 0);
     unchecked {
       return _byteLength / 21;
     }
@@ -284,6 +403,28 @@ library OptionalSystemHooks {
   }
 
   /**
+   * @notice Get an item of hooks (using the specified store).
+   * @dev Reverts with Store_IndexOutOfBounds if `_index` is out of bounds for the array.
+   */
+  function getItemHooks(
+    IStore _store,
+    address player,
+    ResourceId systemId,
+    bytes32 callDataHash,
+    uint256 _index
+  ) internal view returns (bytes21) {
+    bytes32[] memory _keyTuple = new bytes32[](3);
+    _keyTuple[0] = bytes32(uint256(uint160(player)));
+    _keyTuple[1] = ResourceId.unwrap(systemId);
+    _keyTuple[2] = callDataHash;
+
+    unchecked {
+      bytes memory _blob = _store.getDynamicFieldSlice(_tableId, _keyTuple, 0, _index * 21, (_index + 1) * 21);
+      return (bytes21(_blob));
+    }
+  }
+
+  /**
    * @notice Get an item of hooks.
    * @dev Reverts with Store_IndexOutOfBounds if `_index` is out of bounds for the array.
    */
@@ -326,6 +467,28 @@ library OptionalSystemHooks {
   }
 
   /**
+   * @notice Get an item of hooks (using the specified store).
+   * @dev Reverts with Store_IndexOutOfBounds if `_index` is out of bounds for the array.
+   */
+  function getItem(
+    IStore _store,
+    address player,
+    ResourceId systemId,
+    bytes32 callDataHash,
+    uint256 _index
+  ) internal view returns (bytes21) {
+    bytes32[] memory _keyTuple = new bytes32[](3);
+    _keyTuple[0] = bytes32(uint256(uint160(player)));
+    _keyTuple[1] = ResourceId.unwrap(systemId);
+    _keyTuple[2] = callDataHash;
+
+    unchecked {
+      bytes memory _blob = _store.getDynamicFieldSlice(_tableId, _keyTuple, 0, _index * 21, (_index + 1) * 21);
+      return (bytes21(_blob));
+    }
+  }
+
+  /**
    * @notice Push an element to hooks.
    */
   function pushHooks(address player, ResourceId systemId, bytes32 callDataHash, bytes21 _element) internal {
@@ -347,6 +510,24 @@ library OptionalSystemHooks {
     _keyTuple[2] = callDataHash;
 
     StoreCore.pushToDynamicField(_tableId, _keyTuple, 0, abi.encodePacked((_element)));
+  }
+
+  /**
+   * @notice Push an element to hooks (using the specified store).
+   */
+  function pushHooks(
+    IStore _store,
+    address player,
+    ResourceId systemId,
+    bytes32 callDataHash,
+    bytes21 _element
+  ) internal {
+    bytes32[] memory _keyTuple = new bytes32[](3);
+    _keyTuple[0] = bytes32(uint256(uint160(player)));
+    _keyTuple[1] = ResourceId.unwrap(systemId);
+    _keyTuple[2] = callDataHash;
+
+    _store.pushToDynamicField(_tableId, _keyTuple, 0, abi.encodePacked((_element)));
   }
 
   /**
@@ -374,6 +555,18 @@ library OptionalSystemHooks {
   }
 
   /**
+   * @notice Push an element to hooks (using the specified store).
+   */
+  function push(IStore _store, address player, ResourceId systemId, bytes32 callDataHash, bytes21 _element) internal {
+    bytes32[] memory _keyTuple = new bytes32[](3);
+    _keyTuple[0] = bytes32(uint256(uint160(player)));
+    _keyTuple[1] = ResourceId.unwrap(systemId);
+    _keyTuple[2] = callDataHash;
+
+    _store.pushToDynamicField(_tableId, _keyTuple, 0, abi.encodePacked((_element)));
+  }
+
+  /**
    * @notice Pop an element from hooks.
    */
   function popHooks(address player, ResourceId systemId, bytes32 callDataHash) internal {
@@ -398,6 +591,18 @@ library OptionalSystemHooks {
   }
 
   /**
+   * @notice Pop an element from hooks (using the specified store).
+   */
+  function popHooks(IStore _store, address player, ResourceId systemId, bytes32 callDataHash) internal {
+    bytes32[] memory _keyTuple = new bytes32[](3);
+    _keyTuple[0] = bytes32(uint256(uint160(player)));
+    _keyTuple[1] = ResourceId.unwrap(systemId);
+    _keyTuple[2] = callDataHash;
+
+    _store.popFromDynamicField(_tableId, _keyTuple, 0, 21);
+  }
+
+  /**
    * @notice Pop an element from hooks.
    */
   function pop(address player, ResourceId systemId, bytes32 callDataHash) internal {
@@ -419,6 +624,18 @@ library OptionalSystemHooks {
     _keyTuple[2] = callDataHash;
 
     StoreCore.popFromDynamicField(_tableId, _keyTuple, 0, 21);
+  }
+
+  /**
+   * @notice Pop an element from hooks (using the specified store).
+   */
+  function pop(IStore _store, address player, ResourceId systemId, bytes32 callDataHash) internal {
+    bytes32[] memory _keyTuple = new bytes32[](3);
+    _keyTuple[0] = bytes32(uint256(uint160(player)));
+    _keyTuple[1] = ResourceId.unwrap(systemId);
+    _keyTuple[2] = callDataHash;
+
+    _store.popFromDynamicField(_tableId, _keyTuple, 0, 21);
   }
 
   /**
@@ -460,6 +677,28 @@ library OptionalSystemHooks {
     unchecked {
       bytes memory _encoded = abi.encodePacked((_element));
       StoreCore.spliceDynamicData(_tableId, _keyTuple, 0, uint40(_index * 21), uint40(_encoded.length), _encoded);
+    }
+  }
+
+  /**
+   * @notice Update an element of hooks (using the specified store) at `_index`.
+   */
+  function updateHooks(
+    IStore _store,
+    address player,
+    ResourceId systemId,
+    bytes32 callDataHash,
+    uint256 _index,
+    bytes21 _element
+  ) internal {
+    bytes32[] memory _keyTuple = new bytes32[](3);
+    _keyTuple[0] = bytes32(uint256(uint160(player)));
+    _keyTuple[1] = ResourceId.unwrap(systemId);
+    _keyTuple[2] = callDataHash;
+
+    unchecked {
+      bytes memory _encoded = abi.encodePacked((_element));
+      _store.spliceDynamicData(_tableId, _keyTuple, 0, uint40(_index * 21), uint40(_encoded.length), _encoded);
     }
   }
 
@@ -506,6 +745,28 @@ library OptionalSystemHooks {
   }
 
   /**
+   * @notice Update an element of hooks (using the specified store) at `_index`.
+   */
+  function update(
+    IStore _store,
+    address player,
+    ResourceId systemId,
+    bytes32 callDataHash,
+    uint256 _index,
+    bytes21 _element
+  ) internal {
+    bytes32[] memory _keyTuple = new bytes32[](3);
+    _keyTuple[0] = bytes32(uint256(uint160(player)));
+    _keyTuple[1] = ResourceId.unwrap(systemId);
+    _keyTuple[2] = callDataHash;
+
+    unchecked {
+      bytes memory _encoded = abi.encodePacked((_element));
+      _store.spliceDynamicData(_tableId, _keyTuple, 0, uint40(_index * 21), uint40(_encoded.length), _encoded);
+    }
+  }
+
+  /**
    * @notice Delete all data for given keys.
    */
   function deleteRecord(address player, ResourceId systemId, bytes32 callDataHash) internal {
@@ -527,6 +788,18 @@ library OptionalSystemHooks {
     _keyTuple[2] = callDataHash;
 
     StoreCore.deleteRecord(_tableId, _keyTuple, _fieldLayout);
+  }
+
+  /**
+   * @notice Delete all data for given keys (using the specified store).
+   */
+  function deleteRecord(IStore _store, address player, ResourceId systemId, bytes32 callDataHash) internal {
+    bytes32[] memory _keyTuple = new bytes32[](3);
+    _keyTuple[0] = bytes32(uint256(uint160(player)));
+    _keyTuple[1] = ResourceId.unwrap(systemId);
+    _keyTuple[2] = callDataHash;
+
+    _store.deleteRecord(_tableId, _keyTuple);
   }
 
   /**

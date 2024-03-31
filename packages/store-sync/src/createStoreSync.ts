@@ -186,6 +186,10 @@ export async function createStoreSync<config extends StoreConfig = StoreConfig>(
     tap((blockNumber) => {
       debug("on block number", blockNumber, "for", followBlockTag, "block tag");
     }),
+    retry({
+      count: undefined, // ie unlimited
+      delay: 3000, // poll the RPC every 3 seconds
+    }),
     shareReplay(1),
   );
 

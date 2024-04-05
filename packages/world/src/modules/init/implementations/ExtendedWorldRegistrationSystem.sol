@@ -106,7 +106,7 @@ contract ExtendedWorldRegistrationSystem is System, IWorldErrors, LimitedCallCon
           newHooks[newHooksIndex] = currentHooks[currentHooksIndex];
           newHooksIndex++;
         } else {
-          IOptionalSystemHook(address(hookAddress)).onUnregisterHook();
+          address(hookAddress).call(abi.encodeWithSignature("onUnregisterHook()"));
         }
       }
     }

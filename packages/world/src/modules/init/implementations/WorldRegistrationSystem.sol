@@ -278,7 +278,7 @@ contract WorldRegistrationSystem is System, IWorldErrors, LimitedCallContext {
   function unregisterDelegation(address delegatee) public onlyDelegatecall {
     if (ERC165Checker.supportsInterface(delegatee, type(ICustomUnregisterDelegation).interfaceId)) {
       (bool canUnregisterSuccess, bytes memory canUnregisterReturnData) = delegatee.call(
-        abi.encodeCall(ICustomUnregisterDelegation.canUnregister, ())
+        abi.encodeCall(ICustomUnregisterDelegation.canUnregister, (_msgSender()))
       );
       if (!canUnregisterSuccess) revert World_CustomUnregisterDelegationNotAllowed();
       canUnregisterSuccess = abi.decode(canUnregisterReturnData, (bool));

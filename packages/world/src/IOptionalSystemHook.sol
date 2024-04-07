@@ -14,11 +14,11 @@ interface IOptionalSystemHook is ISystemHook {
    * @notice Executes when a system hook is registered by the user.
    * @dev Provides the ability to add custom logic or checks when a system hook is registered.
    */
-  function onRegisterHook() external;
+  function onRegisterHook(address msgSender) external;
 
   /**
    * @notice Executes when a system hook is unregistered by the user.
    * @dev Provides the ability to add custom logic or checks when a system hook is unregistered.
    */
-  function onUnregisterHook() external;
+  function onUnregisterHook(address msgSender) external;
 }

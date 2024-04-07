@@ -70,7 +70,7 @@ contract ExtendedWorldRegistrationSystem is System, IWorldErrors, LimitedCallCon
     // Require the system's namespace to exist
     AccessControl.requireExistence(systemId.getNamespaceId());
 
-    IOptionalSystemHook(address(hookAddress)).onRegisterHook();
+    IOptionalSystemHook(address(hookAddress)).onRegisterHook(_msgSender());
 
     // Register the hook
     OptionalSystemHooks.push(
@@ -106,7 +106,7 @@ contract ExtendedWorldRegistrationSystem is System, IWorldErrors, LimitedCallCon
           newHooks[newHooksIndex] = currentHooks[currentHooksIndex];
           newHooksIndex++;
         } else {
-          address(hookAddress).call(abi.encodeWithSignature("onUnregisterHook()"));
+          address(hookAddress).call(abi.encodeWithSignature("onUnregisterHook(address)", _msgSender()));
         }
       }
     }

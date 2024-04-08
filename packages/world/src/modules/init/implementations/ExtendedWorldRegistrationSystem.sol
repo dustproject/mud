@@ -77,7 +77,7 @@ contract ExtendedWorldRegistrationSystem is System, IWorldErrors, LimitedCallCon
       }
     }
 
-    IOptionalSystemHook(address(hookAddress)).onRegisterHook(_msgSender());
+    IOptionalSystemHook(address(hookAddress)).onRegisterHook(_msgSender(), systemId, enabledHooksBitmap, callDataHash);
 
     // Register the hook
     OptionalSystemHooks.push(
@@ -93,6 +93,7 @@ contract ExtendedWorldRegistrationSystem is System, IWorldErrors, LimitedCallCon
    * @dev Removes a hook for the system at the provided user, system, and call data hash (optional)
    * @param systemId The ID of the system
    * @param hookAddress The address of the hook being unregistered
+   * @param callDataHash The hash of the call data for the system hook
    */
   function unregisterOptionalSystemHook(
     ResourceId systemId,
@@ -109,11 +110,17 @@ contract ExtendedWorldRegistrationSystem is System, IWorldErrors, LimitedCallCon
     uint256 newHooksIndex;
     unchecked {
       for (uint256 currentHooksIndex; currentHooksIndex < currentHooks.length; currentHooksIndex++) {
-        if (Hook.wrap(currentHooks[currentHooksIndex]).getAddress() != address(hookAddress)) {
+        Hook hook = Hook.wrap(currentHooks[currentHooksIndex]);
+        if (hook.getAddress() != address(hookAddress)) {
           newHooks[newHooksIndex] = currentHooks[currentHooksIndex];
           newHooksIndex++;
         } else {
-          address(hookAddress).call(abi.encodeWithSignature("onUnregisterHook(address)", _msgSender()));
+          address(hookAddress).call(
+            abi.encodeCall(
+              IOptionalSystemHook.onUnregisterHook,
+              (_msgSender(), systemId, hook.getBitmap(), callDataHash)
+            )
+          );
         }
       }
     }

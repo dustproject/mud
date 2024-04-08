@@ -113,4 +113,12 @@ interface IWorldErrors {
    * @param functionSelector The function selector of the disallowed callback.
    */
   error World_CallbackNotAllowed(bytes4 functionSelector);
+
+  /**
+   * @notice  Raised when trying to register an optional system hook that is already registered.
+   * @param systemId The ID of the system.
+   * @param hookAddress The address of the hook.
+   * @param callDataHash The hash of the call data.
+   */
+  error World_OptionalHookAlreadyRegistered(ResourceId systemId, address hookAddress, bytes32 callDataHash);
 }

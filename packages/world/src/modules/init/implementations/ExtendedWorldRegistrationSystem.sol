@@ -70,6 +70,13 @@ contract ExtendedWorldRegistrationSystem is System, IWorldErrors, LimitedCallCon
     // Require the system's namespace to exist
     AccessControl.requireExistence(systemId.getNamespaceId());
 
+    bytes21[] memory currentHooks = OptionalSystemHooks._get(_msgSender(), systemId, callDataHash);
+    for (uint256 i = 0; i < currentHooks.length; i++) {
+      if (Hook.wrap(currentHooks[i]).getAddress() == address(hookAddress)) {
+        revert World_OptionalHookAlreadyRegistered(systemId, address(hookAddress), callDataHash);
+      }
+    }
+
     IOptionalSystemHook(address(hookAddress)).onRegisterHook(_msgSender());
 
     // Register the hook

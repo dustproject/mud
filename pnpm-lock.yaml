@@ -156,6 +156,9 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
+      react-merge-refs:
+        specifier: ^2.1.1
+        version: 2.1.1
       react-router-dom:
         specifier: ^6.11.0
         version: 6.11.0(react-dom@18.2.0)(react@18.2.0)
@@ -170,7 +173,11 @@ importers:
         version: 2.7.12(typescript@5.4.2)(zod@3.21.4)
       wagmi:
         specifier: ^2.5.12
+<<<<<<< HEAD
         version: 2.5.19(@tanstack/react-query@5.29.0)(@types/react@18.2.22)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.7.12)
+=======
+        version: 2.5.19(@tanstack/react-query@5.29.2)(@types/react@18.2.22)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16)
+>>>>>>> a8c991c4b (shadow forward ref)
       zustand:
         specifier: ^4.5.2
         version: 4.5.2(@types/react@18.2.22)(react@18.2.0)
@@ -6332,8 +6339,13 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       react-remove-scroll: 2.5.7(@types/react@18.2.22)(react@18.2.0)
       ua-parser-js: 1.0.37
+<<<<<<< HEAD
       viem: 2.7.12(typescript@5.4.2)(zod@3.21.4)
       wagmi: 2.5.19(@tanstack/react-query@5.29.0)(@types/react@18.2.22)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.7.12)
+=======
+      viem: 2.9.16(typescript@5.4.2)(zod@3.21.4)
+      wagmi: 2.5.19(@tanstack/react-query@5.29.2)(@types/react@18.2.22)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16)
+>>>>>>> a8c991c4b (shadow forward ref)
     transitivePeerDependencies:
       - '@types/react'
     dev: false
@@ -8143,7 +8155,11 @@ packages:
       pretty-format: 29.5.0
     dev: true
 
+<<<<<<< HEAD
   /@wagmi/connectors@4.1.25(@types/react@18.2.22)(@wagmi/core@2.6.16)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.7.12):
+=======
+  /@wagmi/connectors@4.1.25(@types/react@18.2.22)(@wagmi/core@2.6.16)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16):
+>>>>>>> a8c991c4b (shadow forward ref)
     resolution: {integrity: sha512-4Tot1Gtiv7uhiUAxZ9On37aai35l5S0sV7N2yQSNgzqXe55bAlI0cqyBAIJRvyKwOe1+hzKfoFqYQSaoCgj5Lg==}
     peerDependencies:
       '@wagmi/core': 2.6.16
@@ -8157,7 +8173,11 @@ packages:
       '@metamask/sdk': 0.14.3(@types/react@18.2.22)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)
       '@safe-global/safe-apps-provider': 0.18.1(typescript@5.4.2)
       '@safe-global/safe-apps-sdk': 8.1.0(typescript@5.4.2)
+<<<<<<< HEAD
       '@wagmi/core': 2.6.16(@types/react@18.2.22)(react@18.2.0)(typescript@5.4.2)(viem@2.7.12)
+=======
+      '@wagmi/core': 2.6.16(@types/react@18.2.22)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16)
+>>>>>>> a8c991c4b (shadow forward ref)
       '@walletconnect/ethereum-provider': 2.11.2(@types/react@18.2.22)(react@18.2.0)
       '@walletconnect/modal': 2.6.2(@types/react@18.2.22)(react@18.2.0)
       typescript: 5.4.2
@@ -8189,7 +8209,11 @@ packages:
       - zod
     dev: false
 
+<<<<<<< HEAD
   /@wagmi/core@2.6.16(@types/react@18.2.22)(react@18.2.0)(typescript@5.4.2)(viem@2.7.12):
+=======
+  /@wagmi/core@2.6.16(@types/react@18.2.22)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16):
+>>>>>>> a8c991c4b (shadow forward ref)
     resolution: {integrity: sha512-95r+2CCf4Yz4CWG7UZMALIcGSUfpr9YbZ2HOqmz6gJEBaW9Cf9xUEZj2MXOHZIP+Ri/3CZJtbBEclDot4enZWA==}
     peerDependencies:
       '@tanstack/query-core': '>=5.0.0'
@@ -15940,6 +15964,10 @@ packages:
   /react-is@18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
 
+  /react-merge-refs@2.1.1:
+    resolution: {integrity: sha512-jLQXJ/URln51zskhgppGJ2ub7b2WFKGq3cl3NYKtlHoTG+dN2q7EzWrn3hN3EgPsTMvpR9tpq5ijdp7YwFZkag==}
+    dev: false
+
   /react-native-webview@11.26.1(react-native@0.73.6)(react@18.2.0):
     resolution: {integrity: sha512-hC7BkxOpf+z0UKhxFSFTPAM4shQzYmZHoELa6/8a/MspcjEP7ukYKpuSUTLDywQditT8yI9idfcKvfZDKQExGw==}
     peerDependencies:
@@ -18241,9 +18269,12 @@ packages:
     dev: false
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   /viem@2.9.20(typescript@5.4.2)(zod@3.21.4):
     resolution: {integrity: sha512-PHb1MrBHMrSZ8Ayuk3Y/6wUTcMbzlACQaM6AJBSv9kRKX3xYSZ/kehi+gvS0swQJeAlTQ4eZM7jsHQJNAOarmg==}
 =======
+=======
+>>>>>>> a8c991c4b (shadow forward ref)
   /viem@1.21.4(typescript@5.4.2):
     resolution: {integrity: sha512-BNVYdSaUjeS2zKQgPs+49e5JKocfo60Ib2yiXOWBT6LuVxY1I/6fFX3waEtpXvL1Xn4qu+BVitVtMh9lyThyhQ==}
     peerDependencies:
@@ -18426,7 +18457,11 @@ packages:
       xml-name-validator: 4.0.0
     dev: true
 
+<<<<<<< HEAD
   /wagmi@2.5.19(@tanstack/react-query@5.29.0)(@types/react@18.2.22)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.7.12):
+=======
+  /wagmi@2.5.19(@tanstack/react-query@5.29.2)(@types/react@18.2.22)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16):
+>>>>>>> a8c991c4b (shadow forward ref)
     resolution: {integrity: sha512-fy6s3qTuXpfrrghhoNXuV92yqOqJI7m/9iLIejHxEYxiddVDTR8BVdkt0BuBQZzoXSAutDkyIlJbtFcpX5dfrQ==}
     peerDependencies:
       '@tanstack/react-query': '>=5.0.0'
@@ -18437,9 +18472,15 @@ packages:
       typescript:
         optional: true
     dependencies:
+<<<<<<< HEAD
       '@tanstack/react-query': 5.29.0(react@18.2.0)
       '@wagmi/connectors': 4.1.25(@types/react@18.2.22)(@wagmi/core@2.6.16)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.7.12)
       '@wagmi/core': 2.6.16(@types/react@18.2.22)(react@18.2.0)(typescript@5.4.2)(viem@2.7.12)
+=======
+      '@tanstack/react-query': 5.29.2(react@18.2.0)
+      '@wagmi/connectors': 4.1.25(@types/react@18.2.22)(@wagmi/core@2.6.16)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16)
+      '@wagmi/core': 2.6.16(@types/react@18.2.22)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16)
+>>>>>>> a8c991c4b (shadow forward ref)
       react: 18.2.0
       typescript: 5.4.2
       use-sync-external-store: 1.2.0(react@18.2.0)

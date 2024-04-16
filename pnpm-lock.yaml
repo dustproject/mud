@@ -241,6 +241,9 @@ importers:
       tsup:
         specifier: ^6.7.0
         version: 6.7.0(postcss@8.4.23)(typescript@5.4.2)
+      vite:
+        specifier: ^4.3.6
+        version: 4.3.6(@types/node@18.15.11)
       vitest:
         specifier: 0.34.6
         version: 0.34.6(jsdom@22.1.0)
@@ -12988,10 +12991,14 @@ packages:
     dependencies:
       call-bind: 1.0.7
 <<<<<<< HEAD
+<<<<<<< HEAD
       has-tostringtag: 1.0.2
 =======
       has-tostringtag: 1.0.0
 >>>>>>> 5b7c40321 (feat(account-kit): add cli for local bundler setup (#2653))
+=======
+      has-tostringtag: 1.0.2
+>>>>>>> cc3d95e2e (feat(account-kit): separate bundled export for non-react environments (#2667))
     dev: false
 
   /is-arrayish@0.2.1:

@@ -158,14 +158,21 @@ importers:
         version: 2.0.5(@types/react@18.2.22)(react-dom@18.2.0)(react@18.2.0)(viem@2.9.16)(wagmi@2.5.19)
       '@reservoir0x/relay-sdk':
         specifier: ^0.3.9
+<<<<<<< HEAD
         version: 0.3.9(typescript@5.4.2)(viem@2.9.16)
 >>>>>>> a91ac18e2 (feat(account-kit): bridging (#2629))
+=======
+        version: 0.3.9(debug@4.3.4)(typescript@5.4.2)(viem@2.9.16)
+>>>>>>> 77bec70b8 (add debug logs)
       '@tanstack/react-query':
         specifier: ^5.28.8
         version: 5.29.0(react@18.2.0)
       abitype:
         specifier: 1.0.0
         version: 1.0.0(typescript@5.4.2)(zod@3.21.4)
+      debug:
+        specifier: ^4.3.4
+        version: 4.3.4
       execa:
         specifier: ^7.0.0
         version: 7.2.0
@@ -212,6 +219,7 @@ importers:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         version: 2.5.19(@tanstack/react-query@5.29.2)(@types/react@18.2.22)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16)
 >>>>>>> 424d69b2c (remove unused package)
 =======
@@ -229,10 +237,16 @@ importers:
 =======
         version: 2.5.19(@tanstack/react-query@5.29.2)(@types/react@18.2.22)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16)(zod@3.21.4)
 >>>>>>> 8aedfaa0a (fix pnpm-lock)
+=======
+        version: 2.5.19(@tanstack/react-query@5.29.2)(@types/react@18.2.22)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16)
+>>>>>>> 77bec70b8 (add debug logs)
       zustand:
         specifier: ^4.5.2
         version: 4.5.2(@types/react@18.2.22)(react@18.2.0)
     devDependencies:
+      '@types/debug':
+        specifier: ^4.1.7
+        version: 4.1.12
       '@types/react':
         specifier: 18.2.22
         version: 18.2.22
@@ -6891,6 +6905,7 @@ packages:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       wagmi: 2.5.19(@tanstack/react-query@5.29.2)(@types/react@18.2.22)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16)
 >>>>>>> a8c991c4b (shadow forward ref)
 =======
@@ -6917,6 +6932,9 @@ packages:
 =======
       wagmi: 2.5.19(@tanstack/react-query@5.29.2)(@types/react@18.2.22)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16)(zod@3.21.4)
 >>>>>>> 8aedfaa0a (fix pnpm-lock)
+=======
+      wagmi: 2.5.19(@tanstack/react-query@5.29.2)(@types/react@18.2.22)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16)
+>>>>>>> 77bec70b8 (add debug logs)
     transitivePeerDependencies:
       - '@types/react'
     dev: false
@@ -7279,13 +7297,13 @@ packages:
     engines: {node: '>=14'}
     dev: false
 
-  /@reservoir0x/relay-sdk@0.3.9(typescript@5.4.2)(viem@2.9.16):
+  /@reservoir0x/relay-sdk@0.3.9(debug@4.3.4)(typescript@5.4.2)(viem@2.9.16):
     resolution: {integrity: sha512-uKrBh4wMeDs6Z3gYagFQdefyu3IvNK1Yanum6vTamaBp3iV+B86ZGcaHGtNiwIs3qK9LcutbBvaqPJ1ieVsz5A==}
     peerDependencies:
       typescript: ^5.0.0
       viem: ^2.7.3
     dependencies:
-      axios: 1.6.8
+      axios: 1.6.8(debug@4.3.4)
       typescript: 5.4.2
       viem: 2.9.16(typescript@5.4.2)(zod@3.21.4)
     transitivePeerDependencies:
@@ -7354,10 +7372,10 @@ packages:
       - '@types/node'
     dev: true
 
-  /@safe-global/safe-apps-provider@0.18.1(typescript@5.4.2)(zod@3.21.4):
+  /@safe-global/safe-apps-provider@0.18.1(typescript@5.4.2):
     resolution: {integrity: sha512-V4a05A3EgJcriqtDoJklDz1BOinWhC6P0hjUSxshA4KOZM7rGPCTto/usXs09zr1vvL28evl/NldSTv97j2bmg==}
     dependencies:
-      '@safe-global/safe-apps-sdk': 8.1.0(typescript@5.4.2)(zod@3.21.4)
+      '@safe-global/safe-apps-sdk': 8.1.0(typescript@5.4.2)
       events: 3.3.0
     transitivePeerDependencies:
       - bufferutil
@@ -7366,11 +7384,11 @@ packages:
       - zod
     dev: false
 
-  /@safe-global/safe-apps-sdk@8.1.0(typescript@5.4.2)(zod@3.21.4):
+  /@safe-global/safe-apps-sdk@8.1.0(typescript@5.4.2):
     resolution: {integrity: sha512-XJbEPuaVc7b9n23MqlF6c+ToYIS3f7P2Sel8f3cSBQ9WORE4xrSuvhMpK9fDSFqJ7by/brc+rmJR/5HViRr0/w==}
     dependencies:
       '@safe-global/safe-gateway-typescript-sdk': 3.19.0
-      viem: 1.21.4(typescript@5.4.2)(zod@3.21.4)
+      viem: 1.21.4(typescript@5.4.2)
     transitivePeerDependencies:
       - bufferutil
       - typescript
@@ -8206,7 +8224,6 @@ packages:
     resolution: {integrity: sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==}
     dependencies:
       '@types/ms': 0.7.31
-    dev: false
 
   /@types/debug@4.1.7:
     resolution: {integrity: sha512-9AonUzyTjXXhEOa0DnqpzZi6VHlqKMswga9EXjpXnnqxwLtdvPPtlO8evrI5D9S6asFRCQ6v+wpiUKbw+vKqyg==}
@@ -8918,11 +8935,15 @@ packages:
     dev: true
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   /@wagmi/connectors@4.1.25(@types/react@18.2.22)(@wagmi/core@2.6.16)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16):
 >>>>>>> 3e758a913 (add bundle dts)
 =======
   /@wagmi/connectors@4.1.25(@types/react@18.2.22)(@wagmi/core@2.6.16)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16)(zod@3.21.4):
 >>>>>>> 65578d998 (integration tweaks)
+=======
+  /@wagmi/connectors@4.1.25(@types/react@18.2.22)(@wagmi/core@2.6.16)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16):
+>>>>>>> 77bec70b8 (add debug logs)
     resolution: {integrity: sha512-4Tot1Gtiv7uhiUAxZ9On37aai35l5S0sV7N2yQSNgzqXe55bAlI0cqyBAIJRvyKwOe1+hzKfoFqYQSaoCgj5Lg==}
     peerDependencies:
       '@wagmi/core': 2.6.16
@@ -8934,6 +8955,7 @@ packages:
     dependencies:
       '@coinbase/wallet-sdk': 3.9.1
       '@metamask/sdk': 0.14.3(@types/react@18.2.22)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -8990,6 +9012,11 @@ packages:
       '@safe-global/safe-apps-sdk': 8.1.0(typescript@5.4.2)(zod@3.21.4)
       '@wagmi/core': 2.6.16(@types/react@18.2.22)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16)(zod@3.21.4)
 >>>>>>> 8aedfaa0a (fix pnpm-lock)
+=======
+      '@safe-global/safe-apps-provider': 0.18.1(typescript@5.4.2)
+      '@safe-global/safe-apps-sdk': 8.1.0(typescript@5.4.2)
+      '@wagmi/core': 2.6.16(@types/react@18.2.22)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16)
+>>>>>>> 77bec70b8 (add debug logs)
       '@walletconnect/ethereum-provider': 2.11.2(@types/react@18.2.22)(react@18.2.0)
       '@walletconnect/modal': 2.6.2(@types/react@18.2.22)(react@18.2.0)
       typescript: 5.4.2
@@ -9030,6 +9057,7 @@ packages:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   /@wagmi/core@2.6.16(@types/react@18.2.22)(react@18.2.0)(typescript@5.4.2)(viem@2.7.12):
 =======
   /@wagmi/core@2.6.16(@types/react@18.2.22)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16):
@@ -9055,6 +9083,9 @@ packages:
 =======
   /@wagmi/core@2.6.16(@types/react@18.2.22)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16)(zod@3.21.4):
 >>>>>>> 8aedfaa0a (fix pnpm-lock)
+=======
+  /@wagmi/core@2.6.16(@types/react@18.2.22)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16):
+>>>>>>> 77bec70b8 (add debug logs)
     resolution: {integrity: sha512-95r+2CCf4Yz4CWG7UZMALIcGSUfpr9YbZ2HOqmz6gJEBaW9Cf9xUEZj2MXOHZIP+Ri/3CZJtbBEclDot4enZWA==}
     peerDependencies:
       '@tanstack/query-core': '>=5.0.0'
@@ -9067,7 +9098,7 @@ packages:
         optional: true
     dependencies:
       eventemitter3: 5.0.1
-      mipd: 0.0.5(typescript@5.4.2)(zod@3.21.4)
+      mipd: 0.0.5(typescript@5.4.2)
       typescript: 5.4.2
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -9475,7 +9506,7 @@ packages:
     engines: {node: '>=6', npm: '>=3'}
     dev: false
 
-  /abitype@0.9.8(typescript@5.4.2)(zod@3.21.4):
+  /abitype@0.9.8(typescript@5.4.2):
     resolution: {integrity: sha512-puLifILdm+8sjyss4S+fsUN09obiT1g2YW6CtcQF+QDzxR0euzgEB29MZujC6zMk2a6SVmtttq1fc6+YFA7WYQ==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -9487,7 +9518,6 @@ packages:
         optional: true
     dependencies:
       typescript: 5.4.2
-      zod: 3.21.4
     dev: false
 
   /abitype@1.0.0(typescript@5.4.2)(zod@3.21.4):
@@ -9947,10 +9977,10 @@ packages:
       - supports-color
     dev: false
 
-  /axios@1.6.8:
+  /axios@1.6.8(debug@4.3.4):
     resolution: {integrity: sha512-v/ZHtJDU39mDpyBoFVkETcd/uNdxrWRrg3bKpOKzXFA6Bvqopts6ALSMU3y6ijYxbw2B+wPrIv46egTzJXCLGQ==}
     dependencies:
-      follow-redirects: 1.15.6
+      follow-redirects: 1.15.6(debug@4.3.4)
       form-data: 4.0.0
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
@@ -12568,7 +12598,7 @@ packages:
       debug: 4.3.4
     dev: true
 
-  /follow-redirects@1.15.6:
+  /follow-redirects@1.15.6(debug@4.3.4):
     resolution: {integrity: sha512-wWN62YITEaOpSK584EZXJafH1AGpO8RVgElfkuXbTOrPX4fIfOyEpW/CsiNd8JdYrAoOvafRTOEnvsO++qCqFA==}
     engines: {node: '>=4.0'}
     peerDependencies:
@@ -12576,6 +12606,8 @@ packages:
     peerDependenciesMeta:
       debug:
         optional: true
+    dependencies:
+      debug: 4.3.4
     dev: false
 
   /for-each@0.3.3:
@@ -15451,7 +15483,7 @@ packages:
       yallist: 4.0.0
     dev: false
 
-  /mipd@0.0.5(typescript@5.4.2)(zod@3.21.4):
+  /mipd@0.0.5(typescript@5.4.2):
     resolution: {integrity: sha512-gbKA784D2WKb5H/GtqEv+Ofd1S9Zj+Z/PGDIl1u1QAbswkxD28BQ5bSXQxkeBzPBABg1iDSbiwGG1XqlOxRspA==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -15460,7 +15492,7 @@ packages:
         optional: true
     dependencies:
       typescript: 5.4.2
-      viem: 1.21.4(typescript@5.4.2)(zod@3.21.4)
+      viem: 1.21.4(typescript@5.4.2)
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -19227,6 +19259,7 @@ packages:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   /viem@2.9.20(typescript@5.4.2)(zod@3.21.4):
     resolution: {integrity: sha512-PHb1MrBHMrSZ8Ayuk3Y/6wUTcMbzlACQaM6AJBSv9kRKX3xYSZ/kehi+gvS0swQJeAlTQ4eZM7jsHQJNAOarmg==}
 =======
@@ -19254,6 +19287,9 @@ packages:
 =======
   /viem@1.21.4(typescript@5.4.2)(zod@3.21.4):
 >>>>>>> 8aedfaa0a (fix pnpm-lock)
+=======
+  /viem@1.21.4(typescript@5.4.2):
+>>>>>>> 77bec70b8 (add debug logs)
     resolution: {integrity: sha512-BNVYdSaUjeS2zKQgPs+49e5JKocfo60Ib2yiXOWBT6LuVxY1I/6fFX3waEtpXvL1Xn4qu+BVitVtMh9lyThyhQ==}
     peerDependencies:
       typescript: '>=5.0.4'
@@ -19266,7 +19302,7 @@ packages:
       '@noble/hashes': 1.3.2
       '@scure/bip32': 1.3.2
       '@scure/bip39': 1.2.1
-      abitype: 0.9.8(typescript@5.4.2)(zod@3.21.4)
+      abitype: 0.9.8(typescript@5.4.2)
       isows: 1.0.3(ws@8.13.0)
       typescript: 5.4.2
       ws: 8.13.0
@@ -19513,6 +19549,7 @@ packages:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   /wagmi@2.5.19(@tanstack/react-query@5.29.0)(@types/react@18.2.22)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.7.12):
 =======
   /wagmi@2.5.19(@tanstack/react-query@5.29.2)(@types/react@18.2.22)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16):
@@ -19538,6 +19575,9 @@ packages:
 =======
   /wagmi@2.5.19(@tanstack/react-query@5.29.2)(@types/react@18.2.22)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16)(zod@3.21.4):
 >>>>>>> 8aedfaa0a (fix pnpm-lock)
+=======
+  /wagmi@2.5.19(@tanstack/react-query@5.29.2)(@types/react@18.2.22)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16):
+>>>>>>> 77bec70b8 (add debug logs)
     resolution: {integrity: sha512-fy6s3qTuXpfrrghhoNXuV92yqOqJI7m/9iLIejHxEYxiddVDTR8BVdkt0BuBQZzoXSAutDkyIlJbtFcpX5dfrQ==}
     peerDependencies:
       '@tanstack/react-query': '>=5.0.0'
@@ -19554,6 +19594,7 @@ packages:
       '@wagmi/core': 2.6.16(@types/react@18.2.22)(react@18.2.0)(typescript@5.4.2)(viem@2.7.12)
 =======
       '@tanstack/react-query': 5.29.2(react@18.2.0)
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -19599,6 +19640,10 @@ packages:
       '@wagmi/connectors': 4.1.25(@types/react@18.2.22)(@wagmi/core@2.6.16)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16)(zod@3.21.4)
       '@wagmi/core': 2.6.16(@types/react@18.2.22)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16)(zod@3.21.4)
 >>>>>>> 8aedfaa0a (fix pnpm-lock)
+=======
+      '@wagmi/connectors': 4.1.25(@types/react@18.2.22)(@wagmi/core@2.6.16)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16)
+      '@wagmi/core': 2.6.16(@types/react@18.2.22)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16)
+>>>>>>> 77bec70b8 (add debug logs)
       react: 18.2.0
       typescript: 5.4.2
       use-sync-external-store: 1.2.0(react@18.2.0)

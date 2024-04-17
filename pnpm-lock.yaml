@@ -177,8 +177,13 @@ importers:
         specifier: ^7.0.0
         version: 7.2.0
       permissionless:
+<<<<<<< HEAD
         specifier: ^0.1.10
         version: 0.1.14(viem@2.7.12)
+=======
+        specifier: ^0.1.17
+        version: 0.1.17(viem@2.9.20)
+>>>>>>> f92d5b11d (make smart account client work with viem bundle)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -11796,6 +11801,7 @@ packages:
   /escalade@3.1.1:
     resolution: {integrity: sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==}
     engines: {node: '>=6'}
+    dev: false
 
   /escalade@3.1.2:
     resolution: {integrity: sha512-ErCHMCae19vR8vQGe50xIsVomy19rg6gFu3+r3jkEO46suLMWBksvVyoGgQV+jOfl84ZSOSlmv6Gxa89PmTGmA==}
@@ -16271,10 +16277,15 @@ packages:
       through2: 2.0.5
     dev: false
 
+<<<<<<< HEAD
   /permissionless@0.1.14(viem@2.7.12):
     resolution: {integrity: sha512-22Y7TABzQ/3shKb4asOCIWse64HjlWWtchqVChBfEoKCOKxGV1AmmMKh76JIqndPsld9+Z0Dg3WMYo1VX3eQZw==}
+=======
+  /permissionless@0.1.17(viem@2.9.20):
+    resolution: {integrity: sha512-xesPWvTvLb5yWB7CzH3W1e989gzqx6EKKo2/jIELLpA5si11yEFnD1rbWxKKwvREip0mJzzIzUbQepQBIhk3Kg==}
+>>>>>>> f92d5b11d (make smart account client work with viem bundle)
     peerDependencies:
-      viem: ^2.0.0
+      viem: ^2.9.17
     dependencies:
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -20064,7 +20075,7 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       cliui: 7.0.4
-      escalade: 3.1.1
+      escalade: 3.1.2
       get-caller-file: 2.0.5
       require-directory: 2.1.1
       string-width: 4.2.3
@@ -20090,7 +20101,7 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       cliui: 8.0.1
-      escalade: 3.1.1
+      escalade: 3.1.2
       get-caller-file: 2.0.5
       require-directory: 2.1.1
       string-width: 4.2.3

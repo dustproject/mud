@@ -153,9 +153,6 @@ importers:
       '@radix-ui/react-select':
         specifier: ^2.0.0
         version: 2.0.0(@types/react-dom@18.2.7)(@types/react@18.2.22)(react-dom@18.2.0)(react@18.2.0)
-      '@radix-ui/react-tabs':
-        specifier: ^1.0.4
-        version: 1.0.4(@types/react-dom@18.2.7)(@types/react@18.2.22)(react-dom@18.2.0)(react@18.2.0)
       '@rainbow-me/rainbowkit':
         specifier: ^2.0.2
 <<<<<<< HEAD
@@ -175,7 +172,7 @@ importers:
         version: 5.29.0(react@18.2.0)
       abitype:
         specifier: 1.0.0
-        version: 1.0.0(typescript@5.4.2)(zod@3.21.4)
+        version: 1.0.0(typescript@5.4.2)
       debug:
         specifier: ^4.3.4
         version: 4.3.4
@@ -207,8 +204,13 @@ importers:
         version: 3.1.0(react@18.2.0)
       viem:
 <<<<<<< HEAD
+<<<<<<< HEAD
         specifier: 2.7.12
         version: 2.7.12(typescript@5.4.2)(zod@3.21.4)
+=======
+        specifier: 2.9.20
+        version: 2.9.20(typescript@5.4.2)
+>>>>>>> 4d009054d (add approx. fee estimates)
       wagmi:
         specifier: ^2.5.12
 <<<<<<< HEAD
@@ -294,10 +296,10 @@ importers:
         version: 4.3.6(@types/node@18.15.11)
       vite-plugin-dts:
         specifier: ^3.8.3
-        version: 3.8.3(@types/node@18.15.11)(typescript@5.4.2)(vite@4.3.6)
+        version: 3.8.3(typescript@5.4.2)(vite@4.3.6)
       vitest:
         specifier: 0.34.6
-        version: 0.34.6(jsdom@22.1.0)
+        version: 0.34.6
 
   packages/block-logs-stream:
     dependencies:
@@ -2385,6 +2387,7 @@ packages:
   /@babel/helper-plugin-utils@7.20.2:
     resolution: {integrity: sha512-8RvlJG2mj4huQ4pZ+rU9lqKi9ZKiRmuvGuM2HlWmkmgOhbs6zEAw6IEiJ5cQqGbDzGZOhwuOQNtZMi/ENLjZoQ==}
     engines: {node: '>=6.9.0'}
+    dev: true
 
   /@babel/helper-plugin-utils@7.24.0:
     resolution: {integrity: sha512-9cUznXMG0+FxRuJfvL82QlTqIzhVW9sL0KjMPHhAOOvpQGL8QtdxnBKILjBqxlHyliz0yCa1G903ZXI/FuHy2w==}
@@ -2763,7 +2766,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.24.4
-      '@babel/helper-plugin-utils': 7.20.2
+      '@babel/helper-plugin-utils': 7.24.0
     dev: false
 
   /@babel/plugin-syntax-bigint@7.8.3(@babel/core@7.21.4):
@@ -2790,7 +2793,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.24.4
-      '@babel/helper-plugin-utils': 7.20.2
+      '@babel/helper-plugin-utils': 7.24.0
     dev: false
 
   /@babel/plugin-syntax-class-static-block@7.14.5(@babel/core@7.24.4):
@@ -2876,7 +2879,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.24.4
-      '@babel/helper-plugin-utils': 7.20.2
+      '@babel/helper-plugin-utils': 7.24.0
     dev: false
 
   /@babel/plugin-syntax-json-strings@7.8.3(@babel/core@7.21.4):
@@ -2894,7 +2897,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.24.4
-      '@babel/helper-plugin-utils': 7.20.2
+      '@babel/helper-plugin-utils': 7.24.0
     dev: false
 
   /@babel/plugin-syntax-jsx@7.18.6(@babel/core@7.21.4):
@@ -2932,7 +2935,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.24.4
-      '@babel/helper-plugin-utils': 7.20.2
+      '@babel/helper-plugin-utils': 7.24.0
     dev: false
 
   /@babel/plugin-syntax-nullish-coalescing-operator@7.8.3(@babel/core@7.21.4):
@@ -2950,7 +2953,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.24.4
-      '@babel/helper-plugin-utils': 7.20.2
+      '@babel/helper-plugin-utils': 7.24.0
     dev: false
 
   /@babel/plugin-syntax-numeric-separator@7.10.4(@babel/core@7.21.4):
@@ -2968,7 +2971,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.24.4
-      '@babel/helper-plugin-utils': 7.20.2
+      '@babel/helper-plugin-utils': 7.24.0
     dev: false
 
   /@babel/plugin-syntax-object-rest-spread@7.8.3(@babel/core@7.21.4):
@@ -2986,7 +2989,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.24.4
-      '@babel/helper-plugin-utils': 7.20.2
+      '@babel/helper-plugin-utils': 7.24.0
     dev: false
 
   /@babel/plugin-syntax-optional-catch-binding@7.8.3(@babel/core@7.21.4):
@@ -3004,7 +3007,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.24.4
-      '@babel/helper-plugin-utils': 7.20.2
+      '@babel/helper-plugin-utils': 7.24.0
     dev: false
 
   /@babel/plugin-syntax-optional-chaining@7.8.3(@babel/core@7.21.4):
@@ -3022,7 +3025,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.24.4
-      '@babel/helper-plugin-utils': 7.20.2
+      '@babel/helper-plugin-utils': 7.24.0
     dev: false
 
   /@babel/plugin-syntax-private-property-in-object@7.14.5(@babel/core@7.24.4):
@@ -3052,7 +3055,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.24.4
-      '@babel/helper-plugin-utils': 7.20.2
+      '@babel/helper-plugin-utils': 7.24.0
     dev: false
 
   /@babel/plugin-syntax-typescript@7.20.0(@babel/core@7.21.4):
@@ -3540,7 +3543,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.24.4
-      '@babel/helper-plugin-utils': 7.20.2
+      '@babel/helper-plugin-utils': 7.24.0
     dev: false
 
   /@babel/plugin-transform-react-jsx-source@7.19.6(@babel/core@7.21.4):
@@ -3560,7 +3563,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': 7.24.4
-      '@babel/helper-plugin-utils': 7.20.2
+      '@babel/helper-plugin-utils': 7.24.0
     dev: false
 
   /@babel/plugin-transform-react-jsx@7.23.4(@babel/core@7.24.4):
@@ -5862,27 +5865,27 @@ packages:
       - supports-color
     dev: false
 
-  /@microsoft/api-extractor-model@7.28.13(@types/node@18.15.11):
+  /@microsoft/api-extractor-model@7.28.13:
     resolution: {integrity: sha512-39v/JyldX4MS9uzHcdfmjjfS6cYGAoXV+io8B5a338pkHiSt+gy2eXQ0Q7cGFJ7quSa1VqqlMdlPrB6sLR/cAw==}
     dependencies:
       '@microsoft/tsdoc': 0.14.2
       '@microsoft/tsdoc-config': 0.16.2
-      '@rushstack/node-core-library': 4.0.2(@types/node@18.15.11)
+      '@rushstack/node-core-library': 4.0.2
     transitivePeerDependencies:
       - '@types/node'
     dev: true
 
-  /@microsoft/api-extractor@7.43.0(@types/node@18.15.11):
+  /@microsoft/api-extractor@7.43.0:
     resolution: {integrity: sha512-GFhTcJpB+MI6FhvXEI9b2K0snulNLWHqC/BbcJtyNYcKUiw7l3Lgis5ApsYncJ0leALX7/of4XfmXk+maT111w==}
     hasBin: true
     dependencies:
-      '@microsoft/api-extractor-model': 7.28.13(@types/node@18.15.11)
+      '@microsoft/api-extractor-model': 7.28.13
       '@microsoft/tsdoc': 0.14.2
       '@microsoft/tsdoc-config': 0.16.2
-      '@rushstack/node-core-library': 4.0.2(@types/node@18.15.11)
+      '@rushstack/node-core-library': 4.0.2
       '@rushstack/rig-package': 0.5.2
-      '@rushstack/terminal': 0.10.0(@types/node@18.15.11)
-      '@rushstack/ts-command-line': 4.19.1(@types/node@18.15.11)
+      '@rushstack/terminal': 0.10.0
+      '@rushstack/ts-command-line': 4.19.1
       lodash: 4.17.21
       minimatch: 3.0.8
       resolve: 1.22.2
@@ -6723,34 +6726,6 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@radix-ui/react-tabs@1.0.4(@types/react-dom@18.2.7)(@types/react@18.2.22)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-egZfYY/+wRNCflXNHx+dePvnz9FbmssDTJBtgRfDY7e8SE5oIo3Py2eCB1ckAbh1Q7cQ/6yJZThJ++sgbxibog==}
-    peerDependencies:
-      '@types/react': '*'
-      '@types/react-dom': '*'
-      react: ^16.8 || ^17.0 || ^18.0
-      react-dom: ^16.8 || ^17.0 || ^18.0
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-      '@types/react-dom':
-        optional: true
-    dependencies:
-      '@babel/runtime': 7.24.4
-      '@radix-ui/primitive': 1.0.1
-      '@radix-ui/react-context': 1.0.1(@types/react@18.2.22)(react@18.2.0)
-      '@radix-ui/react-direction': 1.0.1(@types/react@18.2.22)(react@18.2.0)
-      '@radix-ui/react-id': 1.0.1(@types/react@18.2.22)(react@18.2.0)
-      '@radix-ui/react-presence': 1.0.1(@types/react-dom@18.2.7)(@types/react@18.2.22)(react-dom@18.2.0)(react@18.2.0)
-      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.7)(@types/react@18.2.22)(react-dom@18.2.0)(react@18.2.0)
-      '@radix-ui/react-roving-focus': 1.0.4(@types/react-dom@18.2.7)(@types/react@18.2.22)(react-dom@18.2.0)(react@18.2.0)
-      '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.2.22)(react@18.2.0)
-      '@types/react': 18.2.22
-      '@types/react-dom': 18.2.7
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-    dev: false
-
   /@radix-ui/react-use-callback-ref@1.0.1(@types/react@18.2.22)(react@18.2.0):
     resolution: {integrity: sha512-D94LjX4Sp0xJFVaoQOd3OO9k7tpBYNOXdVhkltUbGv2Qb9OXdrg/CpsjlZv7ia14Sylv398LswWBVVu5nqKzAQ==}
     peerDependencies:
@@ -6909,6 +6884,7 @@ packages:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       viem: 2.7.12(typescript@5.4.2)(zod@3.21.4)
       wagmi: 2.5.19(@tanstack/react-query@5.29.0)(@types/react@18.2.22)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.7.12)
 =======
@@ -6949,6 +6925,9 @@ packages:
 >>>>>>> 77bec70b8 (add debug logs)
 =======
       viem: 2.9.20(typescript@5.4.2)(zod@3.21.4)
+=======
+      viem: 2.9.20(typescript@5.4.2)
+>>>>>>> 4d009054d (add approx. fee estimates)
       wagmi: 2.5.19(@tanstack/react-query@5.29.2)(@types/react@18.2.22)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.9.20)
 >>>>>>> 1a75a0bf6 (update lockfile)
     transitivePeerDependencies:
@@ -7321,7 +7300,11 @@ packages:
     dependencies:
       axios: 1.6.8(debug@4.3.4)
       typescript: 5.4.2
+<<<<<<< HEAD
       viem: 2.9.16(typescript@5.4.2)(zod@3.21.4)
+=======
+      viem: 2.9.20(typescript@5.4.2)
+>>>>>>> 4d009054d (add approx. fee estimates)
     transitivePeerDependencies:
       - debug
     dev: false
@@ -7340,7 +7323,7 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /@rushstack/node-core-library@4.0.2(@types/node@18.15.11):
+  /@rushstack/node-core-library@4.0.2:
     resolution: {integrity: sha512-hyES82QVpkfQMeBMteQUnrhASL/KHPhd7iJ8euduwNJG4mu2GSOKybf0rOEjOm1Wz7CwJEUm9y0yD7jg2C1bfg==}
     peerDependencies:
       '@types/node': '*'
@@ -7348,7 +7331,6 @@ packages:
       '@types/node':
         optional: true
     dependencies:
-      '@types/node': 18.15.11
       fs-extra: 7.0.1
       import-lazy: 4.0.0
       jju: 1.4.0
@@ -7364,7 +7346,7 @@ packages:
       strip-json-comments: 3.1.1
     dev: true
 
-  /@rushstack/terminal@0.10.0(@types/node@18.15.11):
+  /@rushstack/terminal@0.10.0:
     resolution: {integrity: sha512-UbELbXnUdc7EKwfH2sb8ChqNgapUOdqcCIdQP4NGxBpTZV2sQyeekuK3zmfQSa/MN+/7b4kBogl2wq0vpkpYGw==}
     peerDependencies:
       '@types/node': '*'
@@ -7372,15 +7354,14 @@ packages:
       '@types/node':
         optional: true
     dependencies:
-      '@rushstack/node-core-library': 4.0.2(@types/node@18.15.11)
-      '@types/node': 18.15.11
+      '@rushstack/node-core-library': 4.0.2
       supports-color: 8.1.1
     dev: true
 
-  /@rushstack/ts-command-line@4.19.1(@types/node@18.15.11):
+  /@rushstack/ts-command-line@4.19.1:
     resolution: {integrity: sha512-J7H768dgcpG60d7skZ5uSSwyCZs/S2HrWP1Ds8d1qYAyaaeJmpmmLr9BVw97RjFzmQPOYnoXcKA4GkqDCkduQg==}
     dependencies:
-      '@rushstack/terminal': 0.10.0(@types/node@18.15.11)
+      '@rushstack/terminal': 0.10.0
       '@types/argparse': 1.0.38
       argparse: 1.0.10
       string-argv: 0.3.2
@@ -9004,6 +8985,7 @@ packages:
       '@walletconnect/ethereum-provider': 2.11.2(@types/react@18.2.22)(react@18.2.0)
       '@walletconnect/modal': 2.6.2(@types/react@18.2.22)(react@18.2.0)
       typescript: 5.4.2
+<<<<<<< HEAD
       viem: 2.7.12(typescript@5.4.2)(zod@3.21.4)
 =======
       '@safe-global/safe-apps-provider': 0.18.1(typescript@5.4.2)
@@ -9048,6 +9030,9 @@ packages:
       typescript: 5.4.2
       viem: 2.9.16(typescript@5.4.2)(zod@3.21.4)
 >>>>>>> 5f1f92624 (update lockfile)
+=======
+      viem: 2.9.20(typescript@5.4.2)
+>>>>>>> 4d009054d (add approx. fee estimates)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -9132,6 +9117,7 @@ packages:
       typescript: 5.4.2
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       viem: 2.7.12(typescript@5.4.2)(zod@3.21.4)
 =======
       viem: 2.9.16(typescript@5.4.2)
@@ -9139,6 +9125,9 @@ packages:
 =======
       viem: 2.9.16(typescript@5.4.2)(zod@3.21.4)
 >>>>>>> 5f1f92624 (update lockfile)
+=======
+      viem: 2.9.20(typescript@5.4.2)
+>>>>>>> 4d009054d (add approx. fee estimates)
       zustand: 4.4.1(@types/react@18.2.22)(react@18.2.0)
     transitivePeerDependencies:
       - '@types/react'
@@ -9541,6 +9530,20 @@ packages:
     peerDependencies:
       typescript: '>=5.0.4'
       zod: ^3 >=3.19.1
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+      zod:
+        optional: true
+    dependencies:
+      typescript: 5.4.2
+    dev: false
+
+  /abitype@1.0.0(typescript@5.4.2):
+    resolution: {integrity: sha512-NMeMah//6bJ56H5XRj8QCV4AwuW6hB6zqz2LnhhLdcWVQOsXki6/Pn3APeqxCma62nXIcmZWdu1DlHWS74umVQ==}
+    peerDependencies:
+      typescript: '>=5.0.4'
+      zod: ^3 >=3.22.0
     peerDependenciesMeta:
       typescript:
         optional: true
@@ -16314,6 +16317,7 @@ packages:
     dependencies:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       viem: 2.7.12(typescript@5.4.2)(zod@3.21.4)
 =======
       viem: 2.9.16(typescript@5.4.2)
@@ -16321,6 +16325,9 @@ packages:
 =======
       viem: 2.9.16(typescript@5.4.2)(zod@3.21.4)
 >>>>>>> 5f1f92624 (update lockfile)
+=======
+      viem: 2.9.20(typescript@5.4.2)
+>>>>>>> 4d009054d (add approx. fee estimates)
     dev: false
 
   /picocolors@1.0.0:
@@ -19353,11 +19360,16 @@ packages:
       - zod
     dev: false
 
+<<<<<<< HEAD
   /viem@2.7.12(typescript@5.4.2)(zod@3.21.4):
     resolution: {integrity: sha512-NbV+Bycw0I4X8y6A04mgJ6+Imt7xXwflgnqisR3JXoJRNc77YSaQCscFN/dmwGLESTkgegJvi+j4nZY32GTpwQ==}
 <<<<<<< HEAD
 >>>>>>> 4a26f82c2 (bring over mud login files)
 =======
+=======
+  /viem@2.9.20(typescript@5.4.2):
+    resolution: {integrity: sha512-PHb1MrBHMrSZ8Ayuk3Y/6wUTcMbzlACQaM6AJBSv9kRKX3xYSZ/kehi+gvS0swQJeAlTQ4eZM7jsHQJNAOarmg==}
+>>>>>>> 4d009054d (add approx. fee estimates)
     peerDependencies:
       typescript: '>=5.0.4'
     peerDependenciesMeta:
@@ -19369,9 +19381,13 @@ packages:
       '@noble/hashes': 1.3.2
       '@scure/bip32': 1.3.2
       '@scure/bip39': 1.2.1
+<<<<<<< HEAD
       abitype: 1.0.0(typescript@5.4.2)(zod@3.21.4)
 =======
 >>>>>>> 1a75a0bf6 (update lockfile)
+=======
+      abitype: 1.0.0(typescript@5.4.2)
+>>>>>>> 4d009054d (add approx. fee estimates)
       isows: 1.0.3(ws@8.13.0)
       typescript: 5.4.2
       ws: 8.13.0
@@ -19381,9 +19397,14 @@ packages:
       - zod
     dev: false
 
+<<<<<<< HEAD
   /viem@2.9.16(typescript@5.4.2)(zod@3.21.4):
     resolution: {integrity: sha512-FQRfN4G7uKEUs5DYvVrH/kZmTkwcSDpTBxnadpwG1EEP8nHm57WDpSaGN7PwSPVgJ6rMo5MENT5hgnqaNTlb2w==}
 >>>>>>> 424d69b2c (remove unused package)
+=======
+  /viem@2.9.20(typescript@5.4.2)(zod@3.21.4):
+    resolution: {integrity: sha512-PHb1MrBHMrSZ8Ayuk3Y/6wUTcMbzlACQaM6AJBSv9kRKX3xYSZ/kehi+gvS0swQJeAlTQ4eZM7jsHQJNAOarmg==}
+>>>>>>> 4d009054d (add approx. fee estimates)
     peerDependencies:
       typescript: '>=5.0.4'
     peerDependenciesMeta:
@@ -19426,7 +19447,7 @@ packages:
       - terser
     dev: true
 
-  /vite-plugin-dts@3.8.3(@types/node@18.15.11)(typescript@5.4.2)(vite@4.3.6):
+  /vite-plugin-dts@3.8.3(typescript@5.4.2)(vite@4.3.6):
     resolution: {integrity: sha512-yRHiRosQw7MXdOhmcrVI+kRiB8YEShbSxnADNteK4eZGdEoyOkMHihvO5XOAVlOq8ng9sIqu8vVefDK1zcj3qw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -19436,7 +19457,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      '@microsoft/api-extractor': 7.43.0(@types/node@18.15.11)
+      '@microsoft/api-extractor': 7.43.0
       '@rollup/pluginutils': 5.1.0
       '@vue/language-core': 1.8.27(typescript@5.4.2)
       debug: 4.3.4
@@ -19482,6 +19503,70 @@ packages:
       rollup: 3.21.8
     optionalDependencies:
       fsevents: 2.3.3
+    dev: true
+
+  /vitest@0.34.6:
+    resolution: {integrity: sha512-+5CALsOvbNKnS+ZHMXtuUC7nL8/7F1F2DnHGjSsszX8zCjWSSviphCb/NuS9Nzf4Q03KyyDRBAXhF/8lffME4Q==}
+    engines: {node: '>=v14.18.0'}
+    hasBin: true
+    peerDependencies:
+      '@edge-runtime/vm': '*'
+      '@vitest/browser': '*'
+      '@vitest/ui': '*'
+      happy-dom: '*'
+      jsdom: '*'
+      playwright: '*'
+      safaridriver: '*'
+      webdriverio: '*'
+    peerDependenciesMeta:
+      '@edge-runtime/vm':
+        optional: true
+      '@vitest/browser':
+        optional: true
+      '@vitest/ui':
+        optional: true
+      happy-dom:
+        optional: true
+      jsdom:
+        optional: true
+      playwright:
+        optional: true
+      safaridriver:
+        optional: true
+      webdriverio:
+        optional: true
+    dependencies:
+      '@types/chai': 4.3.5
+      '@types/chai-subset': 1.3.3
+      '@types/node': 18.15.11
+      '@vitest/expect': 0.34.6
+      '@vitest/runner': 0.34.6
+      '@vitest/snapshot': 0.34.6
+      '@vitest/spy': 0.34.6
+      '@vitest/utils': 0.34.6
+      acorn: 8.11.3
+      acorn-walk: 8.3.2
+      cac: 6.7.14
+      chai: 4.4.1
+      debug: 4.3.4
+      local-pkg: 0.4.3
+      magic-string: 0.30.5
+      pathe: 1.1.2
+      picocolors: 1.0.0
+      std-env: 3.7.0
+      strip-literal: 1.3.0
+      tinybench: 2.6.0
+      tinypool: 0.7.0
+      vite: 4.3.6(@types/node@18.15.11)
+      vite-node: 0.34.6(@types/node@18.15.11)
+      why-is-node-running: 2.2.2
+    transitivePeerDependencies:
+      - less
+      - sass
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
     dev: true
 
   /vitest@0.34.6(jsdom@22.1.0):
@@ -19664,6 +19749,7 @@ packages:
       react: 18.2.0
       typescript: 5.4.2
       use-sync-external-store: 1.2.0(react@18.2.0)
+<<<<<<< HEAD
       viem: 2.7.12(typescript@5.4.2)(zod@3.21.4)
 =======
       '@wagmi/connectors': 4.1.25(@types/react@18.2.22)(@wagmi/core@2.6.16)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(typescript@5.4.2)(viem@2.9.16)
@@ -19701,6 +19787,9 @@ packages:
       use-sync-external-store: 1.2.0(react@18.2.0)
       viem: 2.9.16(typescript@5.4.2)(zod@3.21.4)
 >>>>>>> 5f1f92624 (update lockfile)
+=======
+      viem: 2.9.20(typescript@5.4.2)
+>>>>>>> 4d009054d (add approx. fee estimates)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'

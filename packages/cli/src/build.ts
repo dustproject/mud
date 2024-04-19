@@ -5,7 +5,6 @@ import { World as WorldConfig } from "@latticexyz/world";
 import { worldToV1 } from "@latticexyz/world/config/v2";
 import { forge, getRemappings } from "@latticexyz/common/foundry";
 import { getExistingContracts } from "./utils/getExistingContracts";
-import { debug as parentDebug } from "./debug";
 import execa from "execa";
 
 type BuildOptions = {

@@ -1,22 +1,4 @@
 import { storeEventsAbi } from "@latticexyz/store";
-import {
-  catchError,
-  combineLatest,
-  concat,
-  concatMap,
-  defer,
-  filter,
-  firstValueFrom,
-  from,
-  identity,
-  map,
-  of,
-  scan,
-  share,
-  shareReplay,
-  tap,
-  mergeMap,
-} from "rxjs";
 import { Hex, TransactionReceiptNotFoundError } from "viem";
 import {
   StorageAdapter,
@@ -29,6 +11,25 @@ import {
   WaitForTransactionResult,
 } from "./common";
 import { createBlockStream } from "@latticexyz/block-logs-stream";
+import {
+  filter,
+  map,
+  tap,
+  from,
+  concat,
+  concatMap,
+  share,
+  firstValueFrom,
+  defer,
+  of,
+  catchError,
+  shareReplay,
+  combineLatest,
+  scan,
+  identity,
+  retry,
+  mergeMap,
+} from "rxjs";
 import { debug as parentDebug } from "./debug";
 import { SyncStep } from "./SyncStep";
 import { bigIntMax, chunk, isDefined, waitForIdle } from "@latticexyz/common/utils";
@@ -283,8 +284,10 @@ export async function createStoreSync<config extends StoreConfig = StoreConfig>(
         try {
           const lastBlock = blocks[0];
           debug("fetching tx receipt for block", lastBlock.blockNumber);
-          const receipt = await publicClient.getTransactionReceipt({ hash: tx });
-          return lastBlock.blockNumber >= receipt.blockNumber;
+          const { status, blockNumber, transactionHash } = await publicClient.getTransactionReceipt({ hash: tx });
+          if (lastBlock.blockNumber >= blockNumber) {
+            return { status, blockNumber, transactionHash };
+          }
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
           if (error instanceof TransactionReceiptNotFoundError || error.name === "TransactionReceiptNotFoundError") {

@@ -1,4 +1,4 @@
-import { flatMorph, narrow } from "@arktype/util";
+import { narrow } from "@arktype/util";
 import { get, hasOwnKey, mergeIfUndefined } from "./generics";
 import { UserTypes } from "./output";
 import { CONFIG_DEFAULTS } from "./defaults";
@@ -64,10 +64,12 @@ export type resolveStore<store> = {
 export function resolveStore<const store extends StoreInput>(store: store): resolveStore<store> {
   return {
     tables: resolveTables(
-      flatMorph(store.tables ?? {}, (tableKey, table) => {
-        const key = store.namespace ? `${store.namespace}__${tableKey}` : tableKey;
-        return [key, mergeIfUndefined(table, { namespace: store.namespace, name: tableKey })];
-      }),
+      Object.fromEntries(
+        Object.entries(store.tables ?? {}).map(([tableKey, table]) => {
+          const key = store.namespace ? `${store.namespace}__${tableKey}` : tableKey;
+          return [key, mergeIfUndefined(table, { namespace: store.namespace, name: tableKey })];
+        }),
+      ),
       extendedScope(store),
     ),
     userTypes: store.userTypes ?? {},

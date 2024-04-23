@@ -1,5 +1,5 @@
 import fs from "fs";
-import path from "path";
+// import path from "path";
 // import * as buffer from "buffer";
 // const { Buffer } = buffer;
 
@@ -43,9 +43,10 @@ type Perlin = (_x: number, _y: number, _z: number, denom: number) => number;
 
 export async function createPerlin(): Promise<Perlin> {
   const wasmModule = await fetchAndCompileWasmModule(
-    import.meta.url
-      ? new URL("../build/release.wasm", import.meta.url)
-      : path.resolve(__dirname, "../build/release.wasm"),
+    new URL("http://localhost:8000/mud/packages/noise/build/release.wasm"),
+    // import.meta.url
+    //   ? new URL("../build/release.wasm", import.meta.url)
+    //   : path.resolve(__dirname, "../build/release.wasm")
   );
   const wasmInstance = await WebAssembly.instantiate(wasmModule, {
     env: {

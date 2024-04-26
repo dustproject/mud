@@ -1309,7 +1309,7 @@ packages:
       '@arktype/util': 0.0.23
       '@typescript/analyze-trace': 0.10.1
       '@typescript/vfs': 1.5.0
-      arktype: 2.0.0-dev.8
+      arktype: 1.0.29-alpha
       typescript: 5.4.2
     transitivePeerDependencies:
       - supports-color
@@ -1319,12 +1319,6 @@ packages:
     resolution: {integrity: sha512-f3p8apUMOTl6KlFNTrOX6twQJDeSdSmtYPVca7SaQjUUTAxfUlaROY1/i1C3y2llYDrrQBEbsggk8k2Oxxgrvw==}
     dev: true
 
-  /@arktype/schema@0.0.8:
-    resolution: {integrity: sha512-X4WCMpiS4EOdTjb6NFI2cYw0QAzXXitj5oMPryv0topEeC8smuMOe3rlesbE/nG2eNUE0OpzDCY+LY/o1S5ktA==}
-    dependencies:
-      '@arktype/util': 0.0.34
-    dev: true
-
   /@arktype/util@0.0.23:
     resolution: {integrity: sha512-MwtDGjbgfXWxlExjIL78HvPlWOma1XFEcDd3VWuCPMt/f+3TR7fXyiGFNlIYZGOYdOIU7qgjaE8dmbd6jdJa3Q==}
     dev: true
@@ -1332,10 +1326,6 @@ packages:
   /@arktype/util@0.0.27:
     resolution: {integrity: sha512-ZkPuSU8Q56YVgPInFhojLTujejM+VPfaZx6Guop41CvnozWFOTlC0uAHuDqvY4nYq3zXsMkRwm8LmaRZ3mslMg==}
     dev: false
-
-  /@arktype/util@0.0.34:
-    resolution: {integrity: sha512-P3opb4q9eDZYbKo1pzLa34Dytg+vMuq8fkY0xQ98BN3RrjHtAVRPFmK3CeAz4fSa39yhrYlLUBfuUEvi52Hb8w==}
-    dev: true
 
   /@aws-crypto/ie11-detection@3.0.0:
     resolution: {integrity: sha512-341lBBkiY1DfDNKai/wXM3aujNBkXR7tq1URPQDL9wi3AUbI80NR74uF1TXHMm7po1AcnFk8iu2S2IeU/+/A+Q==}
@@ -4072,27 +4062,17 @@ packages:
       rimraf: 3.0.2
     dev: false
 
-<<<<<<< HEAD
-<<<<<<< HEAD
   /@opentelemetry/api@1.8.0:
     resolution: {integrity: sha512-I/s6F7yKUDdtMsoBWXJe8Qz40Tui5vsuKCWJEWVL+5q9sSWRzzx6v2KeNsOBEwd94j0eWkpWCH4yB6rZg9Mf0w==}
     engines: {node: '>=8.0.0'}
     dev: false
 
-=======
->>>>>>> 9643c6a1f (Revert "feat: update pnpm and node version")
   /@oven/bun-darwin-aarch64@1.0.11:
     resolution: {integrity: sha512-6wCO37lyGNcqefEDQ7IJp4LW7ElKMH50/hlvW5agIBN/XbTwwtv3788dJ9NczEV7RQSlkOI6J3dUoQJ6Pgav6w==}
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
     dev: true
-<<<<<<< HEAD
-=======
-  '@oven/bun-darwin-aarch64@1.0.11':
->>>>>>> d2ee83450 (feat: update pnpm and node version)
-=======
->>>>>>> 9643c6a1f (Revert "feat: update pnpm and node version")
     optional: true
 
   /@oven/bun-darwin-x64-baseline@1.0.11:
@@ -5741,14 +5721,6 @@ packages:
 
   /arktype@1.0.29-alpha:
     resolution: {integrity: sha512-glMLgVhIQRSkR3tymiS+POAcWVJH09sfrgic0jHnyFL8BlhHAJZX2BzdImU9zYr1y9NBqy+U93ZNrRTHXsKRDw==}
-    dev: false
-
-  /arktype@2.0.0-dev.8:
-    resolution: {integrity: sha512-WaQ5fBos/VIhBNAKtJmBKK1GXMJuD/OCKUfY1tWpxzLG8Fz4RMCz7NEs7xRGjUw+J5ODExbvSguTdsrcE0R37w==}
-    dependencies:
-      '@arktype/schema': 0.0.8
-      '@arktype/util': 0.0.34
-    dev: true
 
   /array-includes@3.1.6:
     resolution: {integrity: sha512-sgTbLvL6cNnw24FnbaDyjmvddQ2ML8arZsgaJhoABMoplz/4QRhtrYS+alr1BUM1Bwp6dhx8vVCBSLG+StwOFw==}
@@ -6017,21 +5989,12 @@ packages:
       file-uri-to-path: 1.0.0
     dev: false
 
-<<<<<<< HEAD
-<<<<<<< HEAD
   /bintrees@1.0.2:
     resolution: {integrity: sha512-VOMgTMwjAaUG580SXn3LacVgjurrbMme7ZZNYGSSV7mmtY6QQRh0Eg3pwIcntQ77DErK1L0NxkbetjcoXzVwKw==}
     dev: false
 
   /bl@4.1.0:
     resolution: {integrity: sha512-1W07cM9gS6DcLperZfFSj+bWLtaPGSOHWhPiGzXmvVJbRLdG82sH/Kn8EtW1VqWVA54AKf2h5k5BbnIbwF3h6w==}
-=======
-  bl@4.1.0:
->>>>>>> d2ee83450 (feat: update pnpm and node version)
-=======
-  /bl@4.1.0:
-    resolution: {integrity: sha512-1W07cM9gS6DcLperZfFSj+bWLtaPGSOHWhPiGzXmvVJbRLdG82sH/Kn8EtW1VqWVA54AKf2h5k5BbnIbwF3h6w==}
->>>>>>> 9643c6a1f (Revert "feat: update pnpm and node version")
     dependencies:
       buffer: 5.7.1
       inherits: 2.0.4
@@ -11315,8 +11278,6 @@ packages:
     engines: {node: '>=0.4.0'}
     dev: true
 
-<<<<<<< HEAD
-<<<<<<< HEAD
   /prom-client@15.1.2:
     resolution: {integrity: sha512-on3h1iXb04QFLLThrmVYg1SChBQ9N1c+nKAjebBjokBqipddH3uxmOUcEkTnzmJ8Jh/5TSUnUqS40i2QB2dJHQ==}
     engines: {node: ^16 || ^18 || >=20}
@@ -11325,8 +11286,6 @@ packages:
       tdigest: 0.1.2
     dev: false
 
-=======
->>>>>>> 9643c6a1f (Revert "feat: update pnpm and node version")
   /promise-inflight@1.0.1:
     resolution: {integrity: sha512-6zWPyEOFaQBJYcGMHBKTKJ3u6TBsnMFOIZSa6ce1e/ZrrsOlnHRHbabMjLiBYKp+n44X9eUI6VUPaukCXHuG4g==}
     peerDependencies:
@@ -11335,12 +11294,6 @@ packages:
       bluebird:
         optional: true
     dev: false
-<<<<<<< HEAD
-=======
-  promise-inflight@1.0.1: {}
->>>>>>> d2ee83450 (feat: update pnpm and node version)
-=======
->>>>>>> 9643c6a1f (Revert "feat: update pnpm and node version")
 
   /promise-retry@2.0.1:
     resolution: {integrity: sha512-y+WKFlBR8BGXnsNlIHFGPZmyDf3DFMoLhaflAnyZgV6rG6xu+JwesTo2Q9R6XwYmtmwAFCkAk3e35jEdoeh/3g==}
@@ -12601,26 +12554,16 @@ packages:
       yallist: 4.0.0
     dev: false
 
-<<<<<<< HEAD
-<<<<<<< HEAD
   /tdigest@0.1.2:
     resolution: {integrity: sha512-+G0LLgjjo9BZX2MfdvPfH+MKLCrxlXSYec5DaPYP1fe6Iyhf0/fSmJ0bFiZ1F8BT6cGXl2LpltQptzjXKWEkKA==}
     dependencies:
       bintrees: 1.0.2
     dev: false
 
-=======
->>>>>>> 9643c6a1f (Revert "feat: update pnpm and node version")
   /term-size@2.2.1:
     resolution: {integrity: sha512-wK0Ri4fOGjv/XPy8SBHZChl8CM7uMc5VML7SqiQ0zG7+J5Vr+RMQDoHa2CNT6KHUnTGIXH34UDMkPzAUyapBZg==}
     engines: {node: '>=8'}
     dev: true
-<<<<<<< HEAD
-=======
-  term-size@2.2.1: {}
->>>>>>> d2ee83450 (feat: update pnpm and node version)
-=======
->>>>>>> 9643c6a1f (Revert "feat: update pnpm and node version")
 
   /test-exclude@6.0.0:
     resolution: {integrity: sha512-cAGWPIyOHU6zlmg88jwm7VRyXnMN7iV68OGAbYDk/Mh/xC/pzVPlQtY6ngoIH/5/tciuhGfvESU8GrHrcxD56w==}

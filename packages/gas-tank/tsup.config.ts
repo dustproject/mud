@@ -5,7 +5,7 @@ export default defineConfig({
     "mud.config": "mud.config.ts",
   },
   target: "esnext",
-  format: ["esm"],
+  format: ["esm", "cjs"],
   dts: false, // # TODO
   sourcemap: true,
   clean: true,

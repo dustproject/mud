@@ -4,6 +4,8 @@ import { alto } from "./utils/alto";
 
 // Usage: `pnpm local-bundler`
 
-await deployEIP4337Contracts();
-await deployGasTank();
-await alto();
+(async (): Promise<void> => {
+  await deployEIP4337Contracts();
+  await deployGasTank();
+  await alto();
+})();

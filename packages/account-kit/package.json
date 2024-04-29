@@ -8,7 +8,6 @@
     "directory": "packages/account-kit"
   },
   "license": "MIT",
-  "type": "module",
   "exports": {
     ".": "./dist/tsup/index.js",
     "./internal": "./dist/tsup/internal.js",
@@ -32,7 +31,7 @@
   },
   "scripts": {
     "build": "pnpm run build:js",
-    "build:js": "tsup & vite build",
+    "build:js": "tsup",
     "clean": "pnpm run clean:js",
     "clean:js": "rimraf dist",
     "dev": "tsup --watch & vite build --watch",

@@ -8,7 +8,7 @@ export default defineConfig({
     "bin/local-bundler": "cli/local-bundler.ts",
   },
   target: "esnext",
-  format: ["esm"],
+  format: ["esm", "cjs"],
   dts: false, // TODO: figure out how to reenable
   sourcemap: true,
   clean: true,

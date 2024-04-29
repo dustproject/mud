@@ -7,7 +7,6 @@
     "directory": "packages/gas-tank"
   },
   "license": "MIT",
-  "type": "module",
   "exports": {
     "./mud.config": "./dist/mud.config.js",
     "./worlds.json": "./worlds.json",

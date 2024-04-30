@@ -8,6 +8,7 @@ export type RpcUrls = {
 };
 
 export type MUDChain = Chain & {
+  indexerUrl?: string;
   faucetUrl?: string;
   iconUrls?: readonly string[];
   rpcUrls?: Chain["rpcUrls"] & {

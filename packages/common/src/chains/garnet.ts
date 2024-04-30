@@ -22,6 +22,7 @@ export const garnet = {
       url: "https://explorer.garnetchain.com",
     },
   },
+  indexerUrl: "https://indexer.mud.garnetchain.com",
   contracts: {
     ...chainConfig.contracts,
     multicall3: {

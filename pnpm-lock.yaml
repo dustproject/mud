@@ -483,9 +483,6 @@ importers:
       dotenv:
         specifier: ^16.0.3
         version: 16.0.3
-      ejs:
-        specifier: ^3.1.8
-        version: 3.1.8
       ethers:
         specifier: ^5.7.2
         version: 5.7.2
@@ -1132,9 +1129,6 @@ importers:
       ds-test:
         specifier: https://github.com/dapphub/ds-test.git#e282159d5170298eb2455a6c05280ab5a73a4ef0
         version: github.com/dapphub/ds-test/e282159d5170298eb2455a6c05280ab5a73a4ef0
-      ejs:
-        specifier: ^3.1.8
-        version: 3.1.8
       forge-std:
         specifier: https://github.com/foundry-rs/forge-std.git#74cfb77e308dd188d2f58864aaf44963ae6b88b1
         version: github.com/foundry-rs/forge-std/74cfb77e308dd188d2f58864aaf44963ae6b88b1
@@ -1437,8 +1431,8 @@ importers:
         specifier: https://github.com/dapphub/ds-test.git#e282159d5170298eb2455a6c05280ab5a73a4ef0
         version: github.com/dapphub/ds-test/e282159d5170298eb2455a6c05280ab5a73a4ef0
       ejs:
-        specifier: ^3.1.8
-        version: 3.1.8
+        specifier: ^3.1.10
+        version: 3.1.10
       forge-std:
         specifier: https://github.com/foundry-rs/forge-std.git#74cfb77e308dd188d2f58864aaf44963ae6b88b1
         version: github.com/foundry-rs/forge-std/74cfb77e308dd188d2f58864aaf44963ae6b88b1
@@ -1500,9 +1494,6 @@ importers:
       ds-test:
         specifier: https://github.com/dapphub/ds-test.git#e282159d5170298eb2455a6c05280ab5a73a4ef0
         version: github.com/dapphub/ds-test/e282159d5170298eb2455a6c05280ab5a73a4ef0
-      ejs:
-        specifier: ^3.1.8
-        version: 3.1.8
       forge-std:
         specifier: https://github.com/foundry-rs/forge-std.git#74cfb77e308dd188d2f58864aaf44963ae6b88b1
         version: github.com/foundry-rs/forge-std/74cfb77e308dd188d2f58864aaf44963ae6b88b1
@@ -1605,6 +1596,7 @@ packages:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       arktype: 2.0.0-dev.8
 =======
       arktype: 2.0.0-dev.7
@@ -1615,6 +1607,9 @@ packages:
 =======
       arktype: 2.0.0-dev.10
 >>>>>>> 0e7574568 (bump relay SDK)
+=======
+      arktype: 2.0.0-dev.10
+>>>>>>> 4e4e9104e (chore: upgrade to ejs 3.1.10 (#2786))
       typescript: 5.4.2
     transitivePeerDependencies:
       - supports-color
@@ -1624,6 +1619,7 @@ packages:
     resolution: {integrity: sha512-f3p8apUMOTl6KlFNTrOX6twQJDeSdSmtYPVca7SaQjUUTAxfUlaROY1/i1C3y2llYDrrQBEbsggk8k2Oxxgrvw==}
     dev: true
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1637,6 +1633,12 @@ packages:
     dependencies:
       '@arktype/util': 0.0.33
 >>>>>>> b657fd8c2 (remove deps that should be peer deps and unused deps)
+=======
+  /@arktype/schema@0.1.1:
+    resolution: {integrity: sha512-wLZNVs6m/OHi4KgJavyjDW2RyPU/TGdfcTtncPvgt8n5JdJkYNaizlLQxDshUBMLPtWdRcN7mHDSZafqrnMJ2Q==}
+    dependencies:
+      '@arktype/util': 0.0.36
+>>>>>>> 4e4e9104e (chore: upgrade to ejs 3.1.10 (#2786))
     dev: true
 
 =======
@@ -1660,8 +1662,13 @@ packages:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   /@arktype/util@0.0.34:
     resolution: {integrity: sha512-P3opb4q9eDZYbKo1pzLa34Dytg+vMuq8fkY0xQ98BN3RrjHtAVRPFmK3CeAz4fSa39yhrYlLUBfuUEvi52Hb8w==}
+=======
+  /@arktype/util@0.0.36:
+    resolution: {integrity: sha512-w9rngq4t1DFGyyLDLqkWhZH+wd1kmML0e87K8qKEHk0Oq2VhUBDEn383qZ1dX+nkweB4szLe+FCkZ0SJO6zQMA==}
+>>>>>>> 4e4e9104e (chore: upgrade to ejs 3.1.10 (#2786))
     dev: true
 
 =======
@@ -10761,6 +10768,7 @@ packages:
       tslib: 2.6.2
     dev: false
 
+<<<<<<< HEAD
   /arktype@1.0.29-alpha:
     resolution: {integrity: sha512-glMLgVhIQRSkR3tymiS+POAcWVJH09sfrgic0jHnyFL8BlhHAJZX2BzdImU9zYr1y9NBqy+U93ZNrRTHXsKRDw==}
 <<<<<<< HEAD
@@ -10780,6 +10788,13 @@ packages:
       '@arktype/schema': 0.0.7
       '@arktype/util': 0.0.33
 >>>>>>> b657fd8c2 (remove deps that should be peer deps and unused deps)
+=======
+  /arktype@2.0.0-dev.10:
+    resolution: {integrity: sha512-fxprnIgP71JgeRdrxZI67QaM2swkTHDeZbIT5XuZJ6CG33Ais1rmi2qG1DNayiUXGGobBew9HjQVJDtcaXB0fw==}
+    dependencies:
+      '@arktype/schema': 0.1.1
+      '@arktype/util': 0.0.36
+>>>>>>> 4e4e9104e (chore: upgrade to ejs 3.1.10 (#2786))
     dev: true
 =======
 >>>>>>> 8e96908b0 (bump wagmi)
@@ -10911,6 +10926,7 @@ packages:
 
   /async@3.2.4:
     resolution: {integrity: sha512-iAB+JbDEGXhyIUavoDl9WP/Jj106Kz9DEn1DPgYw5ruDn0e3Wgi3sKFm55sASdGBNOQB8F59d9qQ7deqrHA8wQ==}
+    dev: true
 
   /asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
@@ -12494,12 +12510,13 @@ packages:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
     dev: false
 
-  /ejs@3.1.8:
-    resolution: {integrity: sha512-/sXZeMlhS0ArkfX2Aw780gJzXSMPnKjtspYZv+f3NiKLlubezAHDU5+9xz6gd3/NhG3txQCo6xlglmTS+oTGEQ==}
+  /ejs@3.1.10:
+    resolution: {integrity: sha512-UeJmFfOrAQS8OJWPZ4qtgHyWExa088/MtK5UEyoJGFH67cDEXkZSviOiKRCZ4Xij0zxI3JECgYs3oKx+AizQBA==}
     engines: {node: '>=0.10.0'}
     hasBin: true
     dependencies:
       jake: 10.8.5
+    dev: true
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -13521,6 +13538,7 @@ packages:
     resolution: {integrity: sha512-w1cEuf3S+DrLCQL7ET6kz+gmlJdbq9J7yXCSjK/OZCPA+qEN1WyF4ZAf0YYJa4/shHJra2t/d/r8SV4Ji+x+8Q==}
     dependencies:
       minimatch: 5.1.6
+    dev: true
 
   /fill-range@7.0.1:
     resolution: {integrity: sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ==}
@@ -14877,6 +14895,7 @@ packages:
       chalk: 4.1.2
       filelist: 1.0.4
       minimatch: 3.1.2
+    dev: true
 
   /jest-changed-files@29.5.0:
     resolution: {integrity: sha512-IFG34IUMUaNBIxjQXF/iu7g6EcdMrGRRxaUSw92I/2g2YC6vCdTltl4nHvt7Ci5nSJwXIkCu8Ka1DKF+X7Z1Ag==}

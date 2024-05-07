@@ -16,6 +16,7 @@ export function createBlockStream<TBlockTag extends BlockTag>({
     return publicClient.watchBlocks({
       blockTag,
       emitOnBegin: true,
+      emitMissed: true,
       onBlock: (block) => subscriber.next(block),
       onError: (error) => subscriber.error(error),
     });

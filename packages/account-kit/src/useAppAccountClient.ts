@@ -1,6 +1,7 @@
 import { http, useAccount, usePublicClient } from "wagmi";
 import { maxUint256, toHex, publicActions, createClient, Chain, walletActions } from "viem";
 import { callFrom } from "@latticexyz/world/internal";
+import { transactionQueue } from "@latticexyz/common/actions";
 import { SmartAccountClientConfig, smartAccountActions } from "permissionless";
 import { createPimlicoBundlerClient } from "permissionless/clients/pimlico";
 import { useConfig } from "./AccountKitConfigProvider";
@@ -66,7 +67,7 @@ export function useAppAccountClient(): UseQueryResult<AppAccountClient> {
                 transport: transportObserver("app account (signer) client", http()),
               })
                 .extend(walletActions)
-                // .extend(transactionQueue({ publicClient }))
+                .extend(transactionQueue())
                 .extend(
                   callFrom({
                     worldAddress,

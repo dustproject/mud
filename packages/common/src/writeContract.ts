@@ -116,6 +116,11 @@ export async function writeContract<
       to: address,
     } as never);
 
+    // add buffer to the gas estimate
+    if (preparedTransaction.gas) {
+      preparedTransaction.gas = preparedTransaction.gas + 50000n;
+    }
+
     return preparedTransaction as never;
   }
 

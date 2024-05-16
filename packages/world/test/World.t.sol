@@ -42,7 +42,8 @@ import { BatchCallSystem } from "../src/modules/init/implementations/BatchCallSy
 
 import { InitModule } from "../src/modules/init/InitModule.sol";
 import { RegistrationSystem } from "../src/modules/init/RegistrationSystem.sol";
-import { REGISTRATION_SYSTEM_ID } from "../src/modules/init/constants.sol";
+import { ExtendedRegistrationSystem } from "../src/modules/init/ExtendedRegistrationSystem.sol";
+import { REGISTRATION_SYSTEM_ID, EXTENDED_REGISTRATION_SYSTEM_ID } from "../src/modules/init/constants.sol";
 import { Systems } from "../src/codegen/tables/Systems.sol";
 import { SystemRegistry } from "../src/codegen/tables/SystemRegistry.sol";
 import { FunctionSelectors } from "../src/codegen/tables/FunctionSelectors.sol";
@@ -223,7 +224,10 @@ contract WorldTest is Test, GasReporter {
 
     // Should have registered the core system function selectors
     RegistrationSystem registrationSystem = RegistrationSystem(Systems.getSystem(REGISTRATION_SYSTEM_ID));
-    bytes4[22] memory funcSelectors = [
+    ExtendedRegistrationSystem extendedRegistrationSystem = ExtendedRegistrationSystem(
+      Systems.getSystem(EXTENDED_REGISTRATION_SYSTEM_ID)
+    );
+    bytes4[24] memory funcSelectors = [
       // --- AccessManagementSystem ---
       AccessManagementSystem.grantAccess.selector,
       AccessManagementSystem.revokeAccess.selector,
@@ -243,15 +247,18 @@ contract WorldTest is Test, GasReporter {
       registrationSystem.unregisterStoreHook.selector,
       // --- WorldRegistrationSystem ---
       registrationSystem.registerNamespace.selector,
-      registrationSystem.registerSystemHook.selector,
-      registrationSystem.unregisterSystemHook.selector,
       registrationSystem.registerSystem.selector,
       registrationSystem.registerFunctionSelector.selector,
       registrationSystem.registerRootFunctionSelector.selector,
       registrationSystem.registerDelegation.selector,
       registrationSystem.unregisterDelegation.selector,
       registrationSystem.registerNamespaceDelegation.selector,
-      registrationSystem.unregisterNamespaceDelegation.selector
+      registrationSystem.unregisterNamespaceDelegation.selector,
+      // --- ExtendedWorldRegistrationSystem ---
+      extendedRegistrationSystem.registerSystemHook.selector,
+      extendedRegistrationSystem.unregisterSystemHook.selector,
+      extendedRegistrationSystem.registerOptionalSystemHook.selector,
+      extendedRegistrationSystem.unregisterOptionalSystemHook.selector
     ];
 
     for (uint256 i; i < funcSelectors.length; i++) {

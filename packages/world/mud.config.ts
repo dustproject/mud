@@ -45,6 +45,13 @@ export default defineWorld({
         storeArgument: true,
       },
     },
+    UserDelegations: {
+      schema: {
+        delegator: "address",
+        delegatees: "address[]",
+      },
+      key: ["delegator"],
+    },
     NamespaceDelegationControl: {
       schema: {
         namespaceId: "ResourceId",

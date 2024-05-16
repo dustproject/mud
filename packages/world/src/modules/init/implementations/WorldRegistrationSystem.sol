@@ -17,8 +17,8 @@ import { requireInterface } from "../../../requireInterface.sol";
 import { NamespaceOwner } from "../../../codegen/tables/NamespaceOwner.sol";
 import { ResourceAccess } from "../../../codegen/tables/ResourceAccess.sol";
 import { UserDelegationControl } from "../../../codegen/tables/UserDelegationControl.sol";
+import { UserDelegations } from "../../../codegen/tables/UserDelegations.sol";
 import { NamespaceDelegationControl } from "../../../codegen/tables/NamespaceDelegationControl.sol";
-import { ISystemHook } from "../../../ISystemHook.sol";
 import { IWorldErrors } from "../../../IWorldErrors.sol";
 import { IDelegationControl } from "../../../IDelegationControl.sol";
 import { ICustomUnregisterDelegation } from "../../../ICustomUnregisterDelegation.sol";
@@ -67,53 +67,6 @@ contract WorldRegistrationSystem is System, IWorldErrors, LimitedCallContext {
 
     // Give caller access to the new namespace
     ResourceAccess._set(namespaceId, _msgSender(), true);
-  }
-
-  /**
-   * @notice Registers a new system hook
-   * @dev Adds a new hook for the system at the provided system ID
-   * @param systemId The ID of the system
-   * @param hookAddress The address of the hook being registered
-   * @param enabledHooksBitmap Bitmap indicating which hooks are enabled
-   */
-  function registerSystemHook(
-    ResourceId systemId,
-    ISystemHook hookAddress,
-    uint8 enabledHooksBitmap
-  ) public virtual onlyDelegatecall {
-    // Require the provided system ID to have type RESOURCE_SYSTEM
-    if (systemId.getType() != RESOURCE_SYSTEM) {
-      revert World_InvalidResourceType(RESOURCE_SYSTEM, systemId, systemId.toString());
-    }
-
-    // Require the provided address to implement the ISystemHook interface
-    requireInterface(address(hookAddress), type(ISystemHook).interfaceId);
-
-    // Require the system to exist
-    AccessControl.requireExistence(systemId);
-
-    // Require the system's namespace to exist
-    AccessControl.requireExistence(systemId.getNamespaceId());
-
-    // Require caller to own the namespace
-    AccessControl.requireOwner(systemId, _msgSender());
-
-    // Register the hook
-    SystemHooks.push(systemId, Hook.unwrap(HookLib.encode(address(hookAddress), enabledHooksBitmap)));
-  }
-
-  /**
-   * @notice Unregisters a system hook
-   * @dev Removes a hook for the system at the provided system ID
-   * @param systemId The ID of the system
-   * @param hookAddress The address of the hook being unregistered
-   */
-  function unregisterSystemHook(ResourceId systemId, ISystemHook hookAddress) public virtual onlyDelegatecall {
-    // Require caller to own the namespace
-    AccessControl.requireOwner(systemId, _msgSender());
-
-    // Remove the hook from the list of hooks for this system in the system hooks table
-    HookLib.filterListByAddress(SystemHooks._tableId, systemId, address(hookAddress));
   }
 
   /**
@@ -287,6 +240,22 @@ contract WorldRegistrationSystem is System, IWorldErrors, LimitedCallContext {
 
     // Delete the delegation control contract address
     UserDelegationControl.deleteRecord({ delegator: _msgSender(), delegatee: delegatee });
+
+    // Remove delegatee from UserDelegations's list
+    address[] memory delegatees = UserDelegations._get(_msgSender());
+    address[] memory newDelegatees = new address[](delegatees.length - 1);
+    if (newDelegatees.length > 0) {
+      uint256 newDelegateesIndex;
+      for (uint256 i = 0; i < delegatees.length; i++) {
+        if (delegatees[i] != delegatee) {
+          newDelegatees[newDelegateesIndex] = delegatees[i];
+          newDelegateesIndex++;
+        }
+      }
+      UserDelegations._set(_msgSender(), newDelegatees);
+    } else {
+      UserDelegations._deleteRecord(_msgSender());
+    }
   }
 
   /**

@@ -19,6 +19,7 @@ import { ResourceAccess } from "../../../codegen/tables/ResourceAccess.sol";
 import { UserDelegationControl } from "../../../codegen/tables/UserDelegationControl.sol";
 import { NamespaceDelegationControl } from "../../../codegen/tables/NamespaceDelegationControl.sol";
 import { IOptionalSystemHook } from "../../../IOptionalSystemHook.sol";
+import { ISystemHook } from "../../../ISystemHook.sol";
 import { IWorldErrors } from "../../../IWorldErrors.sol";
 import { IDelegationControl } from "../../../IDelegationControl.sol";
 import { ICustomUnregisterDelegation } from "../../../ICustomUnregisterDelegation.sol";
@@ -43,6 +44,53 @@ contract ExtendedWorldRegistrationSystem is System, IWorldErrors, LimitedCallCon
   using WorldResourceIdInstance for ResourceId;
 
   /**
+   * @notice Registers a new system hook
+   * @dev Adds a new hook for the system at the provided system ID
+   * @param systemId The ID of the system
+   * @param hookAddress The address of the hook being registered
+   * @param enabledHooksBitmap Bitmap indicating which hooks are enabled
+   */
+  function registerSystemHook(
+    ResourceId systemId,
+    ISystemHook hookAddress,
+    uint8 enabledHooksBitmap
+  ) public virtual onlyDelegatecall {
+    // Require the provided system ID to have type RESOURCE_SYSTEM
+    if (systemId.getType() != RESOURCE_SYSTEM) {
+      revert World_InvalidResourceType(RESOURCE_SYSTEM, systemId, systemId.toString());
+    }
+
+    // Require the provided address to implement the ISystemHook interface
+    requireInterface(address(hookAddress), type(ISystemHook).interfaceId);
+
+    // Require the system to exist
+    AccessControl.requireExistence(systemId);
+
+    // Require the system's namespace to exist
+    AccessControl.requireExistence(systemId.getNamespaceId());
+
+    // Require caller to own the namespace
+    AccessControl.requireOwner(systemId, _msgSender());
+
+    // Register the hook
+    SystemHooks.push(systemId, Hook.unwrap(HookLib.encode(address(hookAddress), enabledHooksBitmap)));
+  }
+
+  /**
+   * @notice Unregisters a system hook
+   * @dev Removes a hook for the system at the provided system ID
+   * @param systemId The ID of the system
+   * @param hookAddress The address of the hook being unregistered
+   */
+  function unregisterSystemHook(ResourceId systemId, ISystemHook hookAddress) public virtual onlyDelegatecall {
+    // Require caller to own the namespace
+    AccessControl.requireOwner(systemId, _msgSender());
+
+    // Remove the hook from the list of hooks for this system in the system hooks table
+    HookLib.filterListByAddress(SystemHooks._tableId, systemId, address(hookAddress));
+  }
+
+  /**
    * @notice Registers a new optional system hook for the user
    * @dev Adds a new hook for the system at the provided user, system, and call data hash (optional)
    * @param systemId The ID of the system
@@ -60,6 +108,7 @@ contract ExtendedWorldRegistrationSystem is System, IWorldErrors, LimitedCallCon
     if (systemId.getType() != RESOURCE_SYSTEM) {
       revert World_InvalidResourceType(RESOURCE_SYSTEM, systemId, systemId.toString());
     }
+    require(callDataHash == bytes32(0), "A non-empty call data hash is not supported");
 
     // Require the provided address to implement the IOptionalSystemHook interface
     requireInterface(address(hookAddress), type(IOptionalSystemHook).interfaceId);
@@ -100,6 +149,8 @@ contract ExtendedWorldRegistrationSystem is System, IWorldErrors, LimitedCallCon
     IOptionalSystemHook hookAddress,
     bytes32 callDataHash
   ) public virtual onlyDelegatecall {
+    require(callDataHash == bytes32(0), "A non-empty call data hash is not supported");
+
     // Remove the hook from the list of hooks for this system in the optional system hooks table
     bytes21[] memory currentHooks = OptionalSystemHooks._get(_msgSender(), systemId, callDataHash);
 

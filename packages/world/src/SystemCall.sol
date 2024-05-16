@@ -97,7 +97,7 @@ library SystemCall {
 
     // Get optional hooks specified by the caller
     bytes21[] memory optionalSystemHooks = OptionalSystemHooks._get(caller, systemId, bytes32(0));
-    bytes21[] memory optionalSystemHooksWithCallData = OptionalSystemHooks._get(caller, systemId, keccak256(callData));
+    // bytes21[] memory optionalSystemHooksWithCallData = OptionalSystemHooks._get(caller, systemId, keccak256(callData));
 
     // Call onBeforeCallSystem hooks (before calling the system)
     for (uint256 i; i < hooks.length; i++) {
@@ -114,12 +114,12 @@ library SystemCall {
         IOptionalSystemHook(hook.getAddress()).onBeforeCallSystem(caller, systemId, callData);
       }
     }
-    for (uint256 i; i < optionalSystemHooksWithCallData.length; i++) {
-      Hook hook = Hook.wrap(optionalSystemHooksWithCallData[i]);
-      if (hook.isEnabled(BEFORE_CALL_SYSTEM)) {
-        IOptionalSystemHook(hook.getAddress()).onBeforeCallSystem(caller, systemId, callData);
-      }
-    }
+    // for (uint256 i; i < optionalSystemHooksWithCallData.length; i++) {
+    //   Hook hook = Hook.wrap(optionalSystemHooksWithCallData[i]);
+    //   if (hook.isEnabled(BEFORE_CALL_SYSTEM)) {
+    //     IOptionalSystemHook(hook.getAddress()).onBeforeCallSystem(caller, systemId, callData);
+    //   }
+    // }
 
     // Call the system and forward any return data
     (success, data) = call({ caller: caller, value: value, systemId: systemId, callData: callData });
@@ -139,12 +139,12 @@ library SystemCall {
         IOptionalSystemHook(hook.getAddress()).onAfterCallSystem(caller, systemId, callData);
       }
     }
-    for (uint256 i; i < optionalSystemHooksWithCallData.length; i++) {
-      Hook hook = Hook.wrap(optionalSystemHooksWithCallData[i]);
-      if (hook.isEnabled(AFTER_CALL_SYSTEM)) {
-        IOptionalSystemHook(hook.getAddress()).onAfterCallSystem(caller, systemId, callData);
-      }
-    }
+    // for (uint256 i; i < optionalSystemHooksWithCallData.length; i++) {
+    //   Hook hook = Hook.wrap(optionalSystemHooksWithCallData[i]);
+    //   if (hook.isEnabled(AFTER_CALL_SYSTEM)) {
+    //     IOptionalSystemHook(hook.getAddress()).onAfterCallSystem(caller, systemId, callData);
+    //   }
+    // }
   }
 
   /**

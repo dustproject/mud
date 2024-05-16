@@ -8,6 +8,7 @@ import { Delegation } from "../../../Delegation.sol";
 import { requireInterface } from "../../../requireInterface.sol";
 import { NamespaceOwner } from "../../../codegen/tables/NamespaceOwner.sol";
 import { UserDelegationControl } from "../../../codegen/tables/UserDelegationControl.sol";
+import { UserDelegations } from "../../../codegen/tables/UserDelegations.sol";
 import { IDelegationControl } from "../../../IDelegationControl.sol";
 
 import { Systems } from "../../../codegen/tables/Systems.sol";
@@ -35,4 +36,13 @@ function createDelegation(
       value: 0
     });
   }
+
+  // check if the delegation is already registered
+  address[] memory delegatees = UserDelegations._get(delegator);
+  for (uint256 i = 0; i < delegatees.length; i++) {
+    if (delegatees[i] == delegatee) {
+      return;
+    }
+  }
+  UserDelegations._push(delegator, delegatee);
 }

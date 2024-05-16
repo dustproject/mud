@@ -39,7 +39,7 @@ function getFunctionSignaturesBatchCall() pure returns (string[2] memory) {
 /**
  * @dev Function signatures for registration system
  */
-function getFunctionSignaturesRegistration() pure returns (string[14] memory) {
+function getFunctionSignaturesRegistration() pure returns (string[12] memory) {
   return [
     // --- ModuleInstallationSystem ---
     "installModule(address,bytes)",
@@ -49,8 +49,6 @@ function getFunctionSignaturesRegistration() pure returns (string[14] memory) {
     "unregisterStoreHook(bytes32,address)",
     // --- WorldRegistrationSystem ---
     "registerNamespace(bytes32)",
-    "registerSystemHook(bytes32,address,uint8)",
-    "unregisterSystemHook(bytes32,address)",
     "registerSystem(bytes32,address,bool)",
     "registerFunctionSelector(bytes32,string)",
     "registerRootFunctionSelector(bytes32,string,string)",
@@ -64,9 +62,11 @@ function getFunctionSignaturesRegistration() pure returns (string[14] memory) {
 /**
  * @dev Function signatures for extended registration system
  */
-function getFunctionSignaturesExtendedRegistration() pure returns (string[2] memory) {
+function getFunctionSignaturesExtendedRegistration() pure returns (string[4] memory) {
   return [
     // --- ExtendedWorldRegistrationSystem ---
+    "registerSystemHook(bytes32,address,uint8)",
+    "unregisterSystemHook(bytes32,address)",
     "registerOptionalSystemHook(bytes32,address,uint8,bytes32)",
     "unregisterOptionalSystemHook(bytes32,address,bytes32)"
   ];

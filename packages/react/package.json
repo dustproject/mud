@@ -8,7 +8,6 @@
     "directory": "packages/react"
   },
   "license": "MIT",
-  "type": "module",
   "exports": {
     ".": "./dist/index.js"
   },

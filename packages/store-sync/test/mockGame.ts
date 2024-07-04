@@ -1,4 +1,4 @@
-import { execa } from "execa";
+import execa from "execa";
 import { anvilRpcUrl } from "./common";
 import configV2 from "mock-game-contracts/mud.config";
 import { resolveConfig } from "@latticexyz/store/internal";

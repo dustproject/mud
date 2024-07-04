@@ -304,8 +304,9 @@ export async function createStoreSync<config extends StoreConfig = StoreConfig>(
           if (lastBlock.blockNumber >= blockNumber) {
             return { status, blockNumber, transactionHash };
           }
-        } catch (error) {
-          if (error instanceof TransactionReceiptNotFoundError) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
+          if (error instanceof TransactionReceiptNotFoundError || error.name === "TransactionReceiptNotFoundError") {
             return;
           }
           throw error;

@@ -8,7 +8,6 @@
     "directory": "packages/world"
   },
   "license": "MIT",
-  "type": "module",
   "exports": {
     ".": "./dist/index.js",
     "./internal": "./dist/internal.js",
@@ -63,7 +62,7 @@
     "test:ci": "pnpm run test"
   },
   "dependencies": {
-    "@arktype/util": "0.0.29",
+    "@arktype/util": "0.0.41-cjs",
     "@latticexyz/common": "workspace:*",
     "@latticexyz/config": "workspace:*",
     "@latticexyz/protocol-parser": "workspace:*",

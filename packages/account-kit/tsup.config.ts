@@ -7,7 +7,7 @@ export default defineConfig({
     internal: "src/exports/internal.ts",
   },
   target: "esnext",
-  format: ["esm"],
+  format: ["esm", "cjs"],
   dts: false, // TODO: figure out how to reenable
   sourcemap: true,
   clean: true,

@@ -1,4 +1,4 @@
-import { ErrorMessage, conform, evaluate, narrow } from "@arktype/util";
+import { ErrorMessage, conform, narrow } from "@arktype/util";
 import {
   UserTypes,
   extendedScope,
@@ -44,24 +44,22 @@ export function validateWorld(world: unknown): asserts world is WorldInput {
   }
 }
 
-export type resolveWorld<world> = evaluate<
-  resolveStore<world> &
-    mergeIfUndefined<
-      { tables: resolveNamespacedTables<world> } & Omit<
-        {
-          [key in keyof world]: key extends "systems"
-            ? resolveSystems<world[key] & SystemsInput>
-            : key extends "deploy"
-              ? resolveDeploy<world[key]>
-              : key extends "codegen"
-                ? resolveCodegen<world[key]>
-                : world[key];
-        },
-        "namespaces" | keyof Store
-      >,
-      CONFIG_DEFAULTS
-    >
->;
+export type resolveWorld<world> = resolveStore<world> &
+  mergeIfUndefined<
+    { tables: resolveNamespacedTables<world> } & Omit<
+      {
+        [key in keyof world]: key extends "systems"
+          ? resolveSystems<world[key] & SystemsInput>
+          : key extends "deploy"
+            ? resolveDeploy<world[key]>
+            : key extends "codegen"
+              ? resolveCodegen<world[key]>
+              : world[key];
+      },
+      "namespaces" | keyof Store
+    >,
+    CONFIG_DEFAULTS
+  >;
 
 export function resolveWorld<const world extends WorldInput>(world: world): resolveWorld<world> {
   const scope = extendedScope(world);

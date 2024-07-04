@@ -6,6 +6,7 @@ pragma solidity >=0.8.24;
 import { KeysWithValue } from "./modules/keyswithvalue/tables/KeysWithValue.sol";
 import { KeysInTable, KeysInTableData } from "./modules/keysintable/tables/KeysInTable.sol";
 import { UsedKeysIndex } from "./modules/keysintable/tables/UsedKeysIndex.sol";
+import { HasKeys } from "./modules/haskeys/tables/HasKeys.sol";
 import { UniqueEntity } from "./modules/uniqueentity/tables/UniqueEntity.sol";
 import { CallboundDelegations } from "./modules/std-delegations/tables/CallboundDelegations.sol";
 import { SystemboundDelegations } from "./modules/std-delegations/tables/SystemboundDelegations.sol";

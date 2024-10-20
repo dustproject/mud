@@ -140,6 +140,12 @@ export async function writeContract<
           const nonce = nonceManager.nextNonce();
 
           const fullRequest = { ...feeRef.fees, ...preparedRequest, nonce };
+          if (request.maxFeePerGas !== undefined && request.maxFeePerGas !== null) {
+            fullRequest.maxFeePerGas = request.maxFeePerGas;
+          }
+          if (request.maxPriorityFeePerGas !== undefined && request.maxPriorityFeePerGas !== null) {
+            fullRequest.maxPriorityFeePerGas = request.maxPriorityFeePerGas;
+          }
           debug("calling", fullRequest.functionName, "with nonce", nonce, "at", fullRequest.address);
           return await getAction(client, viem_writeContract, "writeContract")(fullRequest as never);
         },

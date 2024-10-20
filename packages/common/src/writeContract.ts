@@ -139,7 +139,7 @@ export async function writeContract<
 
           const nonce = nonceManager.nextNonce();
 
-          const fullRequest = { ...preparedRequest, nonce, ...feeRef.fees };
+          const fullRequest = { ...feeRef.fees, ...preparedRequest, nonce };
           debug("calling", fullRequest.functionName, "with nonce", nonce, "at", fullRequest.address);
           return await getAction(client, viem_writeContract, "writeContract")(fullRequest as never);
         },

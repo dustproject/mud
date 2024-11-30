@@ -1,5 +1,5 @@
 {
-  "name": "@latticexyz/cli",
+  "name": "@tenetxyz/mud-cli",
   "version": "2.0.8",
   "description": "Command line interface for mud",
   "repository": {

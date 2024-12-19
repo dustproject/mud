@@ -1,4 +1,3 @@
-import { evaluate } from "@arktype/util";
 import { StoreInput, StoreWithShorthandsInput } from "@latticexyz/store/config/v2";
 import { DynamicResolution, ValueWithType } from "./dynamicResolution";
 
@@ -79,27 +78,25 @@ export type CodegenInput = {
   worldImportPath?: string;
 };
 
-export type WorldInput = evaluate<
-  StoreInput & {
-    namespaces?: NamespacesInput;
-    /**
-     * Contracts named *System will be deployed by default
-     * as public systems at `namespace/ContractName`, unless overridden
-     *
-     * The key is the system name (capitalized).
-     * The value is a SystemConfig object.
-     */
-    systems?: SystemsInput;
-    /** System names to exclude from automatic deployment */
-    excludeSystems?: readonly string[];
-    /** Modules to in the World */
-    modules?: readonly ModuleInput[];
-    /** Deploy config */
-    deploy?: DeployInput;
-    /** Codegen config */
-    codegen?: CodegenInput;
-  }
->;
+export type WorldInput = StoreInput & {
+  namespaces?: NamespacesInput;
+  /**
+   * Contracts named *System will be deployed by default
+   * as public systems at `namespace/ContractName`, unless overridden
+   *
+   * The key is the system name (capitalized).
+   * The value is a SystemConfig object.
+   */
+  systems?: SystemsInput;
+  /** System names to exclude from automatic deployment */
+  excludeSystems?: readonly string[];
+  /** Modules to in the World */
+  modules?: readonly ModuleInput[];
+  /** Deploy config */
+  deploy?: DeployInput;
+  /** Codegen config */
+  codegen?: CodegenInput;
+};
 
 export type NamespacesInput = { [key: string]: NamespaceInput };
 

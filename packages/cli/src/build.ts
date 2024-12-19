@@ -4,7 +4,7 @@ import { worldgen } from "@latticexyz/world/node";
 import { World as WorldConfig } from "@latticexyz/world";
 import { forge, getRemappings } from "@latticexyz/common/foundry";
 import { getExistingContracts } from "./utils/getExistingContracts";
-import { execa } from "execa";
+import execa from "execa";
 
 type BuildOptions = {
   foundryProfile?: string;

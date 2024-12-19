@@ -4,7 +4,7 @@ import { findPlaceholders } from "./findPlaceholders";
 import { z } from "zod";
 import { Abi as abiSchema } from "abitype/zod";
 import { createRequire } from "node:module";
-import { findUp } from "find-up";
+import findUp from "find-up";
 
 export type GetContractArtifactOptions = {
   /**

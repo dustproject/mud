@@ -21,6 +21,8 @@ import { NamespaceDelegationControl } from "../../../codegen/tables/NamespaceDel
 import { ISystemHook } from "../../../ISystemHook.sol";
 import { IWorldErrors } from "../../../IWorldErrors.sol";
 import { IDelegationControl } from "../../../IDelegationControl.sol";
+import { ICustomUnregisterDelegation } from "../../../ICustomUnregisterDelegation.sol";
+import { ERC165Checker } from "../../../ERC165Checker.sol";
 
 import { SystemHooks } from "../../../codegen/tables/SystemHooks.sol";
 import { SystemRegistry } from "../../../codegen/tables/SystemRegistry.sol";
@@ -274,6 +276,15 @@ contract WorldRegistrationSystem is System, IWorldErrors, LimitedCallContext {
    * @param delegatee The address of the delegatee
    */
   function unregisterDelegation(address delegatee) public onlyDelegatecall {
+    if (ERC165Checker.supportsInterface(delegatee, type(ICustomUnregisterDelegation).interfaceId)) {
+      (bool canUnregisterSuccess, bytes memory canUnregisterReturnData) = delegatee.call(
+        abi.encodeCall(ICustomUnregisterDelegation.canUnregister, (_msgSender()))
+      );
+      if (!canUnregisterSuccess) revert World_CustomUnregisterDelegationNotAllowed();
+      canUnregisterSuccess = abi.decode(canUnregisterReturnData, (bool));
+      if (!canUnregisterSuccess) revert World_CustomUnregisterDelegationNotAllowed();
+    }
+
     // Delete the delegation control contract address
     UserDelegationControl.deleteRecord({ delegator: _msgSender(), delegatee: delegatee });
   }

@@ -40,6 +40,8 @@ const config = defineWorld({
   },
 });
 
-const remappings = await getRemappings();
+(async () => {
+  const remappings = await getRemappings();
 
-await tablegen({ configPath, config, remappings });
+  await tablegen({ configPath, config, remappings });
+})();

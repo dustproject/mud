@@ -116,6 +116,11 @@ export async function writeContract<
       to: address,
     } as never);
 
+    // add 20% buffer to the gas estimate
+    if (preparedTransaction.gas) {
+      preparedTransaction.gas = (preparedTransaction.gas * 120n) / 100n;
+    }
+
     return preparedTransaction as never;
   }
 
@@ -134,7 +139,13 @@ export async function writeContract<
 
           const nonce = nonceManager.nextNonce();
 
-          const fullRequest = { ...preparedRequest, nonce, ...feeRef.fees };
+          const fullRequest = { ...feeRef.fees, ...preparedRequest, nonce };
+          if (request.maxFeePerGas !== undefined && request.maxFeePerGas !== null) {
+            fullRequest.maxFeePerGas = request.maxFeePerGas;
+          }
+          if (request.maxPriorityFeePerGas !== undefined && request.maxPriorityFeePerGas !== null) {
+            fullRequest.maxPriorityFeePerGas = request.maxPriorityFeePerGas;
+          }
           debug("calling", fullRequest.functionName, "with nonce", nonce, "at", fullRequest.address);
           return await getAction(client, viem_writeContract, "writeContract")(fullRequest as never);
         },

@@ -7,7 +7,7 @@ import { getDeployer } from "./deploy/getDeployer";
 import { MUDError } from "@latticexyz/common/errors";
 import { Module, salt } from "./deploy/common";
 import { getStorageAt } from "viem/actions";
-import { execa } from "execa";
+import execa from "execa";
 
 type VerifyOptions = {
   client: Client<Transport, Chain | undefined>;

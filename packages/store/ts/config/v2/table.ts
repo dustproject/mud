@@ -1,4 +1,4 @@
-import { ErrorMessage, conform, evaluate, narrow, requiredKeyOf } from "@arktype/util";
+import { ErrorMessage, conform, narrow, requiredKeyOf } from "@arktype/util";
 import { isStaticAbiType } from "@latticexyz/schema-type/internal";
 import { Hex } from "viem";
 import { get, hasOwnKey, mergeIfUndefined } from "./generics";
@@ -101,7 +101,7 @@ export function validateTable<input, scope extends Scope = AbiTypeScope>(
   }
 }
 
-export type resolveTableCodegen<input extends TableInput> = evaluate<{
+export type resolveTableCodegen<input extends TableInput> = {
   [key in keyof TableCodegen]-?: key extends keyof input["codegen"]
     ? undefined extends input["codegen"][key]
       ? key extends "dataStruct"
@@ -116,7 +116,7 @@ export type resolveTableCodegen<input extends TableInput> = evaluate<{
       : key extends keyof TABLE_CODEGEN_DEFAULTS
         ? TABLE_CODEGEN_DEFAULTS[key]
         : never;
-}>;
+};
 
 export function resolveTableCodegen<input extends TableInput>(input: input): resolveTableCodegen<input> {
   const options = input.codegen;

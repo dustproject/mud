@@ -1,4 +1,4 @@
-import { ErrorMessage, evaluate } from "@arktype/util";
+import { ErrorMessage } from "@arktype/util";
 import { isObject, mergeIfUndefined } from "./generics";
 import { TablesInput } from "./input";
 import { Scope, AbiTypeScope } from "./scope";
@@ -23,9 +23,9 @@ export function validateTables<scope extends Scope = AbiTypeScope>(
   throw new Error(`Expected store config, received ${JSON.stringify(input)}`);
 }
 
-export type resolveTables<tables, scope extends Scope = AbiTypeScope> = evaluate<{
+export type resolveTables<tables, scope extends Scope = AbiTypeScope> = {
   readonly [key in keyof tables]: resolveTable<mergeIfUndefined<tables[key], { name: key }>, scope>;
-}>;
+};
 
 export function resolveTables<tables extends TablesInput, scope extends Scope = AbiTypeScope>(
   tables: tables,

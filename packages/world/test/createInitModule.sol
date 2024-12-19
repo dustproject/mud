@@ -7,6 +7,7 @@ import { BatchCallSystem } from "../src/modules/init/implementations/BatchCallSy
 
 import { InitModule } from "../src/modules/init/InitModule.sol";
 import { RegistrationSystem } from "../src/modules/init/RegistrationSystem.sol";
+import { ExtendedRegistrationSystem } from "../src/modules/init/ExtendedRegistrationSystem.sol";
 
 function createInitModule() returns (InitModule) {
   return
@@ -14,6 +15,7 @@ function createInitModule() returns (InitModule) {
       new AccessManagementSystem(),
       new BalanceTransferSystem(),
       new BatchCallSystem(),
-      new RegistrationSystem()
+      new RegistrationSystem(),
+      new ExtendedRegistrationSystem()
     );
 }

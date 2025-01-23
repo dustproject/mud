@@ -45,6 +45,9 @@ export const tablesConfig = defineWorld({
         delegationControlId: "ResourceId",
       },
       key: ["delegator", "delegatee"],
+      codegen: {
+        storeArgument: true,
+      },
     },
     NamespaceDelegationControl: {
       schema: {
@@ -84,6 +87,18 @@ export const tablesConfig = defineWorld({
         value: "bytes21[]",
       },
       key: ["systemId"],
+    },
+    OptionalSystemHooks: {
+      schema: {
+        player: "address",
+        systemId: "ResourceId",
+        callDataHash: "bytes32",
+        hooks: "bytes21[]",
+      },
+      key: ["player", "systemId", "callDataHash"],
+      codegen: {
+        storeArgument: true,
+      },
     },
     FunctionSelectors: {
       schema: {

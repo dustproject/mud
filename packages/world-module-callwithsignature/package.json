@@ -10,8 +10,14 @@
   "license": "MIT",
   "type": "module",
   "exports": {
-    "./internal": "./dist/internal.js",
-    "./mud.config": "./dist/mud.config.js",
+    "./internal": {
+      "import": "./dist/internal.js",
+      "require": "./dist/internal.cjs"
+    },
+    "./mud.config": {
+      "import": "./dist/mud.config.js",
+      "require": "./dist/mud.config.cjs"
+    },
     "./out/*": "./out/*"
   },
   "typesVersions": {

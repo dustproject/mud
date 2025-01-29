@@ -26,4 +26,6 @@ function listener(event: StorageEvent) {
     store.persist.rehydrate();
   }
 }
-window.addEventListener("storage", listener);
+if (typeof window !== "undefined") {
+  window.addEventListener("storage", listener);
+}

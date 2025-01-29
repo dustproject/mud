@@ -15,4 +15,5 @@ export default defineConfig((opts) => ({
     kms: "src/exports/kms.ts",
     internal: "src/exports/internal.ts",
   },
+  noExternal: ["p-queue", "p-retry"],
 }));

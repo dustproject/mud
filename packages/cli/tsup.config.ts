@@ -24,4 +24,5 @@ export default defineConfig((opts) => ({
   env: {
     MUD_PACKAGES: JSON.stringify(mudPackages),
   },
+  noExternal: ["@ark/util", "p-queue", "p-retry"],
 }));

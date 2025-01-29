@@ -10,7 +10,10 @@
   "license": "MIT",
   "type": "module",
   "exports": {
-    "./internal": "./dist/exports/internal.js"
+    "./internal": {
+      "import": "./dist/exports/internal.js",
+      "require": "./dist/exports/internal.cjs"
+    }
   },
   "typesVersions": {
     "*": {

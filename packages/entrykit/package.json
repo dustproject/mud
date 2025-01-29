@@ -10,8 +10,14 @@
   "license": "MIT",
   "type": "module",
   "exports": {
-    ".": "./dist/tsup/exports/index.js",
-    "./internal": "./dist/tsup/exports/internal.js"
+    ".": {
+      "import": "./dist/tsup/exports/index.js",
+      "require": "./dist/tsup/exports/index.cjs"
+    },
+    "./internal": {
+      "import": "./dist/tsup/exports/internal.js",
+      "require": "./dist/tsup/exports/internal.cjs"
+    }
   },
   "typesVersions": {
     "*": {

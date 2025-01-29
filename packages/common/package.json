@@ -10,16 +10,46 @@
   "license": "MIT",
   "type": "module",
   "exports": {
-    ".": "./dist/index.js",
-    "./actions": "./dist/actions.js",
-    "./chains": "./dist/chains.js",
-    "./codegen": "./dist/codegen.js",
-    "./errors": "./dist/errors.js",
-    "./foundry": "./dist/foundry.js",
-    "./type-utils": "./dist/type-utils.js",
-    "./utils": "./dist/utils.js",
-    "./kms": "./dist/kms.js",
-    "./internal": "./dist/internal.js",
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./actions": {
+      "import": "./dist/actions.js",
+      "require": "./dist/actions.cjs"
+    },
+    "./chains": {
+      "import": "./dist/chains.js",
+      "require": "./dist/chains.cjs"
+    },
+    "./codegen": {
+      "import": "./dist/codegen.js",
+      "require": "./dist/codegen.cjs"
+    },
+    "./errors": {
+      "import": "./dist/errors.js",
+      "require": "./dist/errors.cjs"
+    },
+    "./foundry": {
+      "import": "./dist/foundry.js",
+      "require": "./dist/foundry.cjs"
+    },
+    "./type-utils": {
+      "import": "./dist/type-utils.js",
+      "require": "./dist/type-utils.cjs"
+    },
+    "./utils": {
+      "import": "./dist/utils.js",
+      "require": "./dist/utils.cjs"
+    },
+    "./kms": {
+      "import": "./dist/kms.js",
+      "require": "./dist/kms.cjs"
+    },
+    "./internal": {
+      "import": "./dist/internal.js",
+      "require": "./dist/internal.cjs"
+    },
     "./tsconfig.base.json": "./tsconfig.base.json"
   },
   "typesVersions": {

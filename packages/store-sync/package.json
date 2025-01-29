@@ -10,17 +10,50 @@
   "license": "MIT",
   "type": "module",
   "exports": {
-    ".": "./dist/index.js",
-    "./indexer-client": "./dist/indexer-client/index.js",
-    "./internal": "./dist/exports/internal.js",
-    "./react": "./dist/exports/react.js",
-    "./postgres": "./dist/postgres/index.js",
-    "./postgres-decoded": "./dist/postgres-decoded/index.js",
-    "./recs": "./dist/recs/index.js",
-    "./sqlite": "./dist/sqlite/index.js",
-    "./trpc-indexer": "./dist/trpc-indexer/index.js",
-    "./world": "./dist/world/index.js",
-    "./zustand": "./dist/zustand/index.js"
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./indexer-client": {
+      "import": "./dist/indexer-client/index.js",
+      "require": "./dist/indexer-client/index.cjs"
+    },
+    "./internal": {
+      "import": "./dist/exports/internal.js",
+      "require": "./dist/exports/internal.cjs"
+    },
+    "./react": {
+      "import": "./dist/exports/react.js",
+      "require": "./dist/exports/react.cjs"
+    },
+    "./postgres": {
+      "import": "./dist/postgres/index.js",
+      "require": "./dist/postgres/index.cjs"
+    },
+    "./postgres-decoded": {
+      "import": "./dist/postgres-decoded/index.js",
+      "require": "./dist/postgres-decoded/index.cjs"
+    },
+    "./recs": {
+      "import": "./dist/recs/index.js",
+      "require": "./dist/recs/index.cjs"
+    },
+    "./sqlite": {
+      "import": "./dist/sqlite/index.js",
+      "require": "./dist/sqlite/index.cjs"
+    },
+    "./trpc-indexer": {
+      "import": "./dist/trpc-indexer/index.js",
+      "require": "./dist/trpc-indexer/index.cjs"
+    },
+    "./world": {
+      "import": "./dist/world/index.js",
+      "require": "./dist/world/index.cjs"
+    },
+    "./zustand": {
+      "import": "./dist/zustand/index.js",
+      "require": "./dist/zustand/index.cjs"
+    }
   },
   "typesVersions": {
     "*": {

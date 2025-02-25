@@ -9,4 +9,5 @@ export default defineConfig((opts) => ({
     internal: "ts/exports/internal.ts",
     codegen: "ts/codegen/index.ts",
   },
+  noExternal: ["@ark/util"],
 }));

@@ -7,7 +7,7 @@ import { Options } from "tsup";
 export function baseConfig(opts: Options): Options {
   return {
     target: "esnext",
-    format: ["esm"],
+    format: ["esm", "cjs"],
     sourcemap: true,
     // don't generate DTS during watch mode because it's slow
     // we're likely using TS source in this mode anyway

@@ -11,7 +11,8 @@
   "exports": {
     ".": {
       "types": "./dist/exports/index.d.ts",
-      "default": "./dist/exports/index.js"
+      "import": "./dist/exports/index.js",
+      "require": "./dist/exports/index.cjs"
     },
     "./env": {
       "types": "./env.d.ts"

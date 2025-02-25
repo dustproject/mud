@@ -10,10 +10,22 @@
   "license": "MIT",
   "type": "module",
   "exports": {
-    ".": "./dist/index.js",
-    "./internal": "./dist/internal.js",
-    "./mud.config": "./dist/mud.config.js",
-    "./codegen": "./dist/codegen.js",
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./internal": {
+      "import": "./dist/internal.js",
+      "require": "./dist/internal.cjs"
+    },
+    "./mud.config": {
+      "import": "./dist/mud.config.js",
+      "require": "./dist/mud.config.cjs"
+    },
+    "./codegen": {
+      "import": "./dist/codegen.js",
+      "require": "./dist/codegen.cjs"
+    },
     "./out/*": "./out/*"
   },
   "typesVersions": {

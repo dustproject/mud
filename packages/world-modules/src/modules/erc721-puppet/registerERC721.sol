@@ -35,3 +35,23 @@ function registerERC721(
   // Return the newly created ERC721 token
   token = IERC721Mintable(ERC721Registry.get(ERC721_REGISTRY_TABLE_ID, WorldResourceIdLib.encodeNamespace(namespace)));
 }
+
+/**
+ * @notice Register a new ERC721 token with the given metadata in a given namespace
+ * @dev This function must be called within a Store context (i.e. using StoreSwitch.setStoreAddress())
+ */
+function registerERC721Strict(
+  IBaseWorld world,
+  bytes14 namespace,
+  ERC721MetadataData memory metadata
+) returns (IERC721Mintable token) {
+  // Get the ERC721 module
+  ERC721Module erc721Module = ERC721Module(NamespaceOwner.get(MODULE_NAMESPACE_ID));
+  require(address(erc721Module) != address(0), "ERC721Module not installed");
+
+  // Install the ERC721 module with the provided args
+  world.installModule(erc721Module, abi.encode(namespace, metadata));
+
+  // Return the newly created ERC721 token
+  token = IERC721Mintable(ERC721Registry.get(ERC721_REGISTRY_TABLE_ID, WorldResourceIdLib.encodeNamespace(namespace)));
+}

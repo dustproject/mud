@@ -8,4 +8,5 @@ export default defineConfig((opts) => ({
     internal: "src/exports/internal.ts",
     "deprecated/node": "src/deprecated/node/index.ts",
   },
+  noExternal: ["@ark/util"],
 }));

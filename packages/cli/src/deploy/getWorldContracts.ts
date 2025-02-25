@@ -2,6 +2,7 @@ import accessManagementSystemBuild from "@latticexyz/world/out/AccessManagementS
 import balanceTransferSystemBuild from "@latticexyz/world/out/BalanceTransferSystem.sol/BalanceTransferSystem.json" assert { type: "json" };
 import batchCallSystemBuild from "@latticexyz/world/out/BatchCallSystem.sol/BatchCallSystem.json" assert { type: "json" };
 import registrationSystemBuild from "@latticexyz/world/out/RegistrationSystem.sol/RegistrationSystem.json" assert { type: "json" };
+import extendedRegistrationSystemBuild from "@latticexyz/world/out/ExtendedRegistrationSystem.sol/ExtendedRegistrationSystem.json" assert { type: "json" };
 import initModuleBuild from "@latticexyz/world/out/InitModule.sol/InitModule.json" assert { type: "json" };
 import initModuleAbi from "@latticexyz/world/out/InitModule.sol/InitModule.abi.json" assert { type: "json" };
 import { Hex, encodeDeployData, size } from "viem";
@@ -33,11 +34,18 @@ export function getWorldContracts(deployerAddress: Hex) {
     bytecode: registrationBytecode,
   });
 
+  const extendedRegistrationDeployedBytecodeSize = size(extendedRegistrationSystemBuild.deployedBytecode.object as Hex);
+  const extendedRegistrationBytecode = extendedRegistrationSystemBuild.bytecode.object as Hex;
+  const extendedRegistration = getContractAddress({
+    deployerAddress,
+    bytecode: extendedRegistrationBytecode,
+  });
+
   const initModuleDeployedBytecodeSize = size(initModuleBuild.deployedBytecode.object as Hex);
   const initModuleBytecode = encodeDeployData({
     bytecode: initModuleBuild.bytecode.object as Hex,
     abi: initModuleAbi,
-    args: [accessManagementSystem, balanceTransferSystem, batchCallSystem, registration],
+    args: [accessManagementSystem, balanceTransferSystem, batchCallSystem, registration, extendedRegistration],
   });
   const initModule = getContractAddress({ deployerAddress, bytecode: initModuleBytecode });
 
@@ -65,6 +73,12 @@ export function getWorldContracts(deployerAddress: Hex) {
       deployedBytecodeSize: registrationDeployedBytecodeSize,
       debugLabel: "core registration system",
       address: registration,
+    },
+    ExtendedRegistrationSystem: {
+      bytecode: extendedRegistrationBytecode,
+      deployedBytecodeSize: extendedRegistrationDeployedBytecodeSize,
+      debugLabel: "extended core registration system",
+      address: extendedRegistration,
     },
     InitModule: {
       bytecode: initModuleBytecode,

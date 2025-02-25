@@ -16,4 +16,5 @@ export default defineConfig((opts) => ({
     "src/exports/internal.ts",
     "src/exports/react.ts",
   ],
+  noExternal: ["@ark/util", "change-case"],
 }));

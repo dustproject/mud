@@ -90,8 +90,15 @@ const result = await createStoreSync({
   enableHydrationChunking: false,
   storageAdapter: async (block) => {
     console.log("storageAdapter", { blockNumber: block.blockNumber, logs: block.logs.length });
+    console.log("memory storageAdapter", process.memoryUsage());
   },
 });
+if (global.gc) {
+  global.gc();
+} else {
+  console.warn("No GC hook! Start node with --expose-gc to enable manual garbage collection.");
+}
+console.log("memory after sync", process.memoryUsage());
 
 // Start sync
 result.storedBlockLogs$.subscribe();

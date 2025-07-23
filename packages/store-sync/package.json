@@ -77,6 +77,7 @@
   },
   "dependencies": {
     "@ark/util": "0.2.2",
+    "@dust/world": "https://pkg.pr.new/dustproject/dust/@dust/world@4c98455",
     "@latticexyz/block-logs-stream": "workspace:*",
     "@latticexyz/common": "workspace:*",
     "@latticexyz/config": "workspace:*",

@@ -1,7 +1,12 @@
 import { anvil } from "viem/chains";
-import { garnet, pyrope, redstone } from "@latticexyz/common/chains";
+import { garnet, pyrope, redstone as redstoneConfig } from "@latticexyz/common/chains";
 
 export const internalNamespaces = ["world", "store", "metadata", "puppet", "erc20-puppet", "erc721-puppet"];
+
+const redstone = {
+  ...redstoneConfig,
+  indexerUrl: "https://indexer.staging.dustproject.org",
+};
 
 export const supportedChains = { anvil, redstone, garnet, pyrope } as const;
 export type supportedChains = typeof supportedChains;

@@ -5,7 +5,7 @@ export const internalNamespaces = ["world", "store", "metadata", "puppet", "erc2
 
 const redstone = {
   ...redstoneConfig,
-  indexerUrl: "https://indexer.staging.dustproject.org",
+  indexerUrl: "https://indexer.alpha.dustproject.org",
 };
 
 export const supportedChains = { anvil, redstone, garnet, pyrope } as const;
